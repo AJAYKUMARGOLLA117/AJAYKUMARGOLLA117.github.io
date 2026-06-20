@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajay Kumar Golla — Software Engineer</title>
+<title>Ajay Kumar Golla — Software Engineer & ML Engineer</title>
 <style>
   :root {
     --bg: #06090F;
@@ -145,10 +145,11 @@
   .hero {
     position: relative;
     min-height: 100vh;
+    max-height: 1100px;
     display: flex;
     align-items: flex-start;
     overflow: hidden;
-    padding: 110px 48px 60px;
+    padding: 95px 48px 60px;
   }
   #network-canvas {
     position: absolute;
@@ -372,6 +373,52 @@
 
   /* ============ SECTION SHARED ============ */
   section { position: relative; z-index: 2; }
+
+  /* ============ PARALLAX PLAYGROUND BACKGROUND ============ */
+  #playground {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .parallax-layer {
+    position: absolute;
+    top: -5%; left: -5%;
+    width: 110%; height: 110%;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  .ambient-node {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 16px rgba(0,255,148,0.5);
+    opacity: 0.18;
+    animation: ambientDrift 14s ease-in-out infinite;
+  }
+  .ambient-node.orange { background: var(--orange); box-shadow: 0 0 16px rgba(255,107,53,0.5); }
+  @keyframes ambientDrift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(18px, -22px); }
+    50% { transform: translate(-12px, 14px); }
+    75% { transform: translate(14px, 20px); }
+  }
+
+  .mini-bot {
+    position: absolute;
+    width: 46px; height: 50px;
+    opacity: 0.4;
+    animation: miniBotFloat linear infinite;
+  }
+  @keyframes miniBotFloat {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(30px, -18px) rotate(3deg); }
+    50% { transform: translate(60px, 6px) rotate(-2deg); }
+    75% { transform: translate(28px, 26px) rotate(2deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
   .section-inner { max-width: 1100px; margin: 0 auto; padding: 110px 32px; }
   .section-eyebrow {
     font-family: var(--mono);
@@ -404,7 +451,11 @@
   .stagger-item:nth-child(4) { transition-delay: 0.24s; }
   .stagger-item:nth-child(5) { transition-delay: 0.32s; }
   .stagger-item:nth-child(6) { transition-delay: 0.4s; }
-  @media (prefers-reduced-motion: reduce) { .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; }
+    #playground, .mini-bot, .ambient-node { display: none !important; }
+    .parallax-layer { transition: none !important; transform: none !important; }
+  }
 
   /* ============ ABOUT — SYSTEM STATUS PANEL ============ */
   .status-panel {
@@ -723,7 +774,7 @@
 <style>
   .hero-eyebrow, .hero-name, .hero-desc, .hero-cta, .hero-bot-wrap { opacity: 1 !important; animation: none !important; }
   .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; }
-  #network-canvas { display: none; }
+  #network-canvas, #playground { display: none; }
   #cursor-dot, #cursor-ring { display: none; }
   * { cursor: auto !important; }
   a, button, .skill-node { cursor: pointer !important; }
@@ -731,6 +782,43 @@
 </noscript>
 </head>
 <body>
+
+<div id="playground">
+  <div class="parallax-layer" id="parallaxBack">
+    <div class="ambient-node" style="top:12%; left:8%; width:5px; height:5px; animation-delay:0s"></div>
+    <div class="ambient-node orange" style="top:22%; left:78%; width:6px; height:6px; animation-delay:1.5s"></div>
+    <div class="ambient-node" style="top:65%; left:15%; width:4px; height:4px; animation-delay:3s"></div>
+    <div class="ambient-node" style="top:80%; left:85%; width:5px; height:5px; animation-delay:4.5s"></div>
+    <div class="ambient-node orange" style="top:45%; left:92%; width:4px; height:4px; animation-delay:2s"></div>
+    <div class="ambient-node" style="top:88%; left:40%; width:5px; height:5px; animation-delay:6s"></div>
+  </div>
+  <div class="parallax-layer" id="parallaxMid">
+    <svg class="mini-bot" style="top:18%; left:85%; animation-duration:22s" viewBox="0 0 60 64" fill="none">
+      <rect x="14" y="10" width="32" height="26" rx="7" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
+      <rect x="22" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
+      <rect x="32" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
+      <rect x="26" y="38" width="8" height="6" fill="#0D1420" stroke="#00FF94" stroke-width="1"/>
+      <rect x="16" y="44" width="28" height="18" rx="6" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
+      <circle cx="30" cy="53" r="3.5" fill="#FF6B35"/>
+    </svg>
+    <svg class="mini-bot" style="top:62%; left:6%; animation-duration:26s; animation-delay:-8s" viewBox="0 0 60 64" fill="none">
+      <rect x="14" y="10" width="32" height="26" rx="7" fill="#0D1420" stroke="#FF6B35" stroke-width="1.5"/>
+      <rect x="22" y="18" width="6" height="8" rx="2" fill="#FF6B35"/>
+      <rect x="32" y="18" width="6" height="8" rx="2" fill="#FF6B35"/>
+      <rect x="26" y="38" width="8" height="6" fill="#0D1420" stroke="#FF6B35" stroke-width="1"/>
+      <rect x="16" y="44" width="28" height="18" rx="6" fill="#0D1420" stroke="#FF6B35" stroke-width="1.5"/>
+      <circle cx="30" cy="53" r="3.5" fill="#00FF94"/>
+    </svg>
+    <svg class="mini-bot" style="top:38%; left:48%; animation-duration:30s; animation-delay:-15s" viewBox="0 0 60 64" fill="none">
+      <rect x="14" y="10" width="32" height="26" rx="7" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
+      <rect x="22" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
+      <rect x="32" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
+      <rect x="26" y="38" width="8" height="6" fill="#0D1420" stroke="#00FF94" stroke-width="1"/>
+      <rect x="16" y="44" width="28" height="18" rx="6" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
+      <circle cx="30" cy="53" r="3.5" fill="#FF6B35"/>
+    </svg>
+  </div>
+</div>
 
 <div id="cursor-ring"></div>
 <div id="cursor-dot"></div>
@@ -753,7 +841,7 @@
     <div class="hero-text">
       <div class="hero-eyebrow">
         <span class="status-chip">● ONLINE</span>
-        SOFTWARE ENGINEER · DISTRIBUTED SYSTEMS · SAN JOSE, CA
+        SOFTWARE ENGINEER · ML ENGINEER · DISTRIBUTED SYSTEMS · SAN JOSE, CA
       </div>
       <h1 class="hero-name">Ajay Kumar<br><span class="accent">Golla</span></h1>
       <p class="hero-desc">I design backend systems that stay up when things go wrong — <strong>concurrent Go services</strong>, <strong>event-driven Kafka pipelines</strong>, and <strong>fault-tolerant distributed platforms</strong> built to hold 99.9% availability under real concurrent load.</p>
@@ -820,12 +908,12 @@
       <div class="status-header"><span class="pulse-dot"></span> status.log — last updated now</div>
       <div class="status-body">
         <div class="status-bio">
-          <p>I'm a software engineer pursuing my <strong>M.S. in Computer Software Engineering at San Jose State University</strong>, with hands-on experience designing distributed systems in Go, Java, and Kotlin/Elixir.</p>
+          <p>I'm a software and machine learning engineer who just graduated with my <strong>M.S. in Computer Software Engineering from San Jose State University</strong>, with hands-on experience designing distributed systems in Go, Java, and Kotlin/Elixir.</p>
           <p>My work centers on the unglamorous part of distributed systems: what happens when a node fails, a queue backs up, or 10,000 requests land in the same second. I've built Kafka pipelines that don't drop messages, Go services that gracefully degrade instead of crashing, and caching layers that cut latency without cutting correctness.</p>
           <p>Most recently I've been deep in <strong>concurrent goroutine processing</strong> and <strong>Kubernetes-orchestrated multi-node deployments</strong> as a Research Assistant at SJSU.</p>
         </div>
         <div class="metrics-list">
-          <div class="metric-row"><span class="metric-label">degree</span><span class="metric-val">M.S. CSE, SJSU</span></div>
+          <div class="metric-row"><span class="metric-label">degree</span><span class="metric-val">M.S. CSE, SJSU ✓</span></div>
           <div class="metric-row"><span class="metric-label">focus</span><span class="metric-val">Distributed Systems</span></div>
           <div class="metric-row"><span class="metric-label">languages</span><span class="metric-val">Go · Java · Python</span></div>
           <div class="metric-row"><span class="metric-label">location</span><span class="metric-val">San Jose, CA</span></div>
@@ -1065,7 +1153,7 @@
 <section id="contact" class="contact-section">
   <div class="section-inner" style="padding-top:0">
     <div class="section-eyebrow">ping</div>
-    <h2 class="section-title">Let's connect the nodes</h2>
+    <h2 class="section-title" style="margin-top:40px">Let's connect the nodes</h2>
     <div class="contact-grid reveal" style="margin-top:44px">
       <div class="contact-side">
         <h3>Open to opportunities</h3>
@@ -1100,6 +1188,39 @@
 </footer>
 
 <script>
+  // ===== Parallax Playground — whole page tilts toward cursor =====
+  (function() {
+    const back = document.getElementById('parallaxBack');
+    const mid = document.getElementById('parallaxMid');
+    if (!back || !mid) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let targetX = 0, targetY = 0;
+    let curX = 0, curY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      // normalize -1 to 1 from viewport center
+      targetX = (e.clientX / window.innerWidth - 0.5) * 2;
+      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function animateParallax() {
+      curX += (targetX - curX) * 0.05;
+      curY += (targetY - curY) * 0.05;
+      back.style.transform = `translate(${curX * 14}px, ${curY * 10}px)`;
+      mid.style.transform = `translate(${curX * -32}px, ${curY * -24}px)`;
+      requestAnimationFrame(animateParallax);
+    }
+    animateParallax();
+
+    // Gentle device-tilt support on mobile for the same "playground" feel
+    window.addEventListener('deviceorientation', (e) => {
+      if (e.gamma === null || e.beta === null) return;
+      targetX = Math.max(-1, Math.min(1, e.gamma / 30));
+      targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
+    });
+  })();
+
   // ===== Custom Gradient Cursor (dot snaps, ring trails) =====
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const cursorDot = document.getElementById('cursor-dot');
