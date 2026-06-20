@@ -95,16 +95,62 @@
   .nav-links a:hover { color: var(--text); }
   @media (max-width: 820px) { .nav-links { display: none; } nav { padding: 16px 20px; } }
 
+  /* ============ CUSTOM GRADIENT CURSOR ============ */
+  @media (hover: hover) and (pointer: fine) {
+    * { cursor: none !important; }
+
+    #cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--orange));
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease, width 0.25s cubic-bezier(0.34,1.56,0.64,1), height 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.25s ease;
+      box-shadow: 0 0 12px rgba(0,255,148,0.7), 0 0 6px rgba(255,107,53,0.5);
+      will-change: transform;
+    }
+    #cursor-dot.active { opacity: 1; }
+    #cursor-dot.hovering {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, rgba(0,255,148,0.22), rgba(255,107,53,0.22));
+      border: 1.5px solid var(--green);
+      box-shadow: 0 0 26px rgba(0,255,148,0.45);
+    }
+
+    #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,255,148,0.4);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+      will-change: transform;
+    }
+    #cursor-ring.active { opacity: 1; }
+    #cursor-ring.hovering {
+      width: 56px; height: 56px;
+      border-color: rgba(255,107,53,0.5);
+    }
+  }
+
   /* ============ HERO with NETWORK GRAPH ============ */
   .hero {
     position: relative;
     height: 100vh;
-    min-height: 600px;
-    max-height: 1100px;
+    min-height: 680px;
+    max-height: 1150px;
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: 100px 48px 60px;
+    padding: 140px 48px 60px;
   }
   #network-canvas {
     position: absolute;
@@ -219,7 +265,7 @@
   }
 
   @media (max-width: 768px) {
-    .hero { padding: 90px 22px 50px; }
+    .hero { padding: 120px 22px 50px; }
   }
 
   /* ============ SECTION SHARED ============ */
@@ -530,10 +576,16 @@
   .hero-eyebrow, .hero-name, .hero-desc, .hero-cta, .hero-stats { opacity: 1 !important; animation: none !important; }
   .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; }
   #network-canvas { display: none; }
+  #cursor-dot, #cursor-ring { display: none; }
+  * { cursor: auto !important; }
+  a, button, .skill-node { cursor: pointer !important; }
 </style>
 </noscript>
 </head>
 <body>
+
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
 
 <nav>
   <div class="nav-logo"><span class="pulse-dot"></span>ajay<span style="color:var(--text-dim)">.golla</span></div>
@@ -769,6 +821,57 @@
 </footer>
 
 <script>
+  // ===== Custom Gradient Cursor (dot snaps, ring trails) =====
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const cursorDot = document.getElementById('cursor-dot');
+    const cursorRing = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+    let cursorReady = false;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+      if (!cursorReady) {
+        cursorDot.classList.add('active');
+        cursorRing.classList.add('active');
+        cursorReady = true;
+      }
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.16;
+      ringY += (mouseY - ringY) * 0.16;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    window.addEventListener('mouseleave', () => {
+      cursorDot.classList.remove('active');
+      cursorRing.classList.remove('active');
+    });
+    window.addEventListener('mouseenter', () => {
+      cursorDot.classList.add('active');
+      cursorRing.classList.add('active');
+    });
+
+    const hoverTargets = 'a, button, .skill-node, .service-card, input, textarea, .btn';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(hoverTargets)) {
+        cursorDot.classList.add('hovering');
+        cursorRing.classList.add('hovering');
+      }
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest(hoverTargets)) {
+        cursorDot.classList.remove('hovering');
+        cursorRing.classList.remove('hovering');
+      }
+    });
+  }
+
   // ===== Network Graph Hero Animation =====
   const canvas = document.getElementById('network-canvas');
   const ctx = canvas.getContext('2d');
