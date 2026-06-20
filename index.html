@@ -162,11 +162,17 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1240px;
+    max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .hero-text { display: flex; flex-direction: column; gap: 22px; }
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-bot-wrap { order: -1; max-width: 320px; margin: 0 auto 12px; }
   }
   .hero-eyebrow {
     font-family: var(--mono);
@@ -251,6 +257,104 @@
   }
   .hero-stats > div { margin-right: 40px; }
   .hero-stats > div:last-child { margin-right: 0; }
+
+  /* ============ ROBOT AVATAR ============ */
+  .hero-bot-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.6s;
+  }
+  .bot-float {
+    animation: botFloat 4s ease-in-out infinite;
+  }
+  @keyframes botFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+  .bot-svg { width: 100%; max-width: 280px; height: auto; }
+  .bot-antenna-light {
+    animation: antennaPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes antennaPulse {
+    0%, 100% { opacity: 1; r: 4; }
+    50% { opacity: 0.4; r: 5.5; }
+  }
+  .bot-eye {
+    animation: botBlink 4.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes botBlink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+  .bot-screen-line {
+    animation: screenFlicker 2.6s ease-in-out infinite;
+  }
+  @keyframes screenFlicker {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 0.5; }
+  }
+
+  .bot-readout {
+    margin-top: -8px;
+    width: 100%;
+    max-width: 270px;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: 0 10px 40px rgba(0,255,148,0.08);
+  }
+  .bot-readout-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .bot-readout-stat {
+    font-family: var(--mono);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    min-height: 30px;
+  }
+  .bot-readout-num {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green);
+    transition: opacity 0.3s ease;
+  }
+  .bot-readout-desc {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    text-align: right;
+    max-width: 140px;
+    transition: opacity 0.3s ease;
+  }
+  .bot-readout-bar {
+    margin-top: 10px;
+    height: 3px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bot-readout-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--orange));
+    border-radius: 2px;
+    animation: readoutProgress 3.5s linear infinite;
+  }
+  @keyframes readoutProgress {
+    0% { width: 0%; }
+    90%, 100% { width: 100%; }
+  }
   .hstat-num {
     font-family: var(--mono);
     font-size: 22px;
@@ -393,13 +497,38 @@
   /* ============ PROJECTS — SERVICE CARDS ============ */
   .service-stack { display: flex; flex-direction: column; gap: 16px; }
   .service-card {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 26px 28px;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    padding: 26px 28px 26px 32px;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
   }
-  .service-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--green), var(--orange));
+    opacity: 0.5;
+    transition: opacity 0.3s ease, width 0.3s ease;
+  }
+  .service-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0,255,148,0.08);
+  }
+  .service-card:hover::before { opacity: 1; width: 5px; }
+
+  .service-id {
+    position: absolute;
+    top: 16px; right: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
 
   .service-top {
     display: flex;
@@ -408,10 +537,11 @@
     flex-wrap: wrap;
     gap: 14px;
     margin-bottom: 14px;
+    padding-right: 70px;
   }
   .service-name {
     font-family: var(--display);
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -433,7 +563,7 @@
   .service-uptime .pulse-dot { width: 6px; height: 6px; }
 
   .service-desc { color: #B8C1D6; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
-  .service-bullets { list-style: none; margin-bottom: 18px; }
+  .service-bullets { list-style: none; margin-bottom: 16px; }
   .service-bullets li {
     color: var(--text-muted);
     font-size: 13.5px;
@@ -444,6 +574,25 @@
   }
   .service-bullets li::before { content: '↳'; position: absolute; left: 0; color: var(--orange); }
   .service-bullets strong { color: var(--text); font-weight: 600; }
+
+  .service-spark {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 22px;
+    margin-bottom: 16px;
+  }
+  .service-spark-bar {
+    width: 5px;
+    background: linear-gradient(180deg, var(--green), rgba(0,255,148,0.15));
+    border-radius: 2px 2px 0 0;
+    animation: sparkPulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes sparkPulse {
+    0%, 100% { transform: scaleY(0.6); }
+    50% { transform: scaleY(1); }
+  }
 
   .service-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
   .service-tag {
@@ -467,6 +616,7 @@
     align-items: center;
     gap: 7px;
     transition: all 0.2s ease;
+    margin-right: 10px;
   }
   .service-link:hover { border-color: var(--green); background: rgba(0,255,148,0.06); transform: translateY(-1px); }
 
@@ -573,7 +723,7 @@
 </style>
 <noscript>
 <style>
-  .hero-eyebrow, .hero-name, .hero-desc, .hero-cta, .hero-stats { opacity: 1 !important; animation: none !important; }
+  .hero-eyebrow, .hero-name, .hero-desc, .hero-cta, .hero-bot-wrap { opacity: 1 !important; animation: none !important; }
   .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; }
   #network-canvas { display: none; }
   #cursor-dot, #cursor-ring { display: none; }
@@ -602,34 +752,64 @@
 <section class="hero">
   <canvas id="network-canvas"></canvas>
   <div class="hero-grid">
-    <div class="hero-eyebrow">
-      <span class="status-chip">● ONLINE</span>
-      SOFTWARE ENGINEER · DISTRIBUTED SYSTEMS · SAN JOSE, CA
-    </div>
-    <h1 class="hero-name">Ajay Kumar<br><span class="accent">Golla</span></h1>
-    <p class="hero-desc">I design backend systems that stay up when things go wrong — <strong>concurrent Go services</strong>, <strong>event-driven Kafka pipelines</strong>, and <strong>fault-tolerant distributed platforms</strong> built to hold 99.9% availability under real concurrent load.</p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View Services →</a>
-      <a href="#contact" class="btn btn-secondary">Ping Me</a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="hstat-num">99.9%</div>
-        <div class="hstat-label">MindMesh uptime</div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="status-chip">● ONLINE</span>
+        SOFTWARE ENGINEER · DISTRIBUTED SYSTEMS · SAN JOSE, CA
       </div>
-      <div>
-        <div class="hstat-num">10K+</div>
-        <div class="hstat-label">msgs/s Kafka throughput</div>
-      </div>
-      <div>
-        <div class="hstat-num">70%</div>
-        <div class="hstat-label">throughput improvement</div>
-      </div>
-      <div>
-        <div class="hstat-num">1M+</div>
-        <div class="hstat-label">users served</div>
+      <h1 class="hero-name">Ajay Kumar<br><span class="accent">Golla</span></h1>
+      <p class="hero-desc">I design backend systems that stay up when things go wrong — <strong>concurrent Go services</strong>, <strong>event-driven Kafka pipelines</strong>, and <strong>fault-tolerant distributed platforms</strong> built to hold 99.9% availability under real concurrent load.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Services →</a>
+        <a href="#contact" class="btn btn-secondary">Ping Me</a>
       </div>
     </div>
+
+    <div class="hero-bot-wrap">
+      <div class="bot-float">
+        <svg class="bot-svg" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- antenna -->
+          <line x1="120" y1="18" x2="120" y2="38" stroke="#00FF94" stroke-width="2.5"/>
+          <circle class="bot-antenna-light" cx="120" cy="14" r="4" fill="#00FF94"/>
+          <!-- head -->
+          <rect x="55" y="38" width="130" height="100" rx="22" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
+          <!-- screen face -->
+          <rect x="72" y="56" width="96" height="64" rx="10" fill="#06090F" stroke="#1A2333" stroke-width="1.5"/>
+          <!-- eyes -->
+          <rect class="bot-eye" x="92" y="78" width="14" height="18" rx="4" fill="#00FF94"/>
+          <rect class="bot-eye" x="134" y="78" width="14" height="18" rx="4" fill="#00FF94"/>
+          <!-- mouth scan line -->
+          <rect class="bot-screen-line" x="92" y="104" width="56" height="3" rx="1.5" fill="#FF6B35"/>
+          <!-- ear nodes -->
+          <circle cx="50" cy="78" r="7" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
+          <circle cx="190" cy="78" r="7" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
+          <!-- neck -->
+          <rect x="108" y="138" width="24" height="14" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
+          <!-- body -->
+          <rect x="62" y="152" width="116" height="86" rx="16" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
+          <!-- chest panel -->
+          <rect x="80" y="170" width="80" height="50" rx="8" fill="#06090F" stroke="#1A2333" stroke-width="1.5"/>
+          <!-- chest core light -->
+          <circle cx="120" cy="195" r="11" fill="none" stroke="#00FF94" stroke-width="2" class="bot-antenna-light"/>
+          <circle cx="120" cy="195" r="4" fill="#FF6B35"/>
+          <!-- small status dots -->
+          <circle cx="95" cy="178" r="2.5" fill="#00FF94"/>
+          <circle cx="145" cy="178" r="2.5" fill="#00FF94"/>
+          <!-- arms -->
+          <rect x="38" y="160" width="16" height="50" rx="8" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
+          <rect x="186" y="160" width="16" height="50" rx="8" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="bot-readout">
+        <div class="bot-readout-label"><span class="pulse-dot" style="width:6px;height:6px"></span> LIVE METRICS</div>
+        <div class="bot-readout-stat">
+          <span class="bot-readout-num" id="botStatNum">99.9%</span>
+          <span class="bot-readout-desc" id="botStatDesc">MindMesh uptime</span>
+        </div>
+        <div class="bot-readout-bar"><div class="bot-readout-bar-fill" id="botBar"></div></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -703,11 +883,22 @@
     <div class="service-stack reveal-stagger">
 
       <div class="service-card stagger-item">
+        <span class="service-id">svc-01</span>
         <div class="service-top">
           <div class="service-name">MindMesh</div>
           <div class="service-uptime"><span class="pulse-dot"></span> 99.9% uptime</div>
         </div>
         <p class="service-desc">A distributed knowledge graph platform built for high-concurrency access — fault-tolerant communication between Kotlin and Elixir services under real production-style load.</p>
+        <div class="service-spark">
+          <div class="service-spark-bar" style="height:60%;animation-delay:0s"></div>
+          <div class="service-spark-bar" style="height:85%;animation-delay:0.15s"></div>
+          <div class="service-spark-bar" style="height:45%;animation-delay:0.3s"></div>
+          <div class="service-spark-bar" style="height:95%;animation-delay:0.45s"></div>
+          <div class="service-spark-bar" style="height:70%;animation-delay:0.6s"></div>
+          <div class="service-spark-bar" style="height:88%;animation-delay:0.75s"></div>
+          <div class="service-spark-bar" style="height:55%;animation-delay:0.9s"></div>
+          <div class="service-spark-bar" style="height:92%;animation-delay:1.05s"></div>
+        </div>
         <ul class="service-bullets">
           <li>Built distributed backend services in <strong>Kotlin/Elixir</strong> — implemented concurrent request processing and fault-tolerant communication supporting <strong>1K+ concurrent users</strong> at 99.9% availability.</li>
           <li>Designed high-concurrency modules with <strong>Redis caching</strong> and async processing — reduced latency 35% through optimized database access patterns and load balancing.</li>
@@ -716,16 +907,105 @@
       </div>
 
       <div class="service-card stagger-item">
+        <span class="service-id">svc-02</span>
         <div class="service-top">
           <div class="service-name">Reddit Prototype</div>
           <div class="service-uptime"><span class="pulse-dot"></span> 10K+ msg/s</div>
         </div>
         <p class="service-desc">An event-driven distributed messaging platform processing real-time traffic through Kafka producer-consumer pipelines — built to stay fast under concurrent write load.</p>
+        <div class="service-spark">
+          <div class="service-spark-bar" style="height:70%;animation-delay:0.1s"></div>
+          <div class="service-spark-bar" style="height:50%;animation-delay:0.25s"></div>
+          <div class="service-spark-bar" style="height:90%;animation-delay:0.4s"></div>
+          <div class="service-spark-bar" style="height:65%;animation-delay:0.55s"></div>
+          <div class="service-spark-bar" style="height:98%;animation-delay:0.7s"></div>
+          <div class="service-spark-bar" style="height:75%;animation-delay:0.85s"></div>
+          <div class="service-spark-bar" style="height:60%;animation-delay:1.0s"></div>
+          <div class="service-spark-bar" style="height:85%;animation-delay:1.15s"></div>
+        </div>
         <ul class="service-bullets">
           <li>Designed event-driven services processing <strong>10K+ messages</strong> using Kafka and Node.js — implemented concurrent producer-consumer pipelines improving throughput <strong>70%</strong> and cutting latency 45%.</li>
           <li>Optimized network communication for 5K+ concurrent users across AWS — applied multithreading, Redis caching, and fault-tolerant message delivery patterns.</li>
         </ul>
         <div class="service-tags"><span class="service-tag">Kafka</span><span class="service-tag">Node.js</span><span class="service-tag">Redis</span><span class="service-tag">MySQL</span><span class="service-tag">AWS EC2</span></div>
+      </div>
+
+      <div class="service-card stagger-item">
+        <span class="service-id">svc-03</span>
+        <div class="service-top">
+          <div class="service-name">MovieGraph</div>
+          <div class="service-uptime"><span class="pulse-dot"></span> +30% precision</div>
+        </div>
+        <p class="service-desc">A knowledge-based recommendation system fusing Neo4j graph traversal with FAISS vector search — reasons over actor-director-genre relationships instead of just matching keywords.</p>
+        <div class="service-spark">
+          <div class="service-spark-bar" style="height:55%;animation-delay:0.05s"></div>
+          <div class="service-spark-bar" style="height:80%;animation-delay:0.2s"></div>
+          <div class="service-spark-bar" style="height:95%;animation-delay:0.35s"></div>
+          <div class="service-spark-bar" style="height:60%;animation-delay:0.5s"></div>
+          <div class="service-spark-bar" style="height:75%;animation-delay:0.65s"></div>
+          <div class="service-spark-bar" style="height:90%;animation-delay:0.8s"></div>
+          <div class="service-spark-bar" style="height:48%;animation-delay:0.95s"></div>
+          <div class="service-spark-bar" style="height:82%;animation-delay:1.1s"></div>
+        </div>
+        <ul class="service-bullets">
+          <li>Fused <strong>Neo4j</strong> knowledge graphs with <strong>FAISS</strong> vector search inside a RAG pipeline — letting the system reason over relationships rather than just matching keywords.</li>
+          <li>Encoded user queries with Hugging Face sentence transformers and retrieved semantically relevant graph triples via <strong>LangChain</strong> — pushing recommendation precision up by <strong>30%</strong>.</li>
+          <li>Tackled the cold-start problem by grounding recommendations in relationship-aware graph traversal alongside dense vector similarity — a hybrid approach rarely seen in student projects.</li>
+        </ul>
+        <div class="service-tags"><span class="service-tag">Python</span><span class="service-tag">Neo4j</span><span class="service-tag">FAISS</span><span class="service-tag">LangChain</span><span class="service-tag">Hugging Face</span></div>
+      </div>
+
+      <div class="service-card stagger-item">
+        <span class="service-id">svc-04</span>
+        <div class="service-top">
+          <div class="service-name">Oprina</div>
+          <div class="service-uptime"><span class="pulse-dot"></span> live</div>
+        </div>
+        <p class="service-desc">A conversational avatar assistant with a modular sub-agent architecture — voice, Gmail, and Calendar agents each own a distinct capability, orchestrated by a central Gemini 2.0 Flash controller.</p>
+        <div class="service-spark">
+          <div class="service-spark-bar" style="height:65%;animation-delay:0s"></div>
+          <div class="service-spark-bar" style="height:88%;animation-delay:0.15s"></div>
+          <div class="service-spark-bar" style="height:72%;animation-delay:0.3s"></div>
+          <div class="service-spark-bar" style="height:96%;animation-delay:0.45s"></div>
+          <div class="service-spark-bar" style="height:58%;animation-delay:0.6s"></div>
+          <div class="service-spark-bar" style="height:84%;animation-delay:0.75s"></div>
+          <div class="service-spark-bar" style="height:70%;animation-delay:0.9s"></div>
+          <div class="service-spark-bar" style="height:91%;animation-delay:1.05s"></div>
+        </div>
+        <ul class="service-bullets">
+          <li>Designed a modular sub-agent architecture — each agent owns a distinct capability (voice, Gmail, Calendar), all orchestrated by a central controller powered by <strong>Gemini 2.0 Flash</strong>.</li>
+          <li>Solved agent state persistence across sessions using <strong>Supabase</strong> — ensuring agent state survived conversation turns without bloating the LLM context window.</li>
+          <li>Deployed inference services on <strong>VertexAI</strong> and wired secure FastAPI endpoints for session management — keeping latency low under concurrent multi-agent interactions.</li>
+        </ul>
+        <div class="service-tags"><span class="service-tag">Python</span><span class="service-tag">FastAPI</span><span class="service-tag">Gemini 2.0</span><span class="service-tag">VertexAI</span><span class="service-tag">Supabase</span></div>
+        <a href="#" target="_blank" class="service-link">↗ Live Demo</a>
+        <a href="#" target="_blank" class="service-link">▶ Demo Video</a>
+      </div>
+
+      <div class="service-card stagger-item">
+        <span class="service-id">svc-05</span>
+        <div class="service-top">
+          <div class="service-name">CourtCTRL.AI</div>
+          <div class="service-uptime"><span class="pulse-dot"></span> Stanford LLM×Law #5</div>
+        </div>
+        <p class="service-desc">A tax litigation copilot — a retrieval pipeline that grounds LLM answers in real case documents before generating a response, built to keep hallucination risk low in a high-stakes legal domain.</p>
+        <div class="service-spark">
+          <div class="service-spark-bar" style="height:48%;animation-delay:0.1s"></div>
+          <div class="service-spark-bar" style="height:75%;animation-delay:0.25s"></div>
+          <div class="service-spark-bar" style="height:90%;animation-delay:0.4s"></div>
+          <div class="service-spark-bar" style="height:62%;animation-delay:0.55s"></div>
+          <div class="service-spark-bar" style="height:85%;animation-delay:0.7s"></div>
+          <div class="service-spark-bar" style="height:55%;animation-delay:0.85s"></div>
+          <div class="service-spark-bar" style="height:94%;animation-delay:1.0s"></div>
+          <div class="service-spark-bar" style="height:68%;animation-delay:1.15s"></div>
+        </div>
+        <ul class="service-bullets">
+          <li>Built a retrieval pipeline that pulls relevant case context from legal documents before passing it to the LLM — keeping answers grounded and hallucination risk low in a high-stakes domain.</li>
+          <li>Combined document embeddings with structured metadata filters — letting attorneys query by case type, jurisdiction, or outcome beyond simple keyword search.</li>
+          <li>Took the project to <strong>Stanford's LLM x Law Hackathon #5</strong>, where the live demo showed real-time case outcome predictions for tax litigation scenarios.</li>
+        </ul>
+        <div class="service-tags"><span class="service-tag">Python</span><span class="service-tag">Node.js</span><span class="service-tag">OpenAI API</span><span class="service-tag">AWS</span><span class="service-tag">Next.js</span></div>
+        <a href="#" target="_blank" class="service-link">▶ Demo Video</a>
       </div>
 
     </div>
@@ -793,6 +1073,7 @@
         <h3>Open to opportunities</h3>
         <p>Looking for full-time Software Engineer and Backend/Distributed Systems roles. Currently completing my M.S. at SJSU, available for full-time starting Summer 2026.</p>
         <div class="social-row">
+          <a href="https://github.com/ajaykumargolla117" target="_blank" class="social-link" title="GitHub">GH</a>
           <a href="#" target="_blank" class="social-link" title="LinkedIn">in</a>
           <a href="mailto:ajaykumargolla229@gmail.com" class="social-link" title="Email">@</a>
         </div>
@@ -876,9 +1157,10 @@
   const canvas = document.getElementById('network-canvas');
   const ctx = canvas.getContext('2d');
   let w, h, nodes = [];
-  const NODE_COUNT_DESKTOP = 38;
-  const NODE_COUNT_MOBILE = 18;
-  const CONNECT_DIST = 160;
+  const NODE_COUNT_DESKTOP = 55;
+  const NODE_COUNT_MOBILE = 24;
+  const CONNECT_DIST = 175;
+  const MOUSE_RADIUS = 220;
 
   function resize() {
     w = canvas.width = canvas.offsetWidth;
@@ -893,44 +1175,80 @@
       nodes.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        r: Math.random() * 1.5 + 1.2,
+        baseVx: (Math.random() - 0.5) * 0.3,
+        baseVy: (Math.random() - 0.5) * 0.3,
+        vx: 0, vy: 0,
+        r: Math.random() * 1.8 + 1.6,
         pulsePhase: Math.random() * Math.PI * 2
       });
     }
+    nodes.forEach(n => { n.vx = n.baseVx; n.vy = n.baseVy; });
   }
 
   let mouseX = -1000, mouseY = -1000;
+  let mouseActive = false;
   canvas.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
     mouseX = e.clientX - rect.left;
     mouseY = e.clientY - rect.top;
+    mouseActive = true;
   });
-  canvas.addEventListener('mouseleave', () => { mouseX = -1000; mouseY = -1000; });
+  canvas.addEventListener('mouseleave', () => { mouseX = -1000; mouseY = -1000; mouseActive = false; });
+
+  // Click-burst: send a ripple pulse + scatter nearby nodes outward
+  let bursts = [];
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+    bursts.push({ x: cx, y: cy, r: 0, alpha: 1 });
+    nodes.forEach(n => {
+      const dx = n.x - cx, dy = n.y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      if (dist < 260) {
+        const force = (1 - dist / 260) * 5;
+        n.vx += (dx / dist) * force;
+        n.vy += (dy / dist) * force;
+      }
+    });
+  });
 
   let t = 0;
   function draw() {
     ctx.clearRect(0, 0, w, h);
     t += 0.016;
 
-    // update positions
+    // update positions with mouse repulsion + drift back to base velocity
     nodes.forEach(n => {
+      if (mouseActive) {
+        const dx = n.x - mouseX, dy = n.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (dist < MOUSE_RADIUS) {
+          const force = (1 - dist / MOUSE_RADIUS) * 0.6;
+          n.vx += (dx / dist) * force;
+          n.vy += (dy / dist) * force;
+        }
+      }
+      // ease velocity back toward base drift (damping)
+      n.vx += (n.baseVx - n.vx) * 0.02;
+      n.vy += (n.baseVy - n.vy) * 0.02;
       n.x += n.vx;
       n.y += n.vy;
-      if (n.x < 0 || n.x > w) n.vx *= -1;
-      if (n.y < 0 || n.y > h) n.vy *= -1;
+      if (n.x < -20) n.x = w + 20;
+      if (n.x > w + 20) n.x = -20;
+      if (n.y < -20) n.y = h + 20;
+      if (n.y > h + 20) n.y = -20;
     });
 
-    // draw connections
+    // draw connections (brighter base + glow near mouse)
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
         const a = nodes[i], b = nodes[j];
         const dx = a.x - b.x, dy = a.y - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < CONNECT_DIST) {
-          const opacity = (1 - dist / CONNECT_DIST) * 0.18;
-          ctx.strokeStyle = `rgba(0,255,148,${opacity})`;
+          const base = (1 - dist / CONNECT_DIST) * 0.42;
+          ctx.strokeStyle = `rgba(0,255,148,${base})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -938,28 +1256,56 @@
           ctx.stroke();
         }
       }
-      // mouse proximity connection
-      const dxm = nodes[i].x - mouseX, dym = nodes[i].y - mouseY;
-      const distm = Math.sqrt(dxm * dxm + dym * dym);
-      if (distm < 200) {
-        const opacity = (1 - distm / 200) * 0.4;
-        ctx.strokeStyle = `rgba(255,107,53,${opacity})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(mouseX, mouseY);
-        ctx.stroke();
+      // mouse proximity connection (orange, anywhere on canvas)
+      if (mouseActive) {
+        const dxm = nodes[i].x - mouseX, dym = nodes[i].y - mouseY;
+        const distm = Math.sqrt(dxm * dxm + dym * dym);
+        if (distm < MOUSE_RADIUS) {
+          const opacity = (1 - distm / MOUSE_RADIUS) * 0.65;
+          ctx.strokeStyle = `rgba(255,107,53,${opacity})`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(mouseX, mouseY);
+          ctx.stroke();
+        }
       }
     }
 
-    // draw nodes with pulse
+    // draw nodes with pulse (brighter)
     nodes.forEach(n => {
-      const pulse = Math.sin(t * 1.5 + n.pulsePhase) * 0.4 + 0.6;
+      const pulse = Math.sin(t * 1.5 + n.pulsePhase) * 0.35 + 0.75;
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,255,148,${0.5 * pulse})`;
+      ctx.fillStyle = `rgba(0,255,148,${0.85 * pulse})`;
+      ctx.shadowColor = 'rgba(0,255,148,0.6)';
+      ctx.shadowBlur = 6;
       ctx.fill();
+      ctx.shadowBlur = 0;
     });
+
+    // draw click-burst ripples
+    bursts.forEach(b => {
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,107,53,${b.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      b.r += 4.5;
+      b.alpha -= 0.018;
+    });
+    bursts = bursts.filter(b => b.alpha > 0);
+
+    // mouse glow halo
+    if (mouseActive) {
+      const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, MOUSE_RADIUS);
+      grad.addColorStop(0, 'rgba(0,255,148,0.05)');
+      grad.addColorStop(1, 'rgba(0,255,148,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(mouseX, mouseY, MOUSE_RADIUS, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
     requestAnimationFrame(draw);
   }
@@ -967,6 +1313,34 @@
   resize();
   window.addEventListener('resize', resize);
   draw();
+
+  // ===== Robot Readout — cycles through live metrics =====
+  const botStats = [
+    { num: '99.9%', desc: 'MindMesh uptime' },
+    { num: '10K+', desc: 'msgs/s Kafka throughput' },
+    { num: '70%', desc: 'throughput improvement' },
+    { num: '1M+', desc: 'users served' }
+  ];
+  let botIdx = 0;
+  function cycleBotStat() {
+    const numEl = document.getElementById('botStatNum');
+    const descEl = document.getElementById('botStatDesc');
+    const bar = document.getElementById('botBar');
+    if (!numEl) return;
+    numEl.style.opacity = '0';
+    descEl.style.opacity = '0';
+    setTimeout(() => {
+      botIdx = (botIdx + 1) % botStats.length;
+      numEl.textContent = botStats[botIdx].num;
+      descEl.textContent = botStats[botIdx].desc;
+      numEl.style.opacity = '1';
+      descEl.style.opacity = '1';
+      bar.style.animation = 'none';
+      void bar.offsetWidth;
+      bar.style.animation = 'readoutProgress 3.5s linear infinite';
+    }, 300);
+  }
+  setInterval(cycleBotStat, 3500);
 
   // ===== Scroll Reveal =====
   if ('IntersectionObserver' in window) {
