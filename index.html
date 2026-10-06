@@ -1,1499 +1,1301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ajay Kumar Golla — Software Engineer & ML Engineer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ajay Kumar Golla</title>
+<meta name="description" content="Ajay Kumar Golla is a software engineer in San Jose building distributed backends, cloud-native infrastructure, and production AI platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&display=swap">
 <style>
-  :root {
-    --bg: #06090F;
-    --surface: #0D1420;
-    --surface-2: #111A28;
-    --border: rgba(232,237,244,0.08);
-    --border-bright: rgba(0,255,148,0.35);
-    --green: #00FF94;
-    --green-dim: #00C975;
-    --orange: #FF6B35;
-    --text: #E8EDF4;
-    --text-muted: #7C8AA3;
-    --text-dim: #44506A;
-    --mono: 'IBM Plex Mono', 'Courier New', monospace;
-    --display: 'Space Grotesk', sans-serif;
-    --body: 'IBM Plex Sans', sans-serif;
+/* Layout: broadcast graphics over a living stadium. Frosted scorecard panels float above a 360° ground
+   seen from the spidercam; LED scoreboard type carries every number. */
+:root{
+  --mode:day;
+  --sky-top:#7FBEF0; --sky-bot:#D8EEFF; --grass-1:#58AE45; --grass-2:#4C9F3B; --pitch:#D7BC7E;
+  --stand-1:#2C5A8A; --stand-2:#D5E0EC; --roof:#E8EDF2; --screen:#0B1218;
+  --bg:#DCEFD8; --glass:rgba(255,255,255,.80); --glass-2:rgba(255,255,255,.62); --paper:#FFFFFF; --paper-2:#F1F7EF;
+  --ink:#0E2216; --ink-2:#465E4F; --line:rgba(14,34,22,.14);
+  --accent:#C8102E; --on-accent:#FFFFFF; --ballc:#C8102E; --seam:#F6E7C8;
+  --turf:#1F7A34; --gold:#E9A800; --sky:#1F6FC4; --led-bg:#0A120D; --led:#FFB627; --led-2:#5CFF8A;
+  --head:#0E3B24; --on-head:#F4FFF6;
+  --shadow:0 12px 32px rgba(14,34,22,.18);
+  --sun-op:0; --moon-op:1;
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-body:"Barlow","Segoe UI",system-ui,sans-serif;
+  --f-cond:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-led:"Doto",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --mode:night;
+    --sky-top:#030915; --sky-bot:#132B4F; --grass-1:#2E8A33; --grass-2:#277A2C; --pitch:#C2A36A;
+    --stand-1:#16253D; --stand-2:#2C3F5E; --roof:#1E2E48; --screen:#05080D;
+    --bg:#061020; --glass:rgba(9,20,38,.76); --glass-2:rgba(9,20,38,.56); --paper:#0D1C31; --paper-2:#12253F;
+    --ink:#EEF4FF; --ink-2:#A6B6CC; --line:rgba(238,244,255,.16);
+    --accent:#FF4D6D; --on-accent:#1A0710; --ballc:#F4F2EC; --seam:#C8102E;
+    --turf:#5BD66B; --gold:#FFC93C; --sky:#6CB4FF; --led-bg:#03070C; --led:#FFB627; --led-2:#5CFF8A;
+    --head:#0B2A1A; --on-head:#E9FFF0;
+    --shadow:0 12px 32px rgba(0,0,0,.45);
+    --sun-op:1; --moon-op:0;
+    color-scheme:dark;
   }
+}
+:root[data-theme="dark"]{
+  --mode:night;
+  --sky-top:#030915; --sky-bot:#132B4F; --grass-1:#2E8A33; --grass-2:#277A2C; --pitch:#C2A36A;
+  --stand-1:#16253D; --stand-2:#2C3F5E; --roof:#1E2E48; --screen:#05080D;
+  --bg:#061020; --glass:rgba(9,20,38,.76); --glass-2:rgba(9,20,38,.56); --paper:#0D1C31; --paper-2:#12253F;
+  --ink:#EEF4FF; --ink-2:#A6B6CC; --line:rgba(238,244,255,.16);
+  --accent:#FF4D6D; --on-accent:#1A0710; --ballc:#F4F2EC; --seam:#C8102E;
+  --turf:#5BD66B; --gold:#FFC93C; --sky:#6CB4FF; --led-bg:#03070C; --led:#FFB627; --led-2:#5CFF8A;
+  --head:#0B2A1A; --on-head:#E9FFF0;
+  --shadow:0 12px 32px rgba(0,0,0,.45);
+  --sun-op:1; --moon-op:0;
+  color-scheme:dark;
+}
 
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.0625rem;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+img,svg,canvas{max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+::selection{background:var(--gold);color:#111}
+h1,h2,h3,h4{margin:0;line-height:1.02;text-wrap:balance}
+h1,h2{font-family:var(--f-display);font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+h3,h4{font-family:var(--f-cond);font-weight:700;letter-spacing:.01em}
+p{margin:0}
+kbd{font:600 .75rem var(--f-cond);padding:2px 7px;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;background:var(--paper)}
+.led{font-family:var(--f-led);font-weight:900;color:var(--led);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:16px;top:-60px;z-index:100;padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--paper);font-weight:700;text-decoration:none}
+.skip:focus{top:16px}
+#ground{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none;background:linear-gradient(var(--sky-top),var(--sky-bot) 45%,var(--grass-1) 45%)}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:90;pointer-events:none}
+.scrim{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 0%,transparent 40%,var(--glass-2) 100%)}
+main,.foot{position:relative;z-index:1}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--body);
-    overflow-x: hidden;
-    line-height: 1.65;
-  }
-  ::selection { background: var(--green); color: #06090F; }
-  ::-webkit-scrollbar { width: 9px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 5px; border: 2px solid var(--bg); }
-  ::-webkit-scrollbar-thumb:hover { background: var(--green-dim); }
+/* cursor ball */
+@media (hover:hover) and (pointer:fine){ .ball-cursor,.ball-cursor *{cursor:none!important} }
+.cursor{position:fixed;left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;z-index:99;pointer-events:none;opacity:0;transition:opacity .2s,width .2s,height .2s,margin .2s}
+.cursor.on{opacity:1}
+.cursor svg{display:block;width:100%;height:100%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+.cursor.hover{width:38px;height:38px;margin:-19px 0 0 -19px}
+.cursor.hover::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px dashed var(--gold);animation:spin 3s linear infinite}
+.cursor.down svg{transform:scale(.8)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ball-fill{fill:var(--ballc)} .ball-seam{stroke:var(--seam)}
 
-  /* ============ NAV ============ */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 48px;
-    background: rgba(6,9,15,0.72);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-  }
-  .nav-logo .pulse-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-    animation: pulseDot 2s ease-in-out infinite;
-  }
-  @keyframes pulseDot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-  .nav-links {
-    display: flex;
-    font-family: var(--mono);
-    font-size: 12.5px;
-  }
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-left: 34px;
-    position: relative;
-    transition: color 0.25s ease;
-  }
-  .nav-links a:first-child { margin-left: 0; }
-  .nav-links a::before {
-    content: '0' attr(data-idx) '.';
-    color: var(--green);
-    margin-right: 5px;
-    opacity: 0.6;
-  }
-  .nav-links a:hover { color: var(--text); }
-  @media (max-width: 820px) { .nav-links { display: none; } nav { padding: 16px 20px; } }
+/* shared pieces */
+.wrap{width:100%;max-width:1200px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.section{padding-block:clamp(64px,9vw,120px);scroll-margin-top:84px}
+.eyebrow{font:700 .875rem var(--f-cond);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:.6em}
+.eyebrow::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--ballc);box-shadow:inset 0 0 0 1.5px var(--seam),0 0 0 1.5px var(--ink)}
+h2{font-size:clamp(2.4rem,6vw,4.4rem)}
+.lede{color:var(--ink-2);max-width:62ch;font-size:1.125rem}
+.sec-head{display:grid;gap:12px;justify-items:start;margin-bottom:clamp(28px,4vw,48px);padding:18px 22px;border-radius:18px;background:var(--glass-2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);width:fit-content;max-width:100%}
+.card{background:var(--glass);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 18px;background:var(--head);color:var(--on-head);font:700 .8125rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase}
+.card-head .led{font-size:.9375rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 1rem var(--f-cond);letter-spacing:.06em;text-transform:uppercase;padding:.7em 1.3em;border-radius:10px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background-color .2s;white-space:nowrap;box-shadow:0 4px 0 var(--ink)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--ink)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn--accent{background:var(--accent);color:var(--on-accent);border-color:var(--accent);box-shadow:0 4px 0 var(--ink)}
+.btn--small{font-size:.875rem;padding:.5em .95em}
+.btn--ghost{background:transparent;box-shadow:none;border-color:var(--line)}
+.btn--ghost:hover{background:var(--paper-2);box-shadow:none}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;list-style:none;padding:0;margin:0}
+.chips li{font:600 .8125rem var(--f-cond);letter-spacing:.04em;padding:3px 10px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line)}
 
-  /* ============ CUSTOM GRADIENT CURSOR ============ */
-  @media (hover: hover) and (pointer: fine) {
-    * { cursor: none !important; }
+/* nav */
+.nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);width:min(1160px,calc(100% - 24px));z-index:50;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 10px;background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font:400 1.25rem var(--f-display);letter-spacing:.04em}
+.logo svg{width:30px;height:30px;transition:transform .5s}
+.logo:hover svg{transform:rotate(200deg)}
+.nav-links{display:flex;gap:2px;margin-inline:auto}
+.nav-links a{padding:6px 11px;border-radius:8px;text-decoration:none;font:700 .9375rem var(--f-cond);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.nav-links a:hover,.nav-links a[aria-current]{background:var(--head);color:var(--on-head)}
+.nav-actions{display:flex;gap:8px;align-items:center;margin-left:auto}
+.score{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:8px;background:var(--led-bg);border:1px solid #000;white-space:nowrap}
+.score small{font:700 .6875rem var(--f-cond);letter-spacing:.12em;color:#9FB3A6;text-transform:uppercase}
+.score .led{font-size:1rem}
+.score .led.ov{color:var(--led-2);font-size:.875rem}
+.score.bump{animation:bump .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bump{40%{transform:scale(1.12)}}
+.pill-btn{font:700 .875rem var(--f-cond);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:8px;border:0;background:var(--gold);color:#1A1405;cursor:pointer}
+.icon-btn{width:38px;height:38px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;flex:none}
+.i-sun{opacity:var(--sun-op)} .i-moon{opacity:var(--moon-op)}
+.menu-btn{display:none}
+.progress{position:fixed;left:0;top:0;height:5px;width:100%;z-index:60;pointer-events:none;background:linear-gradient(90deg,var(--pitch),var(--pitch));transform-origin:0 50%;transform:scaleX(0)}
 
-    #cursor-dot {
-      position: fixed;
-      top: 0; left: 0;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green), var(--orange));
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: opacity 0.3s ease, width 0.25s cubic-bezier(0.34,1.56,0.64,1), height 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.25s ease;
-      box-shadow: 0 0 12px rgba(0,255,148,0.7), 0 0 6px rgba(255,107,53,0.5);
-      will-change: transform;
-    }
-    #cursor-dot.active { opacity: 1; }
-    #cursor-dot.hovering {
-      width: 38px; height: 38px;
-      background: linear-gradient(135deg, rgba(0,255,148,0.22), rgba(255,107,53,0.22));
-      border: 1.5px solid var(--green);
-      box-shadow: 0 0 26px rgba(0,255,148,0.45);
-    }
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(24px,4vw,48px);align-items:center;padding-top:calc(env(safe-area-inset-top,0px) + 112px);padding-bottom:28px}
+.hero-main{display:grid;gap:16px;justify-items:start;padding:clamp(20px,3vw,32px);border-radius:22px;background:var(--glass-2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.batting{display:inline-flex;align-items:center;gap:10px;padding:6px 12px;border-radius:8px;background:var(--led-bg);font:700 .8125rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:#E8FFF0}
+.batting i{width:9px;height:9px;border-radius:50%;background:var(--led-2);animation:blink 1.2s steps(1) infinite}
+@keyframes blink{50%{opacity:.2}}
+.name{font-family:var(--f-display);font-size:clamp(3.4rem,10.5vw,8.6rem);line-height:.94;letter-spacing:.005em;text-transform:uppercase}
+.name span{display:block}
+.name .last{color:var(--accent);-webkit-text-stroke:0}
+.name .w{display:inline-block;animation:walkin .9s cubic-bezier(.2,1.2,.4,1) both;animation-delay:calc(var(--i) * 90ms)}
+@keyframes walkin{from{transform:translateY(40%) skewX(-8deg)}to{transform:none}}
+.tagline{font-size:clamp(1.1rem,1.8vw,1.3rem);font-weight:500;max-width:40ch}
+.comm{display:flex;gap:10px;align-items:baseline;font:600 1rem var(--f-cond);letter-spacing:.02em;min-height:3.2em;max-width:52ch}
+.comm b{flex:none;font-weight:700;letter-spacing:.14em;color:var(--accent);font-size:.8125rem}
+.caret{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;vertical-align:-.12em;animation:blink 1s steps(1) infinite}
+.pcard{--rx:0deg;--ry:0deg;--px:50%;--py:50%;position:relative;justify-self:center;width:min(100%,340px);border-radius:20px;overflow:hidden;background:linear-gradient(160deg,var(--head),#062114 70%);color:#F2FFF6;box-shadow:var(--shadow);transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s cubic-bezier(.2,.9,.3,1.2);border:2px solid var(--gold)}
+.pcard.tilting{transition:transform .06s linear}
+.pcard::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 25%,rgba(255,214,90,.35) 40%,rgba(120,220,255,.3) 50%,rgba(255,120,160,.3) 60%,transparent 75%);background-size:240% 240%;background-position:var(--px) var(--py);mix-blend-mode:overlay;opacity:.6}
+.pc-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font:700 .75rem var(--f-cond);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.pc-art{position:relative;height:200px;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.18),transparent 60%)}
+.pc-art svg{width:180px;height:180px}
+.pc-name{font:400 1.9rem/1 var(--f-display);text-transform:uppercase;padding:4px 16px 0}
+.pc-role{font:600 .9375rem var(--f-cond);letter-spacing:.06em;color:#BFE9CF;padding:2px 16px 10px}
+.pc-stats{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;padding:12px 16px 16px;border-top:1px solid rgba(255,255,255,.15);font-size:.875rem}
+.pc-stats dt{font:700 .6875rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding-top:3px}
+.pc-stats dd{margin:0;font-weight:600}
+.ticker{position:relative;overflow:hidden;border-block:1px solid #000;background:var(--led-bg);margin-top:8px}
+.ticker-track{display:flex;width:max-content;animation:tick 48s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker span{padding:10px 26px;font:700 .9375rem var(--f-cond);letter-spacing:.08em;text-transform:uppercase;color:#E8FFF0;white-space:nowrap}
+.ticker span b{color:var(--led);font-family:var(--f-led);font-weight:900;margin-right:6px}
+@keyframes tick{to{transform:translateX(-50%)}}
 
-    #cursor-ring {
-      position: fixed;
-      top: 0; left: 0;
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,255,148,0.4);
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-      will-change: transform;
-    }
-    #cursor-ring.active { opacity: 1; }
-    #cursor-ring.hovering {
-      width: 56px; height: 56px;
-      border-color: rgba(255,107,53,0.5);
-    }
-  }
+/* the over (stats) */
+.over{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.6vw,18px)}
+.delivery{display:grid;justify-items:center;text-align:center;gap:8px;padding:16px 10px 18px}
+.dball{position:relative;width:clamp(84px,9vw,112px);aspect-ratio:1;max-width:100%;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.45),transparent 40%),var(--ballc);box-shadow:inset -8px -10px 18px rgba(0,0,0,.25),0 8px 18px rgba(0,0,0,.25);transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+.dball::before{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(90deg,transparent 47%,var(--seam) 47%,var(--seam) 49%,transparent 49%,transparent 51%,var(--seam) 51%,var(--seam) 53%,transparent 53%);opacity:.8;transform:rotate(-30deg)}
+.delivery:hover .dball{transform:rotate(-200deg) scale(1.05)}
+.dball .led{position:relative;font-size:clamp(1.15rem,2vw,1.5rem);color:#FFF6DC;text-shadow:0 2px 6px rgba(0,0,0,.55)}
+.delivery:hover .dball .led{transform:rotate(200deg)}
+.dball .led{display:inline-block;transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+.delivery p{font-size:.875rem;color:var(--ink-2);line-height:1.35}
+.delivery .bn{font:700 .6875rem var(--f-cond);letter-spacing:.16em;color:var(--accent);text-transform:uppercase}
 
-  /* ============ HERO with NETWORK GRAPH ============ */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    max-height: 1100px;
-    display: flex;
-    align-items: flex-start;
-    overflow: hidden;
-    padding: 95px 48px 60px;
-  }
-  #network-canvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 1;
-  }
-  .hero-grid {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1300px;
-    margin: 30px auto 0;
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 32px;
-    align-items: center;
-  }
-  .hero-text { display: flex; flex-direction: column; gap: 22px; }
-  @media (max-width: 980px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-bot-wrap { order: -1; max-width: 320px; margin: 0 auto 12px; }
-  }
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--green);
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.3s;
-  }
-  .hero-eyebrow .status-chip { margin-right: 10px; }
-  .hero-eyebrow .status-chip {
-    border: 1px solid var(--border-bright);
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    background: rgba(0,255,148,0.06);
-  }
-  .hero-name {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(44px, 7.5vw, 92px);
-    line-height: 1.0;
-    letter-spacing: -2px;
-    opacity: 0;
-    animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
-  }
-  .hero-name .accent { color: var(--green); }
-  .hero-desc {
-    font-family: var(--body);
-    font-size: clamp(15px, 1.6vw, 18px);
-    color: var(--text-muted);
-    max-width: 620px;
-    line-height: 1.75;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.75s;
-  }
-  .hero-desc strong { color: var(--text); font-weight: 600; }
-
-  .hero-cta {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.95s;
-  }
-  .btn {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    padding: 13px 26px;
-    border-radius: 6px;
-    text-decoration: none;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: all 0.25s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-primary { background: var(--green); color: #06090F; font-weight: 600; }
-  .btn-primary:hover { background: #33FFA8; box-shadow: 0 0 28px rgba(0,255,148,0.4); transform: translateY(-2px); }
-  .btn-secondary { background: transparent; color: var(--text); border-color: var(--border); }
-  .btn-secondary:hover { border-color: var(--green); background: rgba(0,255,148,0.06); transform: translateY(-2px); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 40px;
-    margin-top: 28px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 1.15s;
-  }
-  .hero-stats > div { margin-right: 40px; }
-  .hero-stats > div:last-child { margin-right: 0; }
-
-  /* ============ ROBOT AVATAR ============ */
-  .hero-bot-wrap {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.6s;
-  }
-  .bot-float {
-    animation: botFloat 4s ease-in-out infinite;
-  }
-  @keyframes botFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-14px); }
-  }
-  .bot-svg { width: 100%; max-width: 280px; height: auto; }
-  .bot-antenna-light {
-    animation: antennaPulse 1.8s ease-in-out infinite;
-  }
-  @keyframes antennaPulse {
-    0%, 100% { opacity: 1; r: 4; }
-    50% { opacity: 0.4; r: 5.5; }
-  }
-  .bot-eye {
-    animation: botBlink 4.5s ease-in-out infinite;
-    transform-origin: center;
-  }
-  @keyframes botBlink {
-    0%, 92%, 100% { transform: scaleY(1); }
-    95% { transform: scaleY(0.1); }
-  }
-  .bot-screen-line {
-    animation: screenFlicker 2.6s ease-in-out infinite;
-  }
-  @keyframes screenFlicker {
-    0%, 100% { opacity: 0.9; }
-    50% { opacity: 0.5; }
-  }
-
-  .bot-readout {
-    margin-top: -8px;
-    width: 100%;
-    max-width: 270px;
-    background: var(--surface);
-    border: 1px solid var(--border-bright);
-    border-radius: 10px;
-    padding: 14px 18px;
-    box-shadow: 0 10px 40px rgba(0,255,148,0.08);
-  }
-  .bot-readout-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .bot-readout-stat {
-    font-family: var(--mono);
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    min-height: 30px;
-  }
-  .bot-readout-num {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--green);
-    transition: opacity 0.3s ease;
-  }
-  .bot-readout-desc {
-    font-size: 11.5px;
-    color: var(--text-muted);
-    text-align: right;
-    max-width: 140px;
-    transition: opacity 0.3s ease;
-  }
-  .bot-readout-bar {
-    margin-top: 10px;
-    height: 3px;
-    background: var(--surface-2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .bot-readout-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--green), var(--orange));
-    border-radius: 2px;
-    animation: readoutProgress 3.5s linear infinite;
-  }
-  @keyframes readoutProgress {
-    0% { width: 0%; }
-    90%, 100% { width: 100%; }
-  }
-  .hstat-num {
-    font-family: var(--mono);
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--green);
-  }
-  .hstat-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  @media (max-width: 768px) {
-    .hero { padding: 100px 22px 50px; }
-  }
-
-  /* ============ SECTION SHARED ============ */
-  section { position: relative; z-index: 2; }
-
-  /* ============ PARALLAX PLAYGROUND BACKGROUND ============ */
-  #playground {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .parallax-layer {
-    position: absolute;
-    top: -5%; left: -5%;
-    width: 110%; height: 110%;
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    will-change: transform;
-  }
-  .ambient-node {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 16px rgba(0,255,148,0.5);
-    opacity: 0.18;
-    animation: ambientDrift 14s ease-in-out infinite;
-  }
-  .ambient-node.orange { background: var(--orange); box-shadow: 0 0 16px rgba(255,107,53,0.5); }
-  @keyframes ambientDrift {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(18px, -22px); }
-    50% { transform: translate(-12px, 14px); }
-    75% { transform: translate(14px, 20px); }
-  }
-
-  .mini-bot {
-    position: absolute;
-    width: 46px; height: 50px;
-    opacity: 0.4;
-    animation: miniBotFloat linear infinite;
-  }
-  @keyframes miniBotFloat {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(30px, -18px) rotate(3deg); }
-    50% { transform: translate(60px, 6px) rotate(-2deg); }
-    75% { transform: translate(28px, 26px) rotate(2deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
-  }
-  .section-inner { max-width: 1100px; margin: 0 auto; padding: 110px 32px; }
-  .section-eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--green);
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-  }
-  .section-eyebrow::before { content: '//'; opacity: 0.6; }
-  .section-title {
-    font-family: var(--display);
-    font-size: clamp(28px, 3.6vw, 42px);
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
-  }
-  .section-sub { color: var(--text-muted); font-size: 15.5px; max-width: 560px; margin-bottom: 56px; }
-
-  .reveal { opacity: 1; transform: none; }
-  .reveal.js-ready { opacity: 0; transform: translateY(26px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-  .reveal.js-ready.in-view { opacity: 1; transform: translateY(0); }
-  .reveal-stagger.js-ready .stagger-item { opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
-  .reveal-stagger.js-ready.in-view .stagger-item { opacity: 1; transform: translateY(0); }
-  .stagger-item:nth-child(1) { transition-delay: 0s; }
-  .stagger-item:nth-child(2) { transition-delay: 0.08s; }
-  .stagger-item:nth-child(3) { transition-delay: 0.16s; }
-  .stagger-item:nth-child(4) { transition-delay: 0.24s; }
-  .stagger-item:nth-child(5) { transition-delay: 0.32s; }
-  .stagger-item:nth-child(6) { transition-delay: 0.4s; }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; }
-    #playground, .mini-bot, .ambient-node { display: none !important; }
-    .parallax-layer { transition: none !important; transform: none !important; }
-  }
-
-  /* ============ ABOUT — SYSTEM STATUS PANEL ============ */
-  .status-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .status-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 20px;
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-  .status-header .pulse-dot { width: 7px; height: 7px; }
-  .status-body { padding: 28px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; }
-  .status-bio { font-size: 16px; color: #C4CCDD; line-height: 1.85; }
-  .status-bio strong { color: var(--text); font-weight: 600; }
-  .status-bio p + p { margin-top: 16px; }
-
-  .metrics-list { display: flex; flex-direction: column; gap: 0; }
-  .metric-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 13px;
-  }
-  .metric-row:last-child { border-bottom: none; }
-  .metric-label { color: var(--text-muted); }
-  .metric-val { color: var(--green); font-weight: 600; }
-
-  @media (max-width: 768px) { .status-body { grid-template-columns: 1fr; gap: 24px; } }
-
-  /* ============ SKILLS — NODE CLUSTERS ============ */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 14px;
-  }
-  .skill-node {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  .skill-node::before {
-    content: '';
-    position: absolute;
-    top: 20px; left: 20px;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 6px var(--green);
-  }
-  .skill-node:hover { border-color: var(--border-bright); transform: translateY(-3px); }
-  .skill-node-title {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--green);
-    text-transform: uppercase;
-    letter-spacing: 1.3px;
-    margin-bottom: 14px;
-    padding-left: 16px;
-  }
-  .skill-badges { display: flex; flex-wrap: wrap; gap: 7px; }
-  .badge {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    padding: 4px 10px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    color: var(--text-muted);
-    transition: all 0.2s ease;
-  }
-  .badge:hover { color: var(--text); border-color: var(--orange); background: rgba(255,107,53,0.08); }
-
-  /* ============ PROJECTS — SERVICE CARDS ============ */
-  .service-stack { display: flex; flex-direction: column; gap: 16px; }
-  .service-card {
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 26px 28px 26px 32px;
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, var(--green), var(--orange));
-    opacity: 0.5;
-    transition: opacity 0.3s ease, width 0.3s ease;
-  }
-  .service-card:hover {
-    border-color: var(--border-bright);
-    transform: translateY(-3px);
-    box-shadow: 0 16px 40px rgba(0,255,148,0.08);
-  }
-  .service-card:hover::before { opacity: 1; width: 5px; }
-
-  .service-id {
-    position: absolute;
-    top: 16px; right: 20px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.5px;
-  }
-
-  .service-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 14px;
-    padding-right: 70px;
-  }
-  .service-name {
-    font-family: var(--display);
-    font-size: 21px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .service-uptime {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 4px 11px;
-    border-radius: 20px;
-    background: rgba(0,255,148,0.08);
-    border: 1px solid var(--border-bright);
-    color: var(--green);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-  }
-  .service-uptime .pulse-dot { width: 6px; height: 6px; }
-
-  .service-desc { color: #B8C1D6; font-size: 14.5px; line-height: 1.75; margin-bottom: 16px; }
-  .service-bullets { list-style: none; margin-bottom: 16px; }
-  .service-bullets li {
-    color: var(--text-muted);
-    font-size: 13.5px;
-    line-height: 1.7;
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 7px;
-  }
-  .service-bullets li::before { content: '↳'; position: absolute; left: 0; color: var(--orange); }
-  .service-bullets strong { color: var(--text); font-weight: 600; }
-
-  .service-spark {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    height: 22px;
-    margin-bottom: 16px;
-  }
-  .service-spark-bar {
-    width: 5px;
-    background: linear-gradient(180deg, var(--green), rgba(0,255,148,0.15));
-    border-radius: 2px 2px 0 0;
-    animation: sparkPulse 2.4s ease-in-out infinite;
-  }
-
-  @keyframes sparkPulse {
-    0%, 100% { transform: scaleY(0.6); }
-    50% { transform: scaleY(1); }
-  }
-
-  .service-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
-  .service-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 4px 10px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    color: var(--green-dim);
-  }
-  .service-link {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text);
-    text-decoration: none;
-    padding: 9px 16px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    transition: all 0.2s ease;
-    margin-right: 10px;
-  }
-  .service-link:hover { border-color: var(--green); background: rgba(0,255,148,0.06); transform: translateY(-1px); }
-
-  /* ============ EXPERIENCE — PIPELINE FLOW ============ */
-  .pipeline {
-    position: relative;
-    padding-left: 32px;
-  }
-  .pipeline::before {
-    content: '';
-    position: absolute;
-    left: 5px; top: 8px; bottom: 8px;
-    width: 2px;
-    background: linear-gradient(var(--green) 0%, var(--border) 100%);
-  }
-  .pipe-node {
-    position: relative;
-    margin-bottom: 44px;
-  }
-  .pipe-node:last-child { margin-bottom: 0; }
-  .pipe-node::before {
-    content: '';
-    position: absolute;
-    left: -32px; top: 6px;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--green);
-    box-shadow: 0 0 0 4px var(--bg), 0 0 10px rgba(0,255,148,0.4);
-  }
-  .pipe-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 6px;
-  }
-  .pipe-role { font-family: var(--display); font-size: 19px; font-weight: 700; }
-  .pipe-dates { font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
-  .pipe-company { font-family: var(--mono); font-size: 13px; color: var(--green); margin-bottom: 12px; }
-  .pipe-bullets { list-style: none; }
-  .pipe-bullets li {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.75;
-    padding-left: 18px;
-    position: relative;
-    margin-bottom: 7px;
-  }
-  .pipe-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--orange); }
-  .pipe-bullets strong { color: var(--text); font-weight: 600; }
-
-  /* ============ CONTACT ============ */
-  .contact-section { background: linear-gradient(180deg, transparent, rgba(0,255,148,0.025)); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-  .form-group label { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.5px; }
-  .form-group input, .form-group textarea {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 13px 16px;
-    color: var(--text);
-    font-family: var(--body);
-    font-size: 14px;
-    transition: border-color 0.25s ease;
-  }
-  .form-group input:focus, .form-group textarea:focus {
-    outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(0,255,148,0.12);
-  }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .submit-btn { align-self: flex-start; margin-top: 4px; }
-
-  .contact-side { display: flex; flex-direction: column; justify-content: center; }
-  .contact-side h3 { font-family: var(--display); font-size: 23px; font-weight: 700; margin-bottom: 14px; }
-  .contact-side p { color: var(--text-muted); margin-bottom: 26px; line-height: 1.7; }
-  .social-row { display: flex; gap: 12px; }
-  .social-link {
-    width: 46px; height: 46px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none; color: var(--text-muted);
-    font-family: var(--mono); font-size: 12.5px; font-weight: 600;
-    transition: all 0.25s ease;
-  }
-  .social-link:hover { border-color: var(--green); color: var(--text); background: rgba(0,255,148,0.08); transform: translateY(-3px); }
-
-  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 36px; } }
-
-  footer {
-    text-align: center;
-    padding: 34px 24px;
-    border-top: 1px solid var(--border);
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--text-dim);
-  }
-  footer span { color: var(--green); }
-
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+/* profile */
+.profile{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,3vw,36px);align-items:start}
+.profile-text{padding:clamp(20px,3vw,32px);display:grid;gap:16px}
+.profile-text p{max-width:64ch}
+.scorebook{margin:0;border-collapse:collapse;width:100%;font-size:.9375rem}
+.scorebook th,.scorebook td{text-align:left;padding:10px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+.scorebook th{font:700 .75rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);width:40%}
+.scorebook tr:last-child th,.scorebook tr:last-child td{border-bottom:0}
 </style>
-<noscript>
+
 <style>
-  .hero-eyebrow, .hero-name, .hero-desc, .hero-cta, .hero-bot-wrap { opacity: 1 !important; animation: none !important; }
-  .reveal, .reveal.js-ready, .stagger-item { opacity: 1 !important; transform: none !important; }
-  #network-canvas, #playground { display: none; }
-  #cursor-dot, #cursor-ring { display: none; }
-  * { cursor: auto !important; }
-  a, button, .skill-node { cursor: pointer !important; }
+/* innings + wagon wheel */
+.innings{display:grid;gap:clamp(20px,3vw,32px)}
+.inning-body{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(18px,3vw,32px);padding:clamp(18px,3vw,28px);align-items:center}
+.inning-title{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px;align-items:baseline;margin-bottom:14px}
+.inning-title h3{font-size:clamp(1.6rem,3vw,2.2rem);text-transform:uppercase}
+.inning-title .role{font:700 1.05rem var(--f-cond);letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.inning-title .when{font:600 .9375rem var(--f-cond);color:var(--ink-2);letter-spacing:.04em}
+.shots{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:10px}
+.shot{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:10px 12px;border-radius:12px;border:1px solid transparent;transition:background-color .2s,border-color .2s}
+.shot:hover,.shot.on{background:var(--paper-2);border-color:var(--line)}
+.shot .runs{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:900 1.1rem var(--f-led);color:#fff;background:var(--c);box-shadow:inset -3px -4px 6px rgba(0,0,0,.2)}
+.shot .sname{display:block;font:700 .75rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.wheel{display:grid;justify-items:center;gap:8px}
+.wheel svg{width:100%;max-width:300px;height:auto;overflow:visible}
+.wheel .field{fill:var(--grass-1);stroke:#fff;stroke-width:2}
+.wheel .ring{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.5;stroke-dasharray:4 5}
+.wheel .strip{fill:var(--pitch)}
+.wheel .ray{stroke:var(--c);stroke-width:3;stroke-linecap:round;opacity:.75;transition:stroke-width .2s,opacity .2s}
+.wheel .ray.on{stroke-width:6;opacity:1}
+.wheel .tip{fill:var(--c);stroke:#fff;stroke-width:2}
+.wheel .lbl{font:700 11px var(--f-cond);letter-spacing:.08em;fill:#fff;text-transform:uppercase;paint-order:stroke;stroke:rgba(0,0,0,.45);stroke-width:3px}
+.wheel figcaption{font:700 .75rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+
+/* DRS project cards */
+.drs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,28px)}
+.drs{position:relative;perspective:1400px;min-height:430px}
+.drs-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,1.2,.4,1)}
+.drs.flipped .drs-inner{transform:rotateY(180deg)}
+.drs-face{position:absolute;inset:0;display:flex;flex-direction:column;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.drs-back{transform:rotateY(180deg)}
+.drs-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:0;overflow:auto}
+.drs-body h3{font-size:1.75rem;text-transform:uppercase;line-height:1}
+.drs-sub{font:600 1rem var(--f-cond);letter-spacing:.04em;color:var(--accent);text-transform:uppercase}
+.drs-stat{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--led-bg)}
+.drs-stat .led{font-size:1.5rem}
+.drs-stat span:last-child{font:600 .875rem var(--f-cond);letter-spacing:.06em;color:#CFE7D8;text-transform:uppercase}
+.drs-desc{color:var(--ink-2);font-size:.9375rem}
+.drs-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.track{display:block;width:100%;height:auto;border-radius:12px;background:linear-gradient(180deg,var(--grass-2),var(--grass-1))}
+.track .tpitch{fill:var(--pitch)} .track .tline{stroke:#fff;stroke-width:1.5}
+.track .zone{fill:rgba(92,255,138,.25);stroke:var(--led-2);stroke-width:1}
+.track .stump{stroke:#F7F1E1;stroke-width:3;stroke-linecap:round}
+.track .path{fill:none;stroke:#FF4D6D;stroke-width:4;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:0}
+.drs.flipped .track .path{animation:trackball 1.6s .4s cubic-bezier(.3,.6,.4,1) both}
+@keyframes trackball{from{stroke-dashoffset:420}to{stroke-dashoffset:0}}
+.track .mark{fill:#fff;stroke:#FF4D6D;stroke-width:2}
+.verdicts{display:grid;gap:8px;margin:0}
+.verdicts div{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:start;font-size:.875rem;line-height:1.45}
+.verdicts dt{font:700 .6875rem var(--f-cond);letter-spacing:.12em;text-transform:uppercase;padding:3px 6px;border-radius:6px;background:var(--led-bg);color:var(--led-2);text-align:center}
+.verdicts dd{margin:0}
+.decision{align-self:flex-start;font:400 1.4rem var(--f-display);letter-spacing:.06em;color:var(--turf);border:3px solid currentColor;border-radius:8px;padding:0 10px;transform:rotate(-4deg)}
+
+/* squad / field map */
+.squad{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(20px,3vw,36px);align-items:start}
+.fieldmap{padding:16px;display:grid;gap:10px;justify-items:center;position:sticky;top:90px}
+.fieldmap svg{width:100%;max-width:400px;height:auto}
+.fm-oval{fill:var(--grass-1);stroke:#fff;stroke-width:3}
+.fm-stripe{fill:var(--grass-2)}
+.fm-ring{fill:none;stroke:rgba(255,255,255,.6);stroke-width:2;stroke-dasharray:6 6}
+.fm-pitch{fill:var(--pitch)}
+.fielder{cursor:pointer}
+.fielder circle{fill:var(--paper);stroke:var(--ink);stroke-width:2.5;transition:r .2s}
+.fielder text{font:700 10px var(--f-cond);letter-spacing:.06em;fill:var(--ink);text-anchor:middle;pointer-events:none}
+.fielder .pos{font-size:9.5px;fill:#fff;paint-order:stroke;stroke:rgba(0,0,0,.5);stroke-width:3px;text-transform:uppercase;letter-spacing:.1em}
+.fielder:hover circle,.fielder.on circle,.fielder:focus-visible circle{fill:var(--gold)}
+.fielder:focus{outline:none}
+.fixed-pl circle{fill:var(--accent);stroke:#fff}
+.fixed-pl text{fill:#fff}
+.throw{fill:none;stroke:var(--gold);stroke-width:3;stroke-dasharray:6 6;stroke-linecap:round}
+.fm-hint{font:600 .875rem var(--f-cond);letter-spacing:.06em;color:var(--ink-2);text-transform:uppercase}
+.groups{display:grid;gap:14px}
+.group{padding:14px 16px;transition:box-shadow .3s,transform .3s}
+.group.on{box-shadow:0 0 0 3px var(--gold),var(--shadow);transform:translateX(4px)}
+.group h3{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:1.15rem;text-transform:uppercase;margin-bottom:10px}
+.group h3 small{font:700 .6875rem var(--f-cond);letter-spacing:.14em;color:var(--accent)}
+
+/* nets */
+.nets{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,3vw,36px);align-items:start}
+.edu{padding:clamp(18px,3vw,26px);display:grid;gap:12px}
+.edu h3{font-size:clamp(1.5rem,2.6vw,2rem);text-transform:uppercase}
+.edu .deg{font:700 1.05rem var(--f-cond);color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+.edu .when{font:600 .9375rem var(--f-cond);color:var(--ink-2)}
+.courses{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
+.courses li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;background:var(--paper-2);border:1px solid var(--line);font-weight:600}
+.courses .res{font:900 .9375rem var(--f-led);min-width:2.2em;text-align:center;padding:2px 6px;border-radius:6px;background:var(--led-bg);color:#5C6B60}
+.courses .res.hit{color:var(--led)} .courses .res.big{color:var(--led-2)} .courses .res.out{color:#FF6B6B}
+.courses li.pop{animation:bump .5s cubic-bezier(.3,1.6,.5,1)}
+.game{display:grid}
+.game-stage{position:relative}
+#netsCanvas{display:block;width:100%;touch-action:manipulation;cursor:pointer}
+.game-call{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font:400 clamp(2.4rem,7vw,4.4rem) var(--f-display);letter-spacing:.04em;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.35),0 0 30px rgba(255,200,60,.6);pointer-events:none;opacity:0}
+.game-call.show{animation:call 1.1s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes call{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}75%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-62%) scale(1)}}
+.game-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--line)}
+.overballs{display:flex;gap:6px}
+.overballs span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:900 .8125rem var(--f-led);background:var(--led-bg);color:#5C6B60;border:1px solid #000}
+.overballs span.hit{color:var(--led)} .overballs span.big{color:var(--led-2)} .overballs span.out{color:#FF6B6B}
+.game-help{font:600 .875rem var(--f-cond);letter-spacing:.04em;color:var(--ink-2)}
+
+/* contact ticket */
+.ticket{display:grid;grid-template-columns:minmax(0,1fr) 210px;max-width:940px;margin-inline:auto;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:var(--paper);border:1px solid var(--line);position:relative}
+.ticket-main{padding:clamp(22px,4vw,40px);display:grid;gap:14px;justify-items:start;background:linear-gradient(135deg,var(--paper) 60%,var(--paper-2))}
+.admit{font:700 .8125rem var(--f-cond);letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.ticket h2{font-size:clamp(2rem,5vw,3.4rem)}
+.ticket dl{display:grid;grid-template-columns:repeat(3,auto);gap:4px 28px;margin:0}
+.ticket dt{font:700 .6875rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.ticket dd{margin:0;font:700 1.05rem var(--f-cond);letter-spacing:.02em}
+.email{font:600 1.05rem var(--f-cond);letter-spacing:.03em;padding:8px 14px;border:2px dashed var(--line);border-radius:10px;background:var(--paper-2);-webkit-user-select:all;user-select:all;word-break:break-all}
+.stub{position:relative;padding:22px 18px;display:grid;gap:12px;align-content:space-between;justify-items:center;text-align:center;background:var(--head);color:var(--on-head);border-left:3px dashed var(--paper);transition:transform .5s cubic-bezier(.3,1.4,.5,1);transform-origin:0 0}
+.ticket:hover .stub{transform:rotate(4deg) translate(6px,6px)}
+.stub .led{font-size:2rem}
+.stub small{font:700 .6875rem var(--f-cond);letter-spacing:.16em;text-transform:uppercase;color:#BFE9CF}
+.barcode{display:flex;gap:2px;height:64px;align-items:stretch}
+.barcode i{display:block;background:var(--on-head)}
+.foot{text-align:center;padding-block:28px 48px;color:var(--ink-2);font-size:.875rem;display:grid;gap:6px;justify-items:center}
+.foot p{padding:4px 12px;border-radius:8px;background:var(--glass-2)}
+
+/* shot popups, overlays */
+.callout{position:fixed;z-index:95;pointer-events:none;font:400 2.2rem var(--f-display);letter-spacing:.04em;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.4),0 0 18px rgba(0,0,0,.35);transform:translate(-50%,-50%);animation:callout 1.1s cubic-bezier(.2,1.4,.4,1) forwards;white-space:nowrap}
+.callout.six{color:var(--gold);font-size:3rem} .callout.four{color:#7FE3FF} .callout.out{color:#FF5B6E;font-size:3rem}
+@keyframes callout{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}20%{opacity:1;transform:translate(-50%,-80%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-190%) scale(1)}}
+.howzat{position:fixed;inset:0;z-index:96;display:grid;place-items:center;pointer-events:none;font:400 clamp(4rem,16vw,12rem) var(--f-display);color:#FF5B6E;text-shadow:0 8px 0 rgba(0,0,0,.35);animation:howz 1.6s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes howz{0%{opacity:0;transform:scale(.3) rotate(-8deg)}25%{opacity:1;transform:scale(1.05) rotate(-3deg)}80%{opacity:1}100%{opacity:0;transform:scale(1.2)}}
+.shake{animation:shake .5s}
+@keyframes shake{20%{transform:translate(-6px,3px)}40%{transform:translate(5px,-4px)}60%{transform:translate(-4px,2px)}80%{transform:translate(3px,-2px)}}
+.tldr{width:min(660px,calc(100% - 32px));max-height:calc(100% - 32px);padding:0;border:1px solid var(--line);border-radius:18px;background:var(--paper);color:var(--ink);box-shadow:var(--shadow)}
+.tldr::backdrop{background:rgba(3,10,20,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tldr-body{padding:clamp(20px,4vw,30px);display:grid;gap:14px}
+.tldr h2{font-size:clamp(2rem,5vw,2.8rem)}
+.tldr dl{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:0}
+.tldr dt{font:700 .75rem var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+.tldr dd{margin:0;font-size:.9375rem}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,calc(100% + 48px));padding:12px 20px;border-radius:10px;background:var(--led-bg);color:#E8FFF0;font:700 1rem var(--f-cond);letter-spacing:.04em;z-index:97;transition:transform .45s cubic-bezier(.3,1.5,.5,1);border:1px solid #000;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+
+/* responsive */
+@media (max-width:1000px){
+  .nav-links{position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;gap:2px;margin:0;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:10px 14px}
+  .menu-btn{display:grid}
+  .hero,.profile,.inning-body,.squad,.nets{grid-template-columns:minmax(0,1fr)}
+  .over{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .drs-grid{grid-template-columns:minmax(0,1fr);max-width:620px;margin-inline:auto}
+  .fieldmap{position:static}
+}
+@media (max-width:640px){
+  .score small{display:none}
+  .pill-btn .long{display:none}
+  .over{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .drs{min-height:500px}
+  .ticket{grid-template-columns:minmax(0,1fr)}
+  .stub{border-left:0;border-top:3px dashed var(--paper);grid-template-columns:1fr 1fr;align-items:center}
+  .ticket dl{grid-template-columns:repeat(2,auto)}
+  .tldr dl{grid-template-columns:minmax(0,1fr);gap:2px}
+  .tldr dd{margin-bottom:10px}
+  .verdicts div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .verdicts dt{justify-self:start}
+}
+@media (max-width:420px){.logo span{display:none}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .ticker-track{animation:none}
+}
 </style>
-</noscript>
+
 </head>
 <body>
 
-<div id="playground">
-  <div class="parallax-layer" id="parallaxBack">
-    <div class="ambient-node" style="top:12%; left:8%; width:5px; height:5px; animation-delay:0s"></div>
-    <div class="ambient-node orange" style="top:22%; left:78%; width:6px; height:6px; animation-delay:1.5s"></div>
-    <div class="ambient-node" style="top:65%; left:15%; width:4px; height:4px; animation-delay:3s"></div>
-    <div class="ambient-node" style="top:80%; left:85%; width:5px; height:5px; animation-delay:4.5s"></div>
-    <div class="ambient-node orange" style="top:45%; left:92%; width:4px; height:4px; animation-delay:2s"></div>
-    <div class="ambient-node" style="top:88%; left:40%; width:5px; height:5px; animation-delay:6s"></div>
-  </div>
-  <div class="parallax-layer" id="parallaxMid">
-    <svg class="mini-bot" style="top:18%; left:85%; animation-duration:22s" viewBox="0 0 60 64" fill="none">
-      <rect x="14" y="10" width="32" height="26" rx="7" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
-      <rect x="22" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
-      <rect x="32" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
-      <rect x="26" y="38" width="8" height="6" fill="#0D1420" stroke="#00FF94" stroke-width="1"/>
-      <rect x="16" y="44" width="28" height="18" rx="6" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
-      <circle cx="30" cy="53" r="3.5" fill="#FF6B35"/>
-    </svg>
-    <svg class="mini-bot" style="top:62%; left:6%; animation-duration:26s; animation-delay:-8s" viewBox="0 0 60 64" fill="none">
-      <rect x="14" y="10" width="32" height="26" rx="7" fill="#0D1420" stroke="#FF6B35" stroke-width="1.5"/>
-      <rect x="22" y="18" width="6" height="8" rx="2" fill="#FF6B35"/>
-      <rect x="32" y="18" width="6" height="8" rx="2" fill="#FF6B35"/>
-      <rect x="26" y="38" width="8" height="6" fill="#0D1420" stroke="#FF6B35" stroke-width="1"/>
-      <rect x="16" y="44" width="28" height="18" rx="6" fill="#0D1420" stroke="#FF6B35" stroke-width="1.5"/>
-      <circle cx="30" cy="53" r="3.5" fill="#00FF94"/>
-    </svg>
-    <svg class="mini-bot" style="top:38%; left:48%; animation-duration:30s; animation-delay:-15s" viewBox="0 0 60 64" fill="none">
-      <rect x="14" y="10" width="32" height="26" rx="7" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
-      <rect x="22" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
-      <rect x="32" y="18" width="6" height="8" rx="2" fill="#00FF94"/>
-      <rect x="26" y="38" width="8" height="6" fill="#0D1420" stroke="#00FF94" stroke-width="1"/>
-      <rect x="16" y="44" width="28" height="18" rx="6" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
-      <circle cx="30" cy="53" r="3.5" fill="#FF6B35"/>
-    </svg>
-  </div>
-</div>
+<canvas id="ground" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" class="ball-fill"/><path d="M10 5 C17 13 17 27 10 35" fill="none" class="ball-seam" stroke-width="1.8" stroke-dasharray="2.2 2"/><path d="M30 5 C23 13 23 27 30 35" fill="none" class="ball-seam" stroke-width="1.8" stroke-dasharray="2.2 2"/><ellipse cx="14" cy="12" rx="5" ry="3" fill="#fff" opacity=".35" transform="rotate(-30 14 12)"/></svg></div>
 
-<div id="cursor-ring"></div>
-<div id="cursor-dot"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-<nav>
-  <div class="nav-logo"><span class="pulse-dot"></span>ajay<span style="color:var(--text-dim)">.golla</span></div>
-  <div class="nav-links">
-    <a href="#about" data-idx="1">about</a>
-    <a href="#skills" data-idx="2">stack</a>
-    <a href="#projects" data-idx="3">services</a>
-    <a href="#experience" data-idx="4">pipeline</a>
-    <a href="#contact" data-idx="5">ping</a>
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Back to top"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" class="ball-fill"/><path d="M10 5 C17 13 17 27 10 35" fill="none" class="ball-seam" stroke-width="1.8" stroke-dasharray="2.2 2"/><path d="M30 5 C23 13 23 27 30 35" fill="none" class="ball-seam" stroke-width="1.8" stroke-dasharray="2.2 2"/></svg><span>AJAY</span></a>
+  <nav class="nav-links" id="navLinks" aria-label="Sections">
+    <a href="#profile">Profile</a><a href="#innings">Innings</a><a href="#highlights">Highlights</a><a href="#squad">Squad</a><a href="#nets">Nets</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-actions">
+    <div class="score" id="score" title="Your innings: every click on the ground bowls a ball" aria-live="polite"><small>Your XI</small><span class="led" id="scoreRuns">0/0</span><span class="led ov" id="scoreOv">0.0</span></div>
+    <button class="pill-btn" id="tldrBtn" type="button"><span class="long">Match </span>summary</button>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch to floodlights">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><g class="i-sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g><g class="i-moon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21V9M17 21V9"/><rect x="3.5" y="3" width="7" height="6" rx="1"/><rect x="13.5" y="3" width="7" height="6" rx="1"/></g></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </button>
   </div>
-</nav>
+</header>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <canvas id="network-canvas"></canvas>
-  <div class="hero-grid">
-    <div class="hero-text">
-      <div class="hero-eyebrow">
-        <span class="status-chip">● ONLINE</span>
-        SOFTWARE ENGINEER · ML ENGINEER · DISTRIBUTED SYSTEMS · SAN JOSE, CA
-      </div>
-      <h1 class="hero-name">Ajay Kumar<br><span class="accent">Golla</span></h1>
-      <p class="hero-desc">I design backend systems that stay up when things go wrong — <strong>concurrent Go services</strong>, <strong>event-driven Kafka pipelines</strong>, and <strong>fault-tolerant distributed platforms</strong> built to hold 99.9% availability under real concurrent load.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View Services →</a>
-        <a href="#contact" class="btn btn-secondary">Ping Me</a>
+<main id="main">
+  <section class="hero wrap" id="top">
+    <div class="hero-main">
+      <p class="batting"><i></i>Now batting · Applied Materials</p>
+      <h1 class="name" aria-label="Ajay Kumar Golla"><span aria-hidden="true"><span class="w" style="--i:0">Ajay</span> <span class="w" style="--i:1">Kumar</span></span><span class="last" aria-hidden="true"><span class="w" style="--i:2">Golla</span></span></h1>
+      <p class="tagline">Software engineer building distributed backends, cloud-native infrastructure, and production AI platforms.</p>
+      <p class="comm" aria-live="off"><b>Commentary</b><span><span id="comm">And that's driven through the covers: throughput up 30% on cloud-native services!</span><span class="caret" aria-hidden="true"></span></span></p>
+      <div class="cta-row">
+        <a class="btn btn--accent" href="#highlights">See the highlights</a>
+        <a class="btn" href="#nets">Face a delivery</a>
+        <a class="btn btn--ghost" href="Ajay_Kumar_Golla_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/ajay-kumar-golla-20468820a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn--ghost" href="https://github.com/AJAYKUMARGOLLA117" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
     </div>
+    <article class="pcard" id="pcard" aria-label="Player card">
+      <div class="pc-top"><span>Player card</span><span>M.S. '26</span></div>
+      <div class="pc-art"><svg viewBox="0 0 200 200" aria-hidden="true">
+        <g transform="rotate(-28 100 100)"><rect x="92" y="18" width="16" height="44" rx="6" fill="#2B2B2B"/><path d="M92 30 h16 M92 38 h16 M92 46 h16" stroke="#4A4A4A" stroke-width="3"/><rect x="83" y="60" width="34" height="112" rx="10" fill="#F2D59B" stroke="#C9A35F" stroke-width="3"/><path d="M100 70 v92" stroke="#D9B878" stroke-width="2"/></g>
+        <g transform="rotate(28 100 100)"><rect x="92" y="18" width="16" height="44" rx="6" fill="#2B2B2B"/><path d="M92 30 h16 M92 38 h16 M92 46 h16" stroke="#4A4A4A" stroke-width="3"/><rect x="83" y="60" width="34" height="112" rx="10" fill="#F2D59B" stroke="#C9A35F" stroke-width="3"/><path d="M100 70 v92" stroke="#D9B878" stroke-width="2"/></g>
+        <circle cx="100" cy="150" r="24" fill="#C8102E" stroke="#7A0A1C" stroke-width="2"/><path d="M86 132 C96 142 96 158 86 168 M114 132 C104 142 104 158 114 168" fill="none" stroke="#F6E7C8" stroke-width="2" stroke-dasharray="3 2.5"/>
+        <text x="100" y="98" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="44" fill="#FFFFFF" stroke="#0E3B24" stroke-width="6" paint-order="stroke" letter-spacing="2">AKG</text>
+      </svg></div>
+      <h2 class="pc-name">Ajay Kumar Golla</h2>
+      <p class="pc-role">Software Consultant · Applied Materials</p>
+      <dl class="pc-stats">
+        <dt>Team</dt><dd>Applied Materials, Santa Clara</dd>
+        <dt>Bats</dt><dd>Python · Go · Java</dd>
+        <dt>Bowls</dt><dd>Distributed systems</dd>
+        <dt>Plays on</dt><dd>AWS · GCP · Kubernetes</dd>
+        <dt>Academy</dt><dd>San José State University</dd>
+        <dt>Home</dt><dd>San Jose, CA</dd>
+      </dl>
+    </article>
+  </section>
 
-    <div class="hero-bot-wrap">
-      <div class="bot-float">
-        <svg class="bot-svg" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- antenna -->
-          <line x1="120" y1="18" x2="120" y2="38" stroke="#00FF94" stroke-width="2.5"/>
-          <circle class="bot-antenna-light" cx="120" cy="14" r="4" fill="#00FF94"/>
-          <!-- head -->
-          <rect x="55" y="38" width="130" height="100" rx="22" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
-          <!-- screen face -->
-          <rect x="72" y="56" width="96" height="64" rx="10" fill="#06090F" stroke="#1A2333" stroke-width="1.5"/>
-          <!-- eyes -->
-          <rect class="bot-eye" x="92" y="78" width="14" height="18" rx="4" fill="#00FF94"/>
-          <rect class="bot-eye" x="134" y="78" width="14" height="18" rx="4" fill="#00FF94"/>
-          <!-- mouth scan line -->
-          <rect class="bot-screen-line" x="92" y="104" width="56" height="3" rx="1.5" fill="#FF6B35"/>
-          <!-- ear nodes -->
-          <circle cx="50" cy="78" r="7" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
-          <circle cx="190" cy="78" r="7" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
-          <!-- neck -->
-          <rect x="108" y="138" width="24" height="14" fill="#0D1420" stroke="#00FF94" stroke-width="1.5"/>
-          <!-- body -->
-          <rect x="62" y="152" width="116" height="86" rx="16" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
-          <!-- chest panel -->
-          <rect x="80" y="170" width="80" height="50" rx="8" fill="#06090F" stroke="#1A2333" stroke-width="1.5"/>
-          <!-- chest core light -->
-          <circle cx="120" cy="195" r="11" fill="none" stroke="#00FF94" stroke-width="2" class="bot-antenna-light"/>
-          <circle cx="120" cy="195" r="4" fill="#FF6B35"/>
-          <!-- small status dots -->
-          <circle cx="95" cy="178" r="2.5" fill="#00FF94"/>
-          <circle cx="145" cy="178" r="2.5" fill="#00FF94"/>
-          <!-- arms -->
-          <rect x="38" y="160" width="16" height="50" rx="8" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
-          <rect x="186" y="160" width="16" height="50" rx="8" fill="#0D1420" stroke="#00FF94" stroke-width="2"/>
-        </svg>
-      </div>
-      <div class="bot-readout">
-        <div class="bot-readout-label"><span class="pulse-dot" style="width:6px;height:6px"></span> LIVE METRICS</div>
-        <div class="bot-readout-stat">
-          <span class="bot-readout-num" id="botStatNum">99.9%</span>
-          <span class="bot-readout-desc" id="botStatDesc">MindMesh uptime</span>
-        </div>
-        <div class="bot-readout-bar"><div class="bot-readout-bar-fill" id="botBar"></div></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============ ABOUT ============ -->
-<section id="about">
-  <div class="section-inner">
-    <div class="section-eyebrow">about</div>
-    <h2 class="section-title">System status: actively building.</h2>
-    <div class="status-panel reveal">
-      <div class="status-header"><span class="pulse-dot"></span> status.log — last updated now</div>
-      <div class="status-body">
-        <div class="status-bio">
-          <p>I'm a software and machine learning engineer who just graduated with my <strong>M.S. in Computer Software Engineering from San Jose State University</strong>, with hands-on experience designing distributed systems in Go, Java, and Kotlin/Elixir.</p>
-          <p>My work centers on the unglamorous part of distributed systems: what happens when a node fails, a queue backs up, or 10,000 requests land in the same second. I've built Kafka pipelines that don't drop messages, Go services that gracefully degrade instead of crashing, and caching layers that cut latency without cutting correctness.</p>
-          <p>Most recently I've been deep in <strong>concurrent goroutine processing</strong> and <strong>Kubernetes-orchestrated multi-node deployments</strong> as a Research Assistant at SJSU.</p>
-        </div>
-        <div class="metrics-list">
-          <div class="metric-row"><span class="metric-label">degree</span><span class="metric-val">M.S. CSE, SJSU ✓</span></div>
-          <div class="metric-row"><span class="metric-label">focus</span><span class="metric-val">Distributed Systems</span></div>
-          <div class="metric-row"><span class="metric-label">languages</span><span class="metric-val">Go · Java · Python</span></div>
-          <div class="metric-row"><span class="metric-label">location</span><span class="metric-val">San Jose, CA</span></div>
-          <div class="metric-row"><span class="metric-label">status</span><span class="metric-val">Open to work</span></div>
-        </div>
-      </div>
+  <div class="ticker" aria-label="Career highlights ticker">
+    <div class="ticker-track" id="ticker">
+      <span><b>NOW</b>Software Consultant at Applied Materials · Santa Clara</span>
+      <span><b>MQTT</b>edge-to-cloud publishing with AWS IoT Greengrass</span>
+      <span><b>+30%</b>throughput on cloud-native services · SJSU research</span>
+      <span><b>−25%</b>execution latency on distributed pipelines</span>
+      <span><b>−30%</b>API latency under production load · Rivach</span>
+      <span><b>+40%</b>deployment frequency with Docker, Jenkins &amp; AWS</span>
+      <span><b>+70%</b>messaging throughput · Kafka + Redis</span>
+      <span><b>99.9%</b>availability · MindMesh</span>
+      <span><b>5K+</b>users on Spring Boot microservices</span>
     </div>
   </div>
-</section>
 
-<!-- ============ SKILLS ============ -->
-<section id="skills">
-  <div class="section-inner" style="padding-top:0">
-    <div class="section-eyebrow">stack</div>
-    <h2 class="section-title">Nodes in the system</h2>
-    <p class="section-sub">The technologies that show up across every service I build.</p>
-    <div class="skills-grid reveal-stagger">
-      <div class="skill-node stagger-item">
-        <div class="skill-node-title">Languages</div>
-        <div class="skill-badges"><span class="badge">Go</span><span class="badge">Java</span><span class="badge">Python</span><span class="badge">Kotlin</span><span class="badge">C++</span><span class="badge">TypeScript</span></div>
-      </div>
-      <div class="skill-node stagger-item">
-        <div class="skill-node-title">Distributed Systems</div>
-        <div class="skill-badges"><span class="badge">Kafka</span><span class="badge">gRPC</span><span class="badge">Microservices</span><span class="badge">Event-Driven</span></div>
-      </div>
-      <div class="skill-node stagger-item">
-        <div class="skill-node-title">Concurrency</div>
-        <div class="skill-badges"><span class="badge">Goroutines</span><span class="badge">Multithreading</span><span class="badge">Async I/O</span><span class="badge">Fault Tolerance</span></div>
-      </div>
-      <div class="skill-node stagger-item">
-        <div class="skill-node-title">Cloud & Infra</div>
-        <div class="skill-badges"><span class="badge">AWS</span><span class="badge">Kubernetes</span><span class="badge">Docker</span><span class="badge">Jenkins</span></div>
-      </div>
-      <div class="skill-node stagger-item">
-        <div class="skill-node-title">Data</div>
-        <div class="skill-badges"><span class="badge">PostgreSQL</span><span class="badge">MongoDB</span><span class="badge">Redis</span><span class="badge">MySQL</span></div>
-      </div>
-      <div class="skill-node stagger-item">
-        <div class="skill-node-title">Backend</div>
-        <div class="skill-badges"><span class="badge">Spring Boot</span><span class="badge">Node.js</span><span class="badge">Express.js</span><span class="badge">REST</span></div>
+  <section class="wrap section" id="over" aria-label="Career numbers" style="padding-block:clamp(40px,6vw,72px) 0">
+    <header class="sec-head">
+      <p class="eyebrow">the numbers</p>
+      <h2>One over of impact</h2>
+      <p class="lede">Six deliveries, six results from my work. Hover a ball to give it some spin.</p>
+    </header>
+    <div class="over">
+      <div class="delivery card"><span class="bn">Ball 1</span><div class="dball"><span class="led" data-to="30" data-pre="+" data-suf="%">+30%</span></div><p>throughput on cloud-native services</p></div>
+      <div class="delivery card"><span class="bn">Ball 2</span><div class="dball"><span class="led" data-to="25" data-pre="−" data-suf="%">−25%</span></div><p>execution latency on data pipelines</p></div>
+      <div class="delivery card"><span class="bn">Ball 3</span><div class="dball"><span class="led" data-to="30" data-pre="−" data-suf="%">−30%</span></div><p>API latency under production load</p></div>
+      <div class="delivery card"><span class="bn">Ball 4</span><div class="dball"><span class="led" data-to="40" data-pre="+" data-suf="%">+40%</span></div><p>deployment frequency</p></div>
+      <div class="delivery card"><span class="bn">Ball 5</span><div class="dball"><span class="led" data-to="70" data-pre="+" data-suf="%">+70%</span></div><p>messaging throughput</p></div>
+      <div class="delivery card"><span class="bn">Ball 6</span><div class="dball"><span class="led" data-to="99.9" data-dec="1" data-suf="%">99.9%</span></div><p>service availability</p></div>
+    </div>
+  </section>
+
+  <section class="wrap section profile" id="profile">
+    <div class="card">
+      <div class="card-head"><span>Player profile</span><span class="led">AKG</span></div>
+      <div class="profile-text">
+        <p class="eyebrow">about me</p>
+        <h2>Backend-first. Built for the long innings.</h2>
+        <p>I'm Ajay, a software engineer in San Jose. Today I'm a software consultant at Applied Materials in Santa Clara, building the pipelines that move measurement data from semiconductor manufacturing equipment into cloud analytics.</p>
+        <p>Before that I finished my M.S. in Computer Software Engineering at San José State University, where I worked as a research assistant on cloud-native backend services.</p>
+        <p>I like systems that have to keep their shape under pressure: microservices that scale horizontally, event-driven pipelines that recover from failure, and AI agents that stay reliable through long conversations. Most of my work is in Python, Go, and Java, running on Kubernetes, AWS, and GCP.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ PROJECTS ============ -->
-<section id="projects">
-  <div class="section-inner" style="padding-top:0">
-    <div class="section-eyebrow">services</div>
-    <h2 class="section-title">Things I've deployed</h2>
-    <p class="section-sub">Each one designed to keep running when load spikes or a node drops.</p>
-
-    <div class="service-stack reveal-stagger">
-
-      <div class="service-card stagger-item">
-        <span class="service-id">svc-01</span>
-        <div class="service-top">
-          <div class="service-name">MindMesh</div>
-          <div class="service-uptime"><span class="pulse-dot"></span> 99.9% uptime</div>
-        </div>
-        <p class="service-desc">A distributed knowledge graph platform built for high-concurrency access — fault-tolerant communication between Kotlin and Elixir services under real production-style load.</p>
-        <div class="service-spark">
-          <div class="service-spark-bar" style="height:60%;animation-delay:0s"></div>
-          <div class="service-spark-bar" style="height:85%;animation-delay:0.15s"></div>
-          <div class="service-spark-bar" style="height:45%;animation-delay:0.3s"></div>
-          <div class="service-spark-bar" style="height:95%;animation-delay:0.45s"></div>
-          <div class="service-spark-bar" style="height:70%;animation-delay:0.6s"></div>
-          <div class="service-spark-bar" style="height:88%;animation-delay:0.75s"></div>
-          <div class="service-spark-bar" style="height:55%;animation-delay:0.9s"></div>
-          <div class="service-spark-bar" style="height:92%;animation-delay:1.05s"></div>
-        </div>
-        <ul class="service-bullets">
-          <li>Built distributed backend services in <strong>Kotlin/Elixir</strong> — implemented concurrent request processing and fault-tolerant communication supporting <strong>1K+ concurrent users</strong> at 99.9% availability.</li>
-          <li>Designed high-concurrency modules with <strong>Redis caching</strong> and async processing — reduced latency 35% through optimized database access patterns and load balancing.</li>
-        </ul>
-        <div class="service-tags"><span class="service-tag">Elixir</span><span class="service-tag">Kotlin</span><span class="service-tag">PostgreSQL</span><span class="service-tag">Redis</span><span class="service-tag">Docker</span></div>
-      </div>
-
-      <div class="service-card stagger-item">
-        <span class="service-id">svc-02</span>
-        <div class="service-top">
-          <div class="service-name">Reddit Prototype</div>
-          <div class="service-uptime"><span class="pulse-dot"></span> 10K+ msg/s</div>
-        </div>
-        <p class="service-desc">An event-driven distributed messaging platform processing real-time traffic through Kafka producer-consumer pipelines — built to stay fast under concurrent write load.</p>
-        <div class="service-spark">
-          <div class="service-spark-bar" style="height:70%;animation-delay:0.1s"></div>
-          <div class="service-spark-bar" style="height:50%;animation-delay:0.25s"></div>
-          <div class="service-spark-bar" style="height:90%;animation-delay:0.4s"></div>
-          <div class="service-spark-bar" style="height:65%;animation-delay:0.55s"></div>
-          <div class="service-spark-bar" style="height:98%;animation-delay:0.7s"></div>
-          <div class="service-spark-bar" style="height:75%;animation-delay:0.85s"></div>
-          <div class="service-spark-bar" style="height:60%;animation-delay:1.0s"></div>
-          <div class="service-spark-bar" style="height:85%;animation-delay:1.15s"></div>
-        </div>
-        <ul class="service-bullets">
-          <li>Designed event-driven services processing <strong>10K+ messages</strong> using Kafka and Node.js — implemented concurrent producer-consumer pipelines improving throughput <strong>70%</strong> and cutting latency 45%.</li>
-          <li>Optimized network communication for 5K+ concurrent users across AWS — applied multithreading, Redis caching, and fault-tolerant message delivery patterns.</li>
-        </ul>
-        <div class="service-tags"><span class="service-tag">Kafka</span><span class="service-tag">Node.js</span><span class="service-tag">Redis</span><span class="service-tag">MySQL</span><span class="service-tag">AWS EC2</span></div>
-      </div>
-
-      <div class="service-card stagger-item">
-        <span class="service-id">svc-03</span>
-        <div class="service-top">
-          <div class="service-name">MovieGraph</div>
-          <div class="service-uptime"><span class="pulse-dot"></span> +30% precision</div>
-        </div>
-        <p class="service-desc">A knowledge-based recommendation system fusing Neo4j graph traversal with FAISS vector search — reasons over actor-director-genre relationships instead of just matching keywords.</p>
-        <div class="service-spark">
-          <div class="service-spark-bar" style="height:55%;animation-delay:0.05s"></div>
-          <div class="service-spark-bar" style="height:80%;animation-delay:0.2s"></div>
-          <div class="service-spark-bar" style="height:95%;animation-delay:0.35s"></div>
-          <div class="service-spark-bar" style="height:60%;animation-delay:0.5s"></div>
-          <div class="service-spark-bar" style="height:75%;animation-delay:0.65s"></div>
-          <div class="service-spark-bar" style="height:90%;animation-delay:0.8s"></div>
-          <div class="service-spark-bar" style="height:48%;animation-delay:0.95s"></div>
-          <div class="service-spark-bar" style="height:82%;animation-delay:1.1s"></div>
-        </div>
-        <ul class="service-bullets">
-          <li>Fused <strong>Neo4j</strong> knowledge graphs with <strong>FAISS</strong> vector search inside a RAG pipeline — letting the system reason over relationships rather than just matching keywords.</li>
-          <li>Encoded user queries with Hugging Face sentence transformers and retrieved semantically relevant graph triples via <strong>LangChain</strong> — pushing recommendation precision up by <strong>30%</strong>.</li>
-          <li>Tackled the cold-start problem by grounding recommendations in relationship-aware graph traversal alongside dense vector similarity — a hybrid approach rarely seen in student projects.</li>
-        </ul>
-        <div class="service-tags"><span class="service-tag">Python</span><span class="service-tag">Neo4j</span><span class="service-tag">FAISS</span><span class="service-tag">LangChain</span><span class="service-tag">Hugging Face</span></div>
-      </div>
-
-      <div class="service-card stagger-item">
-        <span class="service-id">svc-04</span>
-        <div class="service-top">
-          <div class="service-name">Oprina</div>
-          <div class="service-uptime"><span class="pulse-dot"></span> live</div>
-        </div>
-        <p class="service-desc">A conversational avatar assistant with a modular sub-agent architecture — voice, Gmail, and Calendar agents each own a distinct capability, orchestrated by a central Gemini 2.0 Flash controller.</p>
-        <div class="service-spark">
-          <div class="service-spark-bar" style="height:65%;animation-delay:0s"></div>
-          <div class="service-spark-bar" style="height:88%;animation-delay:0.15s"></div>
-          <div class="service-spark-bar" style="height:72%;animation-delay:0.3s"></div>
-          <div class="service-spark-bar" style="height:96%;animation-delay:0.45s"></div>
-          <div class="service-spark-bar" style="height:58%;animation-delay:0.6s"></div>
-          <div class="service-spark-bar" style="height:84%;animation-delay:0.75s"></div>
-          <div class="service-spark-bar" style="height:70%;animation-delay:0.9s"></div>
-          <div class="service-spark-bar" style="height:91%;animation-delay:1.05s"></div>
-        </div>
-        <ul class="service-bullets">
-          <li>Designed a modular sub-agent architecture — each agent owns a distinct capability (voice, Gmail, Calendar), all orchestrated by a central controller powered by <strong>Gemini 2.0 Flash</strong>.</li>
-          <li>Solved agent state persistence across sessions using <strong>Supabase</strong> — ensuring agent state survived conversation turns without bloating the LLM context window.</li>
-          <li>Deployed inference services on <strong>VertexAI</strong> and wired secure FastAPI endpoints for session management — keeping latency low under concurrent multi-agent interactions.</li>
-        </ul>
-        <div class="service-tags"><span class="service-tag">Python</span><span class="service-tag">FastAPI</span><span class="service-tag">Gemini 2.0</span><span class="service-tag">VertexAI</span><span class="service-tag">Supabase</span></div>
-        <a href="#" target="_blank" class="service-link">↗ Live Demo</a>
-        <a href="#" target="_blank" class="service-link">▶ Demo Video</a>
-      </div>
-
-      <div class="service-card stagger-item">
-        <span class="service-id">svc-05</span>
-        <div class="service-top">
-          <div class="service-name">CourtCTRL.AI</div>
-          <div class="service-uptime"><span class="pulse-dot"></span> Stanford LLM×Law #5</div>
-        </div>
-        <p class="service-desc">A tax litigation copilot — a retrieval pipeline that grounds LLM answers in real case documents before generating a response, built to keep hallucination risk low in a high-stakes legal domain.</p>
-        <div class="service-spark">
-          <div class="service-spark-bar" style="height:48%;animation-delay:0.1s"></div>
-          <div class="service-spark-bar" style="height:75%;animation-delay:0.25s"></div>
-          <div class="service-spark-bar" style="height:90%;animation-delay:0.4s"></div>
-          <div class="service-spark-bar" style="height:62%;animation-delay:0.55s"></div>
-          <div class="service-spark-bar" style="height:85%;animation-delay:0.7s"></div>
-          <div class="service-spark-bar" style="height:55%;animation-delay:0.85s"></div>
-          <div class="service-spark-bar" style="height:94%;animation-delay:1.0s"></div>
-          <div class="service-spark-bar" style="height:68%;animation-delay:1.15s"></div>
-        </div>
-        <ul class="service-bullets">
-          <li>Built a retrieval pipeline that pulls relevant case context from legal documents before passing it to the LLM — keeping answers grounded and hallucination risk low in a high-stakes domain.</li>
-          <li>Combined document embeddings with structured metadata filters — letting attorneys query by case type, jurisdiction, or outcome beyond simple keyword search.</li>
-          <li>Took the project to <strong>Stanford's LLM x Law Hackathon #5</strong>, where the live demo showed real-time case outcome predictions for tax litigation scenarios.</li>
-        </ul>
-        <div class="service-tags"><span class="service-tag">Python</span><span class="service-tag">Node.js</span><span class="service-tag">OpenAI API</span><span class="service-tag">AWS</span><span class="service-tag">Next.js</span></div>
-        <a href="#" target="_blank" class="service-link">▶ Demo Video</a>
-      </div>
-
+    <div class="card">
+      <div class="card-head"><span>Scorebook</span><span class="led">2023 → NOW</span></div>
+      <table class="scorebook">
+        <tbody>
+          <tr><th scope="row">Current role</th><td>Software Consultant, Applied Materials</td></tr>
+          <tr><th scope="row">Specialty</th><td>Distributed backends, data pipelines, cloud-native infrastructure, AI platforms</td></tr>
+          <tr><th scope="row">Languages</th><td>Python, Go, Java, C++, TypeScript, SQL</td></tr>
+          <tr><th scope="row">Cloud</th><td>AWS, GCP, Kubernetes, Docker</td></tr>
+          <tr><th scope="row">Experience</th><td>Applied Materials · SJSU research · Rivach LLP</td></tr>
+          <tr><th scope="row">Education</th><td>M.S. Computer Software Engineering, SJSU, 2026</td></tr>
+          <tr><th scope="row">Based in</th><td>San Jose, CA</td></tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ EXPERIENCE ============ -->
-<section id="experience">
-  <div class="section-inner" style="padding-top:0">
-    <div class="section-eyebrow">pipeline</div>
-    <h2 class="section-title">Where I've shipped from</h2>
-    <p class="section-sub">Three stages, each one closer to systems that run themselves.</p>
 
-    <div class="pipeline reveal-stagger">
+  <section class="section" id="innings">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">experience</p>
+        <h2>Three innings, still not out</h2>
+        <p class="lede">Every achievement is a shot on the wagon wheel. Hover or tap a shot to see where it went.</p>
+      </header>
+      <div class="innings">
+        <article class="card inning">
+          <div class="card-head"><span>3rd innings · batting now</span><span class="led">JUL 2026 – PRESENT</span></div>
+          <div class="inning-body">
+            <div>
+              <div class="inning-title"><div><h3>Applied Materials</h3><p class="role">Software Consultant · Santa Clara, CA</p></div><p class="when">7 shots · 5 fours · 2 sixes · not out*</p></div>
+              <ol class="shots">
+                <li class="shot" tabindex="0" data-angle="4" data-len=".88" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Straight drive</span>Build and maintain automated pipelines that move measurement data from semiconductor manufacturing equipment into cloud analytics: file detection on equipment export shares, parsing, validation, metadata matching, upload, and downstream notification.</span></li>
+                <li class="shot" tabindex="0" data-angle="118" data-len=".86" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Reverse sweep</span>Developed Python parsers for multiple vendor measurement data formats, including reverse-engineering binary file structures to recover identifiers missing from standard text exports.</span></li>
+                <li class="shot" tabindex="0" data-angle="56" data-len=".9" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Cover drive</span>Implemented matching logic that resolves each measurement run to its correct lot, recipe, process step, and slot, with partial-match and time-window fallbacks for runs that finish outside the expected window.</span></li>
+                <li class="shot" tabindex="0" data-angle="24" data-len="1.08" style="--c:#E07A00"><span class="runs">6</span><span><span class="sname">Lofted over long-off</span>Integrated edge-to-cloud publishing over MQTT via AWS IoT Greengrass, including payload schema design and delivery confirmation.</span></li>
+                <li class="shot" tabindex="0" data-angle="150" data-len=".84" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Late cut</span>Diagnosed silent data loss where content-based deduplication skipped legitimately re-submitted files and advanced the processing watermark past records that never reached the cloud.</span></li>
+                <li class="shot" tabindex="0" data-angle="-96" data-len="1.08" style="--c:#E07A00"><span class="runs">6</span><span><span class="sname">Pull shot</span>Root-caused intermittent dropped notifications to a shared client identifier that caused broker session eviction, then moved to per-source identifiers to eliminate the failure mode.</span></li>
+                <li class="shot" tabindex="0" data-angle="-48" data-len=".86" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Flick off the pads</span>Led the QA-to-production cutover of the ingestion path.</span></li>
+              </ol>
+              <ul class="chips"><li>Python</li><li>AWS</li><li>AWS IoT Greengrass</li><li>MQTT</li><li>SQL</li><li>Data Pipelines</li><li>ETL</li><li>MES Integration</li><li>Root Cause Analysis</li></ul>
+            </div>
+            <figure class="wheel" aria-hidden="true"><svg viewBox="-120 -120 240 240"></svg><figcaption>Wagon wheel · 3rd innings</figcaption></figure>
+          </div>
+        </article>
 
-      <div class="pipe-node stagger-item">
-        <div class="pipe-header">
-          <span class="pipe-role">Research Assistant</span>
-          <span class="pipe-dates">JAN 2025 – MAY 2026</span>
-        </div>
-        <div class="pipe-company">San Jose State University · San Jose, CA</div>
-        <ul class="pipe-bullets">
-          <li>Designed and developed <strong>Go</strong> backend prototypes for distributed environments — leveraged concurrent goroutine processing, async task execution, and Kubernetes containerization across multi-node deployments.</li>
-          <li>Performed system-level performance analysis and bottleneck identification — improved throughput <strong>30%</strong> through workload balancing and resource optimization using profiling and distributed tracing.</li>
-          <li>Built and tested REST-based services on Linux — applied TCP/IP networking, fault isolation, and distributed system design principles to improve reliability and scalability.</li>
-        </ul>
+        <article class="card inning">
+          <div class="card-head"><span>2nd innings</span><span class="led">JAN 2025 – MAY 2026</span></div>
+          <div class="inning-body">
+            <div>
+              <div class="inning-title"><div><h3>San José State University</h3><p class="role">Research Assistant</p></div><p class="when">3 shots · 2 fours · 1 six</p></div>
+              <ol class="shots">
+                <li class="shot" tabindex="0" data-angle="-24" data-len="1.08" style="--c:#E07A00"><span class="runs">6</span><span><span class="sname">Lofted over long-on</span>Designed cloud-native backend services in Go on Kubernetes, Docker, and AWS, improving throughput 30% with asynchronous processing and distributed orchestration.</span></li>
+                <li class="shot" tabindex="0" data-angle="96" data-len=".88" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Square cut</span>Built Dockerized REST services and distributed data pipelines, cutting execution latency 25% through workload parallelization and concurrency tuning.</span></li>
+                <li class="shot" tabindex="0" data-angle="146" data-len=".84" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Late cut</span>Benchmarked distributed systems under production-like workloads to find bottlenecks and improve scalability, reliability, and observability for cloud-native AI infrastructure.</span></li>
+              </ol>
+              <ul class="chips"><li>Go</li><li>Kubernetes</li><li>Docker</li><li>AWS</li><li>REST APIs</li><li>Data pipelines</li><li>Concurrency</li></ul>
+            </div>
+            <figure class="wheel" aria-hidden="true"><svg viewBox="-120 -120 240 240"></svg><figcaption>Wagon wheel · 2nd innings</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="card inning">
+          <div class="card-head"><span>1st innings</span><span class="led">JUN 2023 – JUL 2024</span></div>
+          <div class="inning-body">
+            <div>
+              <div class="inning-title"><div><h3>Rivach LLP</h3><p class="role">Software Engineer</p></div><p class="when">3 shots · 2 fours · 1 six</p></div>
+              <ol class="shots">
+                <li class="shot" tabindex="0" data-angle="58" data-len=".86" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Cover drive</span>Architected and deployed stateless Spring Boot microservices with well-defined REST APIs, supporting 5K+ users with horizontal scalability and fault isolation.</span></li>
+                <li class="shot" tabindex="0" data-angle="-96" data-len="1.08" style="--c:#E07A00"><span class="runs">6</span><span><span class="sname">Pull shot</span>Cut API latency 30% under production load by optimizing SQL query plans, adding Redis caching, and restructuring data access patterns.</span></li>
+                <li class="shot" tabindex="0" data-angle="6" data-len=".88" style="--c:#2377D0"><span class="runs">4</span><span><span class="sname">Straight drive</span>Engineered containerized CI/CD pipelines with Docker, Jenkins, and AWS, raising deployment frequency 40% with automated testing and rollback.</span></li>
+              </ol>
+              <ul class="chips"><li>Spring Boot</li><li>Java</li><li>REST APIs</li><li>SQL</li><li>Redis</li><li>Docker</li><li>Jenkins</li><li>AWS</li></ul>
+            </div>
+            <figure class="wheel" aria-hidden="true"><svg viewBox="-120 -120 240 240"></svg><figcaption>Wagon wheel · 1st innings</figcaption></figure>
+          </div>
+        </article>
       </div>
-
-      <div class="pipe-node stagger-item">
-        <div class="pipe-header">
-          <span class="pipe-role">Software Engineer</span>
-          <span class="pipe-dates">OCT 2023 – JUN 2024</span>
-        </div>
-        <div class="pipe-company">Rivach LLP</div>
-        <ul class="pipe-bullets">
-          <li>Designed scalable <strong>Spring Boot</strong> modules and REST services supporting <strong>5K+ users</strong> — focused on performance, maintainable architecture, and reliability under concurrent production workloads.</li>
-          <li>Improved application performance <strong>30%</strong> through profiling, SQL optimization, and caching strategies — resolved complex production issues via root-cause analysis and API tracing.</li>
-          <li>Contributed to test automation and CI/CD pipelines — reduced production defects and improved release stability through systematic debugging.</li>
-        </ul>
-      </div>
-
-      <div class="pipe-node stagger-item">
-        <div class="pipe-header">
-          <span class="pipe-role">Software Engineer Intern</span>
-          <span class="pipe-dates">APR 2023 – AUG 2023</span>
-        </div>
-        <div class="pipe-company">Infintor Solutions</div>
-        <ul class="pipe-bullets">
-          <li>Developed <strong>React/TypeScript</strong> components for applications serving <strong>1M+ users</strong> — optimized GraphQL queries, reducing network payloads 35%.</li>
-          <li>Designed automated test procedures with Jest and React Testing Library — achieved full coverage for new functionality across release cycles.</li>
-        </ul>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CONTACT ============ -->
-<section id="contact" class="contact-section">
-  <div class="section-inner" style="padding-top:0">
-    <div class="section-eyebrow">ping</div>
-    <h2 class="section-title" style="margin-top:40px">Let's connect the nodes</h2>
-    <div class="contact-grid reveal" style="margin-top:44px">
-      <div class="contact-side">
-        <h3>Open to opportunities</h3>
-        <p>Looking for full-time Software Engineer and Backend/Distributed Systems roles. Currently completing my M.S. at SJSU, available for full-time starting Summer 2026.</p>
-        <div class="social-row">
-          <a href="https://github.com/ajaykumargolla117" target="_blank" class="social-link" title="GitHub">GH</a>
-          <a href="#" target="_blank" class="social-link" title="LinkedIn">in</a>
-          <a href="mailto:ajaykumargolla229@gmail.com" class="social-link" title="Email">@</a>
+  <section class="section" id="highlights">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">projects</p>
+        <h2>Match highlights</h2>
+        <p class="lede">Four projects. Call for a review on any of them to see the ball tracking: where it pitched, the impact, and the result.</p>
+      </header>
+      <div class="drs-grid">
+        <article class="drs" data-seed="1">
+          <div class="drs-inner">
+            <div class="drs-face drs-front card">
+              <div class="card-head"><span>Highlight 1</span><span class="led">LIVE</span></div>
+              <div class="drs-body">
+                <h3>Oprina</h3><p class="drs-sub">Production multi-agent AI platform</p>
+                <div class="drs-stat"><span class="led">GCP</span><span>Cloud Run · Gmail + Calendar agents</span></div>
+                <p class="drs-desc">Specialized agents for Gmail, Calendar, and conversation, coordinated by one orchestration layer with low-latency tool execution.</p>
+                <ul class="chips"><li>Python</li><li>FastAPI</li><li>Gemini 2.0</li><li>Vertex AI</li><li>Cloud Run</li><li>Supabase</li><li>Docker</li></ul>
+                <div class="drs-foot"><button class="btn btn--small btn--accent drs-btn" type="button">Review (DRS) ↻</button><a class="btn btn--small btn--ghost" href="https://github.com/AJAYKUMARGOLLA117/Oprina-Ai" target="_blank" rel="noopener">Code ↗</a></div>
+              </div>
+            </div>
+            <div class="drs-face drs-back card" aria-hidden="true">
+              <div class="card-head"><span>DRS · ball tracking</span><span class="led">OPRINA</span></div>
+              <div class="drs-body">
+                <svg class="track" viewBox="0 0 300 120" data-track></svg>
+                <dl class="verdicts">
+                  <div><dt>Pitching</dt><dd>Multi-agent workflows for Gmail, Calendar, and conversation, deployed on GCP Cloud Run.</dd></div>
+                  <div><dt>Impact</dt><dd>Central orchestration with session persistence, tool invocation, and retrieval-backed memory.</dd></div>
+                  <div><dt>Wickets</dt><dd>Reliable long-running conversations through monitoring, failure recovery, and context management.</dd></div>
+                </dl>
+                <div class="drs-foot"><span class="decision">Shipped</span><button class="btn btn--small drs-btn" type="button">Back ↺</button></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="drs" data-seed="2">
+          <div class="drs-inner">
+            <div class="drs-face drs-front card">
+              <div class="card-head"><span>Highlight 2</span><span class="led">MCP</span></div>
+              <div class="drs-body">
+                <h3>RepoPilot AI</h3><p class="drs-sub">Autonomous coding and debugging platform</p>
+                <div class="drs-stat"><span class="led">4</span><span>Tools wired: GitHub · Jira · Slack · Postgres</span></div>
+                <p class="drs-desc">A multi-agent software engineering platform that runs autonomous workflows with LangGraph and MCP, backed by hybrid code retrieval.</p>
+                <ul class="chips"><li>Python</li><li>LangGraph</li><li>MCP</li><li>FastAPI</li><li>PostgreSQL</li><li>FAISS</li><li>LangFuse</li></ul>
+                <div class="drs-foot"><button class="btn btn--small btn--accent drs-btn" type="button">Review (DRS) ↻</button></div>
+              </div>
+            </div>
+            <div class="drs-face drs-back card" aria-hidden="true">
+              <div class="card-head"><span>DRS · ball tracking</span><span class="led">REPOPILOT</span></div>
+              <div class="drs-body">
+                <svg class="track" viewBox="0 0 300 120" data-track></svg>
+                <dl class="verdicts">
+                  <div><dt>Pitching</dt><dd>Agent workflows across GitHub, Jira, Slack, and PostgreSQL through reusable MCP tool integrations.</dd></div>
+                  <div><dt>Impact</dt><dd>Hybrid retrieval with FAISS and Tree-sitter for semantic code search and context-aware reasoning.</dd></div>
+                  <div><dt>Wickets</dt><dd>LangFuse evaluations of retrieval quality, tool-call reliability, latency, and agent performance.</dd></div>
+                </dl>
+                <div class="drs-foot"><span class="decision">Shipped</span><button class="btn btn--small drs-btn" type="button">Back ↺</button></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="drs" data-seed="3">
+          <div class="drs-inner">
+            <div class="drs-face drs-front card">
+              <div class="card-head"><span>Highlight 3</span><span class="led">+70%</span></div>
+              <div class="drs-body">
+                <h3>Reddit Messaging</h3><p class="drs-sub">Distributed messaging platform</p>
+                <div class="drs-stat"><span class="led">−45%</span><span>End-to-end latency · +70% throughput</span></div>
+                <p class="drs-desc">An event-driven messaging platform built on Kafka producers and consumers with Redis caching, serving 5K+ concurrent users on AWS.</p>
+                <ul class="chips"><li>Node.js</li><li>Kafka</li><li>Redis</li><li>MySQL</li><li>MongoDB</li><li>AWS EC2</li></ul>
+                <div class="drs-foot"><button class="btn btn--small btn--accent drs-btn" type="button">Review (DRS) ↻</button></div>
+              </div>
+            </div>
+            <div class="drs-face drs-back card" aria-hidden="true">
+              <div class="card-head"><span>DRS · ball tracking</span><span class="led">MESSAGING</span></div>
+              <div class="drs-body">
+                <svg class="track" viewBox="0 0 300 120" data-track></svg>
+                <dl class="verdicts">
+                  <div><dt>Pitching</dt><dd>Asynchronous communication across services with Kafka producers, consumers, and Redis caching.</dd></div>
+                  <div><dt>Impact</dt><dd>Retry handling and optimized database access lifted throughput 70% and cut end-to-end latency 45%.</dd></div>
+                  <div><dt>Wickets</dt><dd>REST APIs serving 5K+ concurrent users with reliable delivery on a multi-node AWS deployment.</dd></div>
+                </dl>
+                <div class="drs-foot"><span class="decision">Shipped</span><button class="btn btn--small drs-btn" type="button">Back ↺</button></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="drs" data-seed="4">
+          <div class="drs-inner">
+            <div class="drs-face drs-front card">
+              <div class="card-head"><span>Highlight 4</span><span class="led">99.9%</span></div>
+              <div class="drs-body">
+                <h3>MindMesh</h3><p class="drs-sub">Distributed knowledge graph platform</p>
+                <div class="drs-stat"><span class="led">99.9%</span><span>Availability · 1K+ concurrent users</span></div>
+                <p class="drs-desc">Reactive microservices behind an API gateway, with a hybrid storage design tuned for consistency, hierarchy, and speed.</p>
+                <ul class="chips"><li>Kotlin</li><li>Elixir</li><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li><li>Docker</li></ul>
+                <div class="drs-foot"><button class="btn btn--small btn--accent drs-btn" type="button">Review (DRS) ↻</button></div>
+              </div>
+            </div>
+            <div class="drs-face drs-back card" aria-hidden="true">
+              <div class="card-head"><span>DRS · ball tracking</span><span class="led">MINDMESH</span></div>
+              <div class="drs-body">
+                <svg class="track" viewBox="0 0 300 120" data-track></svg>
+                <dl class="verdicts">
+                  <div><dt>Pitching</dt><dd>Reactive backend services and an API gateway with fault-isolated communication for 1K+ users.</dd></div>
+                  <div><dt>Impact</dt><dd>PostgreSQL for transactions, MongoDB for hierarchical data, and Redis for high-throughput caching.</dd></div>
+                  <div><dt>Wickets</dt><dd>Load balancing, circuit breakers, and distributed caching held 99.9% availability under load.</dd></div>
+                </dl>
+                <div class="drs-foot"><span class="decision">Shipped</span><button class="btn btn--small drs-btn" type="button">Back ↺</button></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="squad">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">skills</p>
+        <h2>Setting the field</h2>
+        <p class="lede">Seven skill groups, each one placed at a fielding position. Tap a fielder to throw the ball in and see who's standing there.</p>
+      </header>
+      <div class="squad">
+        <div class="card fieldmap">
+          <svg id="fieldSvg" viewBox="0 0 400 440" role="group" aria-label="Fielding positions, one per skill group"></svg>
+          <p class="fm-hint" id="fmHint">Tap a fielder</p>
+        </div>
+        <div class="groups" id="groups"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nets">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow">education · nets session</p>
+        <h2>Face an over at the nets</h2>
+        <p class="lede">Six balls, six courses from my master's. Swing when the ball reaches the bat: click, tap, or press <kbd>Space</kbd>. Time it well and you'll clear the ropes.</p>
+      </header>
+      <div class="nets">
+        <article class="card edu">
+          <div class="card-head" style="margin:-26px -26px 6px;margin:calc(-1 * clamp(18px,3vw,26px)) calc(-1 * clamp(18px,3vw,26px)) 6px"><span>Academy</span><span class="led">AUG 2024 – MAY 2026</span></div>
+          <h3>San José State University</h3>
+          <p class="deg">M.S. Computer Software Engineering</p>
+          <p class="when">San Jose, CA</p>
+          <ol class="courses" id="courses">
+            <li><span>Distributed Systems</span><span class="res">·</span></li>
+            <li><span>Advanced Algorithms</span><span class="res">·</span></li>
+            <li><span>Cloud Computing</span><span class="res">·</span></li>
+            <li><span>Machine Learning Systems</span><span class="res">·</span></li>
+            <li><span>Deep Learning</span><span class="res">·</span></li>
+            <li><span>Data Mining</span><span class="res">·</span></li>
+          </ol>
+        </article>
+        <div class="card game">
+          <div class="card-head"><span>Nets · <span id="netsOver">over 1</span></span><span class="led" id="netsTotal">0 RUNS</span></div>
+          <div class="game-stage" id="netsStage">
+            <canvas id="netsCanvas" role="img" aria-label="Batting nets game. A bowler runs in and delivers; swing when the ball reaches the bat."></canvas>
+            <p class="game-call" id="netsCall" aria-live="polite"></p>
+          </div>
+          <div class="game-bar">
+            <div class="overballs" id="overBalls" aria-label="This over"><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span></div>
+            <p class="game-help" id="netsHelp">Click the nets to call for a delivery</p>
+            <button class="btn btn--small btn--accent" id="netsBtn" type="button">Bowl it</button>
+          </div>
         </div>
       </div>
-      <form class="contact-form" onsubmit="return handleSubmit(event)">
-        <div class="form-group">
-          <label for="cf-name">NAME</label>
-          <input type="text" id="cf-name" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label for="cf-email">EMAIL</label>
-          <input type="email" id="cf-email" placeholder="you@company.com" required>
-        </div>
-        <div class="form-group">
-          <label for="cf-msg">MESSAGE</label>
-          <textarea id="cf-msg" placeholder="Let's talk about..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary submit-btn">Send Ping →</button>
-      </form>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  built by <span>Ajay Kumar Golla</span> — San Jose, CA — 2026
+  <section class="section" id="contact">
+    <div class="wrap">
+      <article class="ticket" id="ticket">
+        <div class="ticket-main">
+          <p class="admit">Admit one · contact</p>
+          <h2>Let's play the next match together</h2>
+          <p class="lede">Want to talk distributed systems, data pipelines, or AI platforms? I'd love to hear from you. Email is the quickest way to reach me.</p>
+          <dl>
+            <div><dt>Venue</dt><dd>San Jose, CA</dd></div>
+            <div><dt>Format</dt><dd>Software Engineer</dd></div>
+            <div><dt>Gate</dt><dd>Email</dd></div>
+          </dl>
+          <div class="cta-row" style="align-items:center">
+            <code class="email" id="email">ajaykumargolla229@gmail.com</code>
+            <button class="btn btn--accent btn--small" type="button" data-copy>Copy email</button>
+            <a class="btn btn--ghost btn--small" href="mailto:ajaykumargolla229@gmail.com">Open mail app ↗</a>
+            <a class="btn btn--small" href="Ajay_Kumar_Golla_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/in/ajay-kumar-golla-20468820a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="btn btn--small" href="https://github.com/AJAYKUMARGOLLA117" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="stub" aria-hidden="true">
+          <small>Seat</small><span class="led">AKG-26</span>
+          <div class="barcode" id="barcode"></div>
+          <small>San Jose · 2026</small>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <p>Designed and built for Ajay Kumar Golla · San Jose, CA · 2026</p>
+  <p>psst: click the ground to bowl, or type <kbd>howzat</kbd></p>
 </footer>
 
+<dialog class="tldr" id="tldr" aria-labelledby="tldrTitle">
+  <div class="tldr-body">
+    <div class="card-head" style="margin:calc(-1 * clamp(20px,4vw,30px)) calc(-1 * clamp(20px,4vw,30px)) 0;border-radius:0"><span>Match summary</span><button class="icon-btn" id="tldrClose" type="button" aria-label="Close" style="width:30px;height:30px;color:var(--ink)"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div>
+    <h2 id="tldrTitle">Ajay Kumar Golla</h2>
+    <p class="lede">Software engineer for distributed backends, cloud-native infrastructure, and production AI platforms. Based in San Jose, CA.</p>
+    <dl>
+      <dt>Education</dt><dd>M.S. Computer Software Engineering, San José State University, May 2026</dd>
+      <dt>Now</dt><dd>Software Consultant at Applied Materials, Santa Clara (Jul 2026 – present): equipment-to-cloud data pipelines, MQTT via AWS IoT Greengrass</dd>
+      <dt>Before</dt><dd>Research Assistant at SJSU (2025–2026) · Software Engineer at Rivach LLP (2023–2024)</dd>
+      <dt>Results</dt><dd>Throughput +30% · execution latency −25% · API latency −30% · deploy frequency +40% · messaging throughput +70% · 99.9% availability</dd>
+      <dt>Projects</dt><dd>Oprina (multi-agent AI on GCP) · RepoPilot AI (LangGraph + MCP) · Reddit messaging (Kafka) · MindMesh (knowledge graph)</dd>
+      <dt>Stack</dt><dd>Python, Go, Java, SQL · Spring Boot, FastAPI, Node.js · Kafka, Redis, MQTT · Kubernetes, Docker, AWS, GCP · LangGraph, MCP, RAG</dd>
+      <dt>Email</dt><dd>ajaykumargolla229@gmail.com</dd>
+    </dl>
+    <div class="cta-row">
+      <button class="btn btn--accent btn--small" type="button" data-copy>Copy email</button>
+      <a class="btn btn--small" href="Ajay_Kumar_Golla_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+      <a class="btn btn--small" href="https://www.linkedin.com/in/ajay-kumar-golla-20468820a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn btn--small" href="https://github.com/AJAYKUMARGOLLA117" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
-  // ===== Parallax Playground — whole page tilts toward cursor =====
-  (function() {
-    const back = document.getElementById('parallaxBack');
-    const mid = document.getElementById('parallaxMid');
-    if (!back || !mid) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), lerp=(a,b,t)=>a+(b-a)*t, rand=(a,b)=>a+Math.random()*(b-a);
+const pick=a=>a[Math.floor(Math.random()*a.length)], TAU=Math.PI*2;
+const debounce=(f,ms)=>{let id;return(...a)=>{clearTimeout(id);id=setTimeout(()=>f(...a),ms);};};
+const root=document.documentElement;
+const mq=q=>window.matchMedia(q);
+const onMq=(m,f)=>{ if(m.addEventListener) m.addEventListener('change',f); else if(m.addListener) m.addListener(f); };
+const mqReduce=mq('(prefers-reduced-motion: reduce)'), mqDark=mq('(prefers-color-scheme: dark)'), mqFine=mq('(hover: hover) and (pointer: fine)');
+let reduced=mqReduce.matches; onMq(mqReduce,e=>{reduced=e.matches;});
+const store={get(k){try{return localStorage.getItem(k);}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
+const EMAIL='ajaykumargolla229@gmail.com';
+const CONF=['#C8102E','#FFC93C','#2377D0','#2E9E4E','#FFFFFF','#E07A00'];
 
-    let targetX = 0, targetY = 0;
-    let curX = 0, curY = 0;
+/* ---------- theme tokens ---------- */
+const tok={}, themeSubs=[];
+function readTokens(){
+  const cs=getComputedStyle(root);
+  ['sky-top','sky-bot','grass-1','grass-2','pitch','stand-1','stand-2','roof','screen','ink','ink-2','paper','line','accent','ballc','seam','gold','led','led-2','led-bg','mode']
+    .forEach(k=>{tok[k]=cs.getPropertyValue('--'+k).trim();});
+  tok.night=tok.mode==='night'; themeSubs.forEach(f=>f());
+}
+const savedTheme=store.get('akg-theme'); if(savedTheme==='dark'||savedTheme==='light') root.setAttribute('data-theme',savedTheme);
+readTokens();
+new MutationObserver(readTokens).observe(root,{attributes:true,attributeFilter:['data-theme']});
+onMq(mqDark,readTokens);
+const themeBtn=$('#themeBtn');
+const syncThemeBtn=()=>themeBtn.setAttribute('aria-label',tok.night?'Switch to a day Test match':'Switch to floodlights');
+themeSubs.push(syncThemeBtn); syncThemeBtn();
+themeBtn.addEventListener('click',()=>{ const next=tok.night?'light':'dark'; root.setAttribute('data-theme',next); store.set('akg-theme',next);
+  toast(next==='dark'?'Floodlights on. White ball, black sightscreens.':'Day Test match. Red ball, white sightscreens.'); });
 
-    window.addEventListener('mousemove', (e) => {
-      // normalize -1 to 1 from viewport center
-      targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-      targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
+/* ---------- toast ---------- */
+const toastEl=$('#toast'); let toastT=0;
+function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>toastEl.classList.remove('show'),2600); }
 
-    function animateParallax() {
-      curX += (targetX - curX) * 0.05;
-      curY += (targetY - curY) * 0.05;
-      back.style.transform = `translate(${curX * 14}px, ${curY * 10}px)`;
-      mid.style.transform = `translate(${curX * -32}px, ${curY * -24}px)`;
-      requestAnimationFrame(animateParallax);
-    }
-    animateParallax();
+/* ---------- foreground fx ---------- */
+const fx=(()=>{
+  const c=$('#fx'), ctx=c.getContext('2d'); let W=0,H=0,ps=[],running=false,last=0;
+  function size(){ const D=Math.min(1.5,devicePixelRatio||1); W=innerWidth; H=innerHeight; c.width=Math.round(W*D); c.height=Math.round(H*D); ctx.setTransform(D,0,0,D,0,0); }
+  size(); addEventListener('resize',debounce(size,150));
+  function add(p){ ps.push(p); if(!running){ running=true; last=performance.now(); requestAnimationFrame(loop); } }
+  function burst(x,y,n=16,o={}){ if(reduced) n=Math.min(n,5);
+    for(let i=0;i<n;i++){ const a=o.angle!=null?o.angle+rand(-.6,.6):rand(0,TAU), sp=rand(o.min||120,o.max||340);
+      add({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-(o.lift==null?140:o.lift),g:o.g==null?560:o.g,life:0,max:rand(.6,1.2),w:rand(4,8)*(o.scale||1),h:rand(2,5)*(o.scale||1),rot:rand(0,TAU),vr:rand(-8,8),color:o.color||pick(CONF),round:!!o.round}); } }
+  function trail(x,y,color){ add({x,y,vx:rand(-10,10),vy:rand(-10,10),g:0,life:0,max:.28,w:7,h:7,rot:0,vr:0,color,round:true,fade:true}); }
+  function loop(now){ const dt=Math.min(.05,(now-last)/1000); last=now; ctx.clearRect(0,0,W,H);
+    for(let i=ps.length-1;i>=0;i--){ const p=ps[i]; p.life+=dt; if(p.life>=p.max){ ps.splice(i,1); continue; }
+      p.vy+=p.g*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; p.vx*=.98; p.rot+=p.vr*dt; const k=1-p.life/p.max;
+      ctx.globalAlpha=p.fade?k*.35:Math.min(1,k*1.6); ctx.fillStyle=p.color;
+      if(p.round){ ctx.beginPath(); ctx.arc(p.x,p.y,p.w/2*(p.fade?k:1),0,TAU); ctx.fill(); }
+      else{ ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore(); } }
+    ctx.globalAlpha=1; if(ps.length) requestAnimationFrame(loop); else { running=false; ctx.clearRect(0,0,W,H); } }
+  return {burst,trail};
+})();
 
-    // Gentle device-tilt support on mobile for the same "playground" feel
-    window.addEventListener('deviceorientation', (e) => {
-      if (e.gamma === null || e.beta === null) return;
-      targetX = Math.max(-1, Math.min(1, e.gamma / 30));
-      targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
-    });
-  })();
+/* ---------- pointer + cricket-ball cursor ---------- */
+const ptr={x:-9999,y:-9999,has:false};
+(()=>{
+  const el=$('#cursor'); let rot=0, lx=0, ly=0, lastTrail=0;
+  const HOVER='a,button,[role="button"],.shot,.fielder,label,#netsCanvas,.delivery,summary';
+  const useBall=()=>mqFine.matches;
+  function apply(){ document.body.classList.toggle('ball-cursor',useBall()); if(!useBall()) el.classList.remove('on'); }
+  apply(); onMq(mqFine,apply);
+  addEventListener('pointermove',e=>{
+    ptr.x=e.clientX; ptr.y=e.clientY; ptr.has=true;
+    if(e.pointerType!=='mouse'||!useBall()) return;
+    const dx=e.clientX-lx, dy=e.clientY-ly; lx=e.clientX; ly=e.clientY; rot+=dx*2.2+dy*.6;
+    el.classList.add('on'); el.style.transform=`translate3d(${e.clientX}px,${e.clientY}px,0) rotate(${rot.toFixed(1)}deg)`;
+    const now=performance.now(); if(!reduced&&Math.hypot(dx,dy)>6&&now-lastTrail>30){ lastTrail=now; fx.trail(e.clientX,e.clientY,tok.ballc); }
+  },{passive:true});
+  document.addEventListener('pointerover',e=>{ el.classList.toggle('hover',!!(e.target.closest&&e.target.closest(HOVER))); });
+  document.addEventListener('pointerdown',()=>el.classList.add('down'));
+  document.addEventListener('pointerup',()=>el.classList.remove('down'));
+  document.addEventListener('pointerleave',()=>{ ptr.has=false; ptr.x=ptr.y=-9999; el.classList.remove('on'); });
+})();
 
-  // ===== Custom Gradient Cursor (dot snaps, ring trails) =====
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const cursorDot = document.getElementById('cursor-dot');
-    const cursorRing = document.getElementById('cursor-ring');
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-    let cursorReady = false;
+/* ---------- the visitor's innings (every click on the ground bowls a ball) ---------- */
+const innings=(()=>{
+  const runsEl=$('#scoreRuns'), ovEl=$('#scoreOv'), box=$('#score'); let S={r:0,w:0,b:0};
+  try{ const s=JSON.parse(store.get('akg-innings')||'null'); if(s&&typeof s.r==='number') S=s; }catch(e){}
+  function render(){ runsEl.textContent=`${S.r}/${S.w}`; ovEl.textContent=`${Math.floor(S.b/6)}.${S.b%6}`; }
+  function save(){ store.set('akg-innings',JSON.stringify(S)); }
+  function bump(){ box.classList.remove('bump'); void box.offsetWidth; box.classList.add('bump'); }
+  function ball(runs,wicket){ S.b++; if(wicket) S.w++; else S.r+=runs;
+    if(S.w>=10){ toast(`All out for ${S.r}! New innings starting.`); S={r:0,w:0,b:0}; }
+    render(); save(); bump(); }
+  render();
+  return {ball,get:()=>S};
+})();
+function callout(x,y,text,cls){ const d=document.createElement('div'); d.className='callout '+(cls||''); d.textContent=text; d.style.left=x+'px'; d.style.top=y+'px'; d.setAttribute('aria-hidden','true'); document.body.append(d); setTimeout(()=>d.remove(),1200); }
+function howzat(){ const d=document.createElement('div'); d.className='howzat'; d.textContent='HOWZAT!'; d.setAttribute('aria-hidden','true'); document.body.append(d); setTimeout(()=>d.remove(),1700);
+  const m=$('#main'); if(!reduced){ m.classList.remove('shake'); void m.offsetWidth; m.classList.add('shake'); setTimeout(()=>m.classList.remove('shake'),600); } }
 
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-      if (!cursorReady) {
-        cursorDot.classList.add('active');
-        cursorRing.classList.add('active');
-        cursorReady = true;
-      }
-    });
 
-    function animateRing() {
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
-      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animateRing);
-    }
-    animateRing();
+/* ---------- 360° stadium, seen from the spidercam; the cursor steers the camera ---------- */
+const stadium=(()=>{
+  const c=$('#ground'), ctx=c.getContext('2d');
+  let W=0,H=0,F=600,small=false,basePitch=-.2,t=0,last=performance.now(),running=false,boardShift=0,boardT=0,screenStat=0,screenT=0;
+  const CAM={x:0,y:11,z:0}, NEAR=.6;
+  const view={yaw:0,pitch:-.2,acc:0,ox:0,oy:0,sy:0};
+  let cyw=1,syw=0,cp=1,sp=0,halfFov=.8;
+  const R={rope:66,board:69,s0:73,s1:96,s2:99,s3:120,r0:103,r1:124,flood:128};
+  const SEG=72, segA=TAU/SEG;
+  const BOARDS=['AJAY KUMAR GOLLA','SOFTWARE ENGINEER','PYTHON · GO · JAVA','KUBERNETES','DISTRIBUTED SYSTEMS','AWS · GCP','KAFKA · REDIS','LANGGRAPH · MCP','SAN JOSE, CA','SPRING BOOT','HIRE AJAY','99.9% UPTIME'];
+  const BCOL=['#0E3B24','#C8102E','#13315C','#E9A800','#1C1C1C','#2377D0'];
+  const STATS=['THROUGHPUT +30%','LATENCY −25%','API LATENCY −30%','DEPLOYS +40%','MESSAGING +70%','AVAILABILITY 99.9%'];
+  const CROWD=['#F2F2F2','#2377D0','#FF8A1F','#FFD23F','#E8364E','#3BB273','#1C2B4A','#9B5DE5','#FF9EC4','#7FD1FF'];
+  const sun=[Math.sin(2.4)*Math.cos(.5),Math.sin(.5),Math.cos(2.4)*Math.cos(.5)];
+  const excite=new Float32Array(SEG);
+  let crowd=[],stars=[],clouds=[],balls=[],stumpsFall=0;
 
-    window.addEventListener('mouseleave', () => {
-      cursorDot.classList.remove('active');
-      cursorRing.classList.remove('active');
-    });
-    window.addEventListener('mouseenter', () => {
-      cursorDot.classList.add('active');
-      cursorRing.classList.add('active');
-    });
-
-    const hoverTargets = 'a, button, .skill-node, .service-card, input, textarea, .btn';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(hoverTargets)) {
-        cursorDot.classList.add('hovering');
-        cursorRing.classList.add('hovering');
-      }
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(hoverTargets)) {
-        cursorDot.classList.remove('hovering');
-        cursorRing.classList.remove('hovering');
-      }
-    });
+  const wrapA=a=>{ a=(a+Math.PI)%TAU; if(a<0) a+=TAU; return a-Math.PI; };
+  function setCam(){ cyw=Math.cos(view.yaw); syw=Math.sin(view.yaw); cp=Math.cos(view.pitch); sp=Math.sin(view.pitch); halfFov=Math.atan(W/2/F)+.35; }
+  function cam(x,y,z){ const rx=x-CAM.x, ry=y-CAM.y, rz=z-CAM.z, x1=rx*cyw-rz*syw, z1=rx*syw+rz*cyw; return {x:x1,y:ry*cp-z1*sp,z:ry*sp+z1*cp}; }
+  function camDir(x,y,z){ const x1=x*cyw-z*syw, z1=x*syw+z*cyw; return {x:x1,y:y*cp-z1*sp,z:y*sp+z1*cp}; }
+  const SX=p=>W/2+p.x/p.z*F, SY=p=>H/2-p.y/p.z*F;
+  const wp=(az,r,h)=>[Math.sin(az)*r,h,Math.cos(az)*r];
+  const inView=az=>Math.abs(wrapA(az-view.yaw))<halfFov;
+  function poly(pts,fill){
+    const cs=pts.map(p=>cam(p[0],p[1],p[2])), out=[];
+    for(let i=0;i<cs.length;i++){ const a=cs[i], b=cs[(i+1)%cs.length], ai=a.z>=NEAR, bi=b.z>=NEAR;
+      if(ai) out.push(a); if(ai!==bi){ const k=(NEAR-a.z)/(b.z-a.z); out.push({x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k,z:NEAR}); } }
+    if(out.length<3) return null;
+    ctx.beginPath(); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9;
+    out.forEach((p,i)=>{ const X=SX(p), Y=SY(p); if(X<minX)minX=X; if(X>maxX)maxX=X; if(Y<minY)minY=Y; if(Y>maxY)maxY=Y; i?ctx.lineTo(X,Y):ctx.moveTo(X,Y); });
+    ctx.closePath(); if(fill){ ctx.fillStyle=fill; ctx.fill(); } return {minX,maxX,minY,maxY};
   }
+  function seg(a,b,stroke,w){ let A=cam(a[0],a[1],a[2]), B=cam(b[0],b[1],b[2]);
+    if(A.z<NEAR&&B.z<NEAR) return; if(A.z<NEAR||B.z<NEAR){ const k=(NEAR-A.z)/(B.z-A.z), P={x:A.x+(B.x-A.x)*k,y:A.y+(B.y-A.y)*k,z:NEAR}; if(A.z<NEAR) A=P; else B=P; }
+    ctx.strokeStyle=stroke; ctx.lineWidth=w; ctx.beginPath(); ctx.moveTo(SX(A),SY(A)); ctx.lineTo(SX(B),SY(B)); ctx.stroke(); }
+  function ring(r,h,stroke,w,dash){ ctx.strokeStyle=stroke; ctx.lineWidth=w; ctx.setLineDash(dash||[]); ctx.beginPath(); let pen=false;
+    for(let i=0;i<=120;i++){ const az=i/120*TAU, p=cam(Math.sin(az)*r,h,Math.cos(az)*r); if(p.z<NEAR){ pen=false; continue; } const X=SX(p), Y=SY(p); if(pen) ctx.lineTo(X,Y); else { ctx.moveTo(X,Y); pen=true; } }
+    ctx.stroke(); ctx.setLineDash([]); }
 
-  // ===== Network Graph Hero Animation =====
-  const canvas = document.getElementById('network-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, nodes = [];
-  const NODE_COUNT_DESKTOP = 55;
-  const NODE_COUNT_MOBILE = 24;
-  const CONNECT_DIST = 175;
-  const MOUSE_RADIUS = 220;
-
-  function resize() {
-    w = canvas.width = canvas.offsetWidth;
-    h = canvas.height = canvas.offsetHeight;
-    initNodes();
+  function build(){
+    crowd=[];
+    for(let s=0;s<SEG;s++){ const a0=s*segA;
+      const ss=Math.min(Math.abs(wrapA(a0+segA/2)),Math.abs(wrapA(a0+segA/2-Math.PI)))<.17;
+      if(!ss) for(let i=0;i<26;i++) crowd.push({s,az:a0+Math.random()*segA,u:Math.random(),tier:0,c:pick(CROWD),ph:rand(0,TAU)});
+      for(let i=0;i<22;i++) crowd.push({s,az:a0+Math.random()*segA,u:Math.random(),tier:1,c:pick(CROWD),ph:rand(0,TAU)}); }
+    stars=Array.from({length:700},()=>{ const u=rand(.06,1), a=rand(0,TAU), r=Math.sqrt(1-u*u); return {d:[r*Math.sin(a),u,r*Math.cos(a)],r:rand(.4,1.4),ph:rand(0,TAU),sp:rand(.8,2.2)}; });
+    clouds=Array.from({length:12},()=>({az:rand(0,TAU),el:rand(.26,.55),s:rand(.7,1.3),v:rand(.004,.01),puffs:[[-44,2,22],[-18,-12,28],[12,-18,32],[40,-6,24],[-62,8,14],[62,8,15]].map(([dx,dy,r])=>({dx:dx+rand(-5,5),dy:dy+rand(-4,4),r}))}));
   }
+  function size(){ const D=Math.min(1.25,devicePixelRatio||1); W=innerWidth; H=innerHeight; c.width=Math.round(W*D); c.height=Math.round(H*D); ctx.setTransform(D,0,0,D,0,0);
+    small=W<640; F=Math.min(W,H*1.5)*.44; basePitch=W<H?-.36:-.25; if(!crowd.length) build(); if(!running) frame(0); }
+  function updView(dt){
+    if(reduced){ view.yaw=0; view.pitch=basePitch; setCam(); return; }
+    const fine=ptr.has&&mqFine.matches, nx=fine?clamp(ptr.x/W*2-1,-1,1):0, ny=fine?clamp(ptr.y/H*2-1,-1,1):0;
+    view.acc+=dt*(.018+Math.sign(nx)*Math.max(0,Math.abs(nx)-.5)/.5*.32);
+    const k=Math.min(1,dt*3); view.ox+=(nx*.34-view.ox)*k; view.oy+=(-ny*.16-view.oy)*k;
+    const max=Math.max(1,root.scrollHeight-innerHeight), target=clamp((window.scrollY||0)/max,0,1)*TAU;
+    view.sy+=(target-view.sy)*(dt?Math.min(1,dt*4):1);
+    view.yaw=view.acc+view.sy+view.ox; view.pitch=basePitch+view.oy; setCam();
+  }
+  function standH(r){ if(r<R.s0) return 0; if(r<R.s1) return lerp(2,15,(r-R.s0)/(R.s1-R.s0)); if(r<R.s2) return 16.5; if(r<R.s3) return lerp(16.5,31,(r-R.s2)/(R.s3-R.s2)); return 40; }
+  function drawCloud(x,y,s,puffs,night){ ctx.fillStyle=night?'rgba(170,180,235,.08)':'rgba(255,255,255,.82)'; ctx.beginPath(); ctx.ellipse(x,y+4*s,72*s,13*s,0,0,TAU); ctx.fill();
+    for(const p of puffs){ ctx.beginPath(); ctx.arc(x+p.dx*s,y+p.dy*s,p.r*s,0,TAU); ctx.fill(); } }
+  function textFit(txt,cx,cy,w,h,color,display){ const fs=Math.max(6,h).toFixed(1);
+    ctx.font=display?`400 ${fs}px Anton, Impact, sans-serif`:`900 ${fs}px "Doto", ui-monospace, monospace`; ctx.fillStyle=color; ctx.fillText(txt,cx,cy,w); }
 
-  function initNodes() {
-    const count = w < 768 ? NODE_COUNT_MOBILE : NODE_COUNT_DESKTOP;
-    nodes = [];
-    for (let i = 0; i < count; i++) {
-      nodes.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        baseVx: (Math.random() - 0.5) * 0.3,
-        baseVy: (Math.random() - 0.5) * 0.3,
-        vx: 0, vy: 0,
-        r: Math.random() * 1.8 + 1.6,
-        pulsePhase: Math.random() * Math.PI * 2
-      });
+  function frame(dt){
+    t+=dt; updView(dt); const night=tok.night;
+    const horizon=H/2+Math.tan(view.pitch)*F;
+    let g=ctx.createLinearGradient(0,0,0,Math.max(10,horizon)); g.addColorStop(0,tok['sky-top']); g.addColorStop(1,tok['sky-bot']);
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,Math.max(0,horizon)+2);
+    if(night){ ctx.fillStyle='#FFF6D8';
+      for(const s of stars){ const p=camDir(s.d[0],s.d[1],s.d[2]); if(p.z<.05) continue; const X=SX(p), Y=SY(p); if(X<-4||X>W+4||Y<-4||Y>horizon) continue;
+        ctx.globalAlpha=.3+.6*Math.abs(Math.sin(t*s.sp+s.ph)); ctx.beginPath(); ctx.arc(X,Y,s.r,0,TAU); ctx.fill(); }
+      ctx.globalAlpha=1;
+      const m=camDir(sun[0],sun[1],sun[2]); if(m.z>.05){ const X=SX(m), Y=SY(m), r=small?18:26;
+        const hg=ctx.createRadialGradient(X,Y,r*.5,X,Y,r*4); hg.addColorStop(0,'rgba(255,244,200,.35)'); hg.addColorStop(1,'rgba(255,244,200,0)'); ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(X,Y,r*4,0,TAU); ctx.fill();
+        ctx.fillStyle='#FFF4C8'; ctx.beginPath(); ctx.arc(X,Y,r,0,TAU); ctx.fill(); ctx.fillStyle='rgba(200,190,150,.35)'; ctx.beginPath(); ctx.arc(X-r*.3,Y-r*.2,r*.22,0,TAU); ctx.arc(X+r*.35,Y+r*.25,r*.15,0,TAU); ctx.fill(); }
+    }else{
+      const m=camDir(sun[0],sun[1],sun[2]); if(m.z>.05){ const X=SX(m), Y=SY(m), r=small?20:30;
+        const hg=ctx.createRadialGradient(X,Y,r*.6,X,Y,r*5); hg.addColorStop(0,'rgba(255,240,180,.6)'); hg.addColorStop(1,'rgba(255,240,180,0)'); ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(X,Y,r*5,0,TAU); ctx.fill();
+        ctx.fillStyle='#FFF3C4'; ctx.beginPath(); ctx.arc(X,Y,r,0,TAU); ctx.fill(); }
     }
-    nodes.forEach(n => { n.vx = n.baseVx; n.vy = n.baseVy; });
+    for(const cl of clouds){ if(dt&&!reduced) cl.az+=cl.v*dt; const d=[Math.sin(cl.az)*Math.cos(cl.el),Math.sin(cl.el),Math.cos(cl.az)*Math.cos(cl.el)], p=camDir(d[0],d[1],d[2]); if(p.z<.1) continue;
+      const X=SX(p), Y=SY(p); if(X<-200||X>W+200) continue; drawCloud(X,Y,cl.s*(small?.6:1)/p.z,cl.puffs,night); }
+    // ground base
+    g=ctx.createLinearGradient(0,horizon,0,H); g.addColorStop(0,tok['grass-2']); g.addColorStop(1,tok['grass-1']); ctx.fillStyle=g; ctx.fillRect(0,horizon,W,H-horizon+2);
+    // floodlight towers
+    for(let k=0;k<4;k++){ const az=Math.PI/4+k*Math.PI/2; if(!inView(az)) continue; const tx=Math.cos(az), tz=-Math.sin(az), b=wp(az,R.flood,0), top=wp(az,R.flood-2,58);
+      poly([[b[0]-tx*2.2,0,b[2]-tz*2.2],[b[0]+tx*2.2,0,b[2]+tz*2.2],[top[0]+tx*1,58,top[2]+tz*1],[top[0]-tx*1,58,top[2]-tz*1]],night?'#2A3550':'#9AA6B2');
+      const pc=wp(az,R.flood-3,61); const bb=poly([[pc[0]-tx*8,57,pc[2]-tz*8],[pc[0]+tx*8,57,pc[2]+tz*8],[pc[0]+tx*8,65,pc[2]+tz*8],[pc[0]-tx*8,65,pc[2]-tz*8]],night?'#1B2333':'#B9C2CC');
+      if(bb){ const cw=bb.maxX-bb.minX, chh=bb.maxY-bb.minY, cx=(bb.minX+bb.maxX)/2, cy=(bb.minY+bb.maxY)/2;
+        if(night){ const hg=ctx.createRadialGradient(cx,cy,0,cx,cy,cw*2.6); hg.addColorStop(0,'rgba(255,250,225,.55)'); hg.addColorStop(1,'rgba(255,250,225,0)'); ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(cx,cy,cw*2.6,0,TAU); ctx.fill(); }
+        ctx.fillStyle=night?'#FFFDF0':'#7D8894'; for(let i=0;i<6;i++) for(let j=0;j<3;j++){ ctx.beginPath(); ctx.arc(bb.minX+cw*(i+.5)/6,bb.minY+chh*(j+.5)/3,Math.max(1,cw/22),0,TAU); ctx.fill(); } } }
+    // stands
+    for(let s=0;s<SEG;s++){ const a0=s*segA, a1=a0+segA*1.02, am=a0+segA/2; if(!inView(am)) continue; const blk=Math.floor(s/3)%2;
+      poly([wp(a0,R.s3,31),wp(a1,R.s3,31),wp(a1,R.s3,38),wp(a0,R.s3,38)],night?'#0E1726':'#7E8C9C');
+      poly([wp(a0,R.r0,35.5),wp(a1,R.r0,35.5),wp(a1,R.r1,37.5),wp(a0,R.r1,37.5)],tok.roof);
+      poly([wp(a0,R.s2,16.5),wp(a1,R.s2,16.5),wp(a1,R.s3,31),wp(a0,R.s3,31)],blk?tok['stand-2']:tok['stand-1']);
+      poly([wp(a0,R.s1,15),wp(a1,R.s1,15),wp(a1,R.s2,16.5),wp(a0,R.s2,16.5)],night?'#070C16':'#3A4652');
+      poly([wp(a0,R.s0,2),wp(a1,R.s0,2),wp(a1,R.s1,15),wp(a0,R.s1,15)],blk?tok['stand-1']:tok['stand-2']);
+      poly([wp(a0,R.s0,0),wp(a1,R.s0,0),wp(a1,R.s0,2),wp(a0,R.s0,2)],night?'#0B111C':'#55606B');
+      poly([wp(a0,R.r0,33),wp(a1,R.r0,33),wp(a1,R.r0,35.5),wp(a0,R.r0,35.5)],night?'#C8102E':'#0E3B24'); }
+    // crowd + Mexican wave
+    const waveAz=t*.55;
+    for(const d of crowd){ if(!inView(d.az)) continue;
+      const r=d.tier?lerp(R.s2,R.s3,d.u):lerp(R.s0,R.s1,d.u), h0=d.tier?lerp(16.5,31,d.u):lerp(2,15,d.u);
+      const wd=Math.abs(wrapA(d.az-waveAz)), lift=(wd<.35?Math.pow(Math.cos(wd/.35*Math.PI/2),2)*1.6:0)+excite[d.s]*Math.max(0,Math.sin(t*16+d.ph))*1.4;
+      const p=cam(Math.sin(d.az)*r,h0+.7+lift,Math.cos(d.az)*r); if(p.z<NEAR) continue; const sz=Math.max(1.2,.34*F/p.z);
+      ctx.fillStyle=d.c; ctx.fillRect(SX(p)-sz/2,SY(p)-sz/2,sz,sz*1.2); if(lift>.6){ ctx.fillRect(SX(p)-sz*.2,SY(p)-sz*1.4,sz*.4,sz*.9); } }
+    for(let s=0;s<SEG;s++) excite[s]*=Math.pow(.25,dt);
+    // big screens
+    [[Math.PI/2,0],[-Math.PI/2,1]].forEach(([az,which])=>{ if(!inView(az)) return; const tx=Math.cos(az), tz=-Math.sin(az), cc=wp(az,98,23);
+      const bb=poly([[cc[0]-tx*14,16.5,cc[2]-tz*14],[cc[0]+tx*14,16.5,cc[2]+tz*14],[cc[0]+tx*14,30,cc[2]+tz*14],[cc[0]-tx*14,30,cc[2]-tz*14]],'#05080D'); if(!bb) return;
+      const w=bb.maxX-bb.minX, h=bb.maxY-bb.minY, cx=(bb.minX+bb.maxX)/2; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.strokeStyle='#2A3340'; ctx.lineWidth=2; ctx.strokeRect(bb.minX+1,bb.minY+1,w-2,h-2);
+      if(which===0){ const S=innings.get(); textFit('NOW BATTING',cx,bb.minY+h*.2,w*.8,h*.13,'#5CFF8A'); textFit('AJAY KUMAR GOLLA',cx,bb.minY+h*.47,w*.9,h*.24,'#FFFFFF',true);
+        textFit(`YOUR XI ${S.r}/${S.w}  (${Math.floor(S.b/6)}.${S.b%6} OV)`,cx,bb.minY+h*.76,w*.86,h*.14,'#FFB627'); }
+      else{ textFit('SOFTWARE ENGINEER',cx,bb.minY+h*.24,w*.86,h*.15,'#FFFFFF'); textFit(STATS[screenStat],cx,bb.minY+h*.55,w*.86,h*.2,'#FFB627'); textFit('SAN JOSE · CA',cx,bb.minY+h*.82,w*.8,h*.11,'#5CFF8A'); } });
+    // sightscreens: white for the red ball, black under lights for the white ball
+    [0,Math.PI].forEach(az=>{ if(!inView(az)) return; const tx=Math.cos(az), tz=-Math.sin(az), cc=wp(az,72,0);
+      poly([[cc[0]-tx*13,0,cc[2]-tz*13],[cc[0]+tx*13,0,cc[2]+tz*13],[cc[0]+tx*13,9,cc[2]+tz*13],[cc[0]-tx*13,9,cc[2]-tz*13]],night?'#0A0A0C':'#F4F6F2'); });
+    // LED advertising boards
+    if(dt){ boardT+=dt; if(boardT>4){ boardT=0; boardShift++; } screenT+=dt; if(screenT>3){ screenT=0; screenStat=(screenStat+1)%STATS.length; } }
+    const NB=40, bA=TAU/NB; ctx.textAlign='center'; ctx.textBaseline='middle';
+    for(let i=0;i<NB;i++){ const a0=i*bA+.004, a1=(i+1)*bA-.004; if(!inView(a0+bA/2)) continue;
+      const bb=poly([wp(a0,R.board,0),wp(a1,R.board,0),wp(a1,R.board,1.4),wp(a0,R.board,1.4)],BCOL[(i+boardShift)%BCOL.length]); if(!bb) continue;
+      const h=bb.maxY-bb.minY; if(h<5) continue; ctx.font=`700 ${(h*.62).toFixed(1)}px "Barlow Condensed", sans-serif`; ctx.fillStyle=(i+boardShift)%BCOL.length===3?'#1A1405':'#FFFFFF';
+      ctx.fillText(BOARDS[(i+boardShift)%BOARDS.length],(bb.minX+bb.maxX)/2,(bb.minY+bb.maxY)/2+1,(bb.maxX-bb.minX)*.9); }
+    // mowing stripes inside the boundary
+    for(let i=-5;i<5;i++){ if(i%2===0) continue; const x0=i*7, x1=x0+7, top=[], bot=[];
+      for(let k=0;k<=8;k++){ const x=lerp(x0,x1,k/8), zz=Math.sqrt(Math.max(0,R.board*R.board-x*x)); top.push([x,0,zz]); bot.push([x,0,-zz]); }
+      poly(top.concat(bot.reverse()),night?'rgba(255,255,255,.035)':'rgba(255,255,255,.07)'); }
+    ring(R.rope,.05,night?'#F0F0F0':'#FFFFFF',3);
+    ring(27.4,.02,'rgba(255,255,255,.7)',1.6,[6,8]);
+    // the pitch, creases, stumps
+    poly([[-1.52,0,-11],[1.52,0,-11],[1.52,0,11],[-1.52,0,11]],tok.pitch);
+    const W2='rgba(255,255,255,.95)';
+    [-1,1].forEach(e=>{ seg([-1.83,.01,e*8.84],[1.83,.01,e*8.84],W2,1.5); seg([-1.32,.01,e*10.06],[1.32,.01,e*10.06],W2,1.5);
+      seg([-1.32,.01,e*8.84],[-1.32,.01,e*11],W2,1.2); seg([1.32,.01,e*8.84],[1.32,.01,e*11],W2,1.2);
+      const fall=e<0?stumpsFall:0;
+      [-.114,0,.114].forEach((sx,j)=>{ const lean=fall*(j-1)*.5, back=fall*.6; seg([sx,0,e*10.06],[sx+lean,.71*(1-fall*.35),e*(10.06+back)],'#F7F1E1',2.2); }); });
+    if(stumpsFall>0&&dt) stumpsFall=Math.max(0,stumpsFall-dt*.25);
+    // balls in flight
+    for(let i=balls.length-1;i>=0;i--){ const b=balls[i]; b.life+=dt;
+      if(!b.done&&dt){ if(b.kind==='six'){ b.vy-=9.8*dt; } else { const sp=Math.hypot(b.vx,b.vz); if(sp>0){ const ns=Math.max(0,sp-b.dec*dt); b.vx*=ns/sp; b.vz*=ns/sp; if(ns===0) b.done=true; } }
+        b.x+=b.vx*dt; b.y+=b.vy*dt; b.z+=b.vz*dt; b.tr.push([b.x,b.y,b.z]); if(b.tr.length>14) b.tr.shift();
+        const r=Math.hypot(b.x,b.z);
+        if(b.kind==='six'&&r>R.s0&&b.y<standH(r)){ b.done=true; const s=((Math.floor((Math.atan2(b.x,b.z)+TAU)%TAU/segA))%SEG+SEG)%SEG; for(let k=-3;k<=3;k++) excite[(s+k+SEG)%SEG]=1; }
+        if(b.kind==='four'&&r>R.board-1){ b.done=true; const s=((Math.floor((Math.atan2(b.x,b.z)+TAU)%TAU/segA))%SEG+SEG)%SEG; for(let k=-2;k<=2;k++) excite[(s+k+SEG)%SEG]=Math.max(excite[(s+k+SEG)%SEG],.6); }
+        if(r>140||b.y<-1) b.done=true; }
+      if(b.done) b.fade+=dt; if(b.fade>1.2){ balls.splice(i,1); continue; }
+      ctx.globalAlpha=1-b.fade/1.2;
+      for(let k=1;k<b.tr.length;k++){ ctx.globalAlpha=(1-b.fade/1.2)*k/b.tr.length*.6; seg(b.tr[k-1],b.tr[k],tok.ballc,2); }
+      ctx.globalAlpha=1-b.fade/1.2;
+      const sh=cam(b.x,0,b.z); if(sh.z>NEAR){ ctx.fillStyle='rgba(0,0,0,.25)'; ctx.beginPath(); ctx.ellipse(SX(sh),SY(sh),Math.max(2,.5*F/sh.z),Math.max(1,.2*F/sh.z),0,0,TAU); ctx.fill(); }
+      const p=cam(b.x,b.y,b.z); if(p.z>NEAR){ const rr=Math.max(2.5,.4*F/p.z); ctx.fillStyle=tok.ballc; ctx.beginPath(); ctx.arc(SX(p),SY(p),rr,0,TAU); ctx.fill(); ctx.strokeStyle=tok.seam; ctx.lineWidth=1; ctx.stroke(); }
+      ctx.globalAlpha=1; }
+    // night: floodlit pool on the turf
+    if(night){ const pg=ctx.createRadialGradient(W/2,H*1.05,0,W/2,H*1.05,Math.max(W,H)*.75); pg.addColorStop(0,'rgba(255,250,225,.10)'); pg.addColorStop(1,'rgba(255,250,225,0)'); ctx.fillStyle=pg; ctx.fillRect(0,horizon,W,H-horizon); }
   }
+  function hit(kind,screenX){
+    if(reduced) return; const az=view.yaw+Math.atan((screenX-W/2)/F), dx=Math.sin(az), dz=Math.cos(az);
+    const b={x:dx*3,y:1,z:dz*3,vx:0,vy:0,vz:0,kind,tr:[],life:0,done:false,fade:0,dec:0};
+    if(kind==='six'){ const v=rand(30,36); b.vx=dx*v; b.vz=dz*v; b.vy=rand(17,21); }
+    else if(kind==='four'){ const v=31; b.vx=dx*v; b.vz=dz*v; b.y=.15; b.dec=5.5; }
+    else { const v=rand(9,18); b.vx=dx*v; b.vz=dz*v; b.y=.15; b.dec=6; }
+    balls.push(b); if(balls.length>8) balls.shift();
+  }
+  function wicket(){ stumpsFall=1; for(let s=0;s<SEG;s++) excite[s]=Math.max(excite[s],.7); }
+  function roar(){ for(let s=0;s<SEG;s++) excite[s]=1; }
+  function loop(now){ if(!running) return; const dt=Math.min(.05,(now-last)/1000); last=now; if(!document.hidden) frame(dt); requestAnimationFrame(loop); }
+  function start(){ if(running||reduced) return; running=true; last=performance.now(); requestAnimationFrame(loop); }
+  size(); addEventListener('resize',debounce(size,150));
+  themeSubs.push(()=>{ if(!running) frame(0); });
+  onMq(mqReduce,()=>{ if(reduced){ running=false; frame(0); } else start(); });
+  addEventListener('scroll',()=>{ if(!running) frame(0); },{passive:true});
+  start();
+  return {hit,wicket,roar};
+})();
 
-  let mouseX = -1000, mouseY = -1000;
-  let mouseActive = false;
-  canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
-    mouseActive = true;
+
+/* ---------- hero: commentary, ticker, player card ---------- */
+(()=>{
+  const el=$('#comm');
+  const lines=["Now at the crease for Applied Materials: semiconductor measurement data, piped straight to the cloud!","Lofted over long-off: edge-to-cloud over MQTT with AWS IoT Greengrass.","And that's driven through the covers: throughput up 30% on cloud-native services!","Short ball, pulled away for six: API latency down 30% at Rivach.","Lofted over long-on! Messaging throughput up 70% with Kafka and Redis.","Solid in defence: 99.9% availability under concurrent load.","Quick running between the wickets: deployments 40% more frequent.","Agents in the field: Oprina orchestrates Gmail and Calendar on Cloud Run."];
+  let li=0, text=lines[0], ci=text.length, del=true;
+  if(reduced){ setInterval(()=>{ li=(li+1)%lines.length; el.textContent=lines[li]; },4500); }
+  else{ (function step(){ if(!del){ if(ci<text.length){ ci++; el.textContent=text.slice(0,ci); setTimeout(step,24+Math.random()*30); } else { del=true; setTimeout(step,2600); } }
+      else{ if(ci>0){ ci=Math.max(0,ci-3); el.textContent=text.slice(0,ci); setTimeout(step,14); } else { del=false; li=(li+1)%lines.length; text=lines[li]; setTimeout(step,250); } } })(); }
+  const tr=$('#ticker'); [...tr.children].forEach(n=>{ const c=n.cloneNode(true); c.setAttribute('aria-hidden','true'); tr.append(c); });
+  const card=$('#pcard');
+  card.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse'||reduced) return; const r=card.getBoundingClientRect(), px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+    card.classList.add('tilting'); card.style.setProperty('--rx',((.5-py)*14).toFixed(2)+'deg'); card.style.setProperty('--ry',((px-.5)*16).toFixed(2)+'deg'); card.style.setProperty('--px',(px*100).toFixed(1)+'%'); card.style.setProperty('--py',(py*100).toFixed(1)+'%'); });
+  card.addEventListener('pointerleave',()=>{ card.classList.remove('tilting'); card.style.setProperty('--rx','0deg'); card.style.setProperty('--ry','0deg'); });
+})();
+
+/* ---------- count-up numbers ---------- */
+(()=>{
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting) return; io.unobserve(e.target); if(reduced||performance.now()<1500) return;
+    const el=e.target, to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), pre=el.dataset.pre||'', suf=el.dataset.suf||'', t0=performance.now();
+    (function f(now){ const k=clamp((now-t0)/1300,0,1), v=to*(1-Math.pow(1-k,3)); el.textContent=pre+v.toFixed(dec)+suf; if(k<1) requestAnimationFrame(f); })(t0);
+  }),{threshold:.6});
+  $$('[data-to]').forEach(n=>io.observe(n));
+})();
+
+/* ---------- wagon wheels ---------- */
+$$('.inning').forEach(inn=>{
+  const svg=$('.wheel svg',inn), shots=$$('.shot',inn);
+  let html='<circle class="field" r="100"/><circle class="ring" r="48"/><rect class="strip" x="-5" y="-24" width="10" height="36" rx="2"/>';
+  const paths=[];
+  shots.forEach((s,i)=>{ const a=+s.dataset.angle*Math.PI/180, L=+s.dataset.len*100, x=Math.sin(a)*L, y=-Math.cos(a)*L, col=s.style.getPropertyValue('--c');
+    const qx=(x*.5+y*.18).toFixed(1), qy=(y*.5-x*.18).toFixed(1);
+    html+=`<g style="--c:${col}"><path class="ray" d="M0 6 Q ${qx} ${qy} ${x.toFixed(1)} ${y.toFixed(1)}" fill="none"/><circle class="tip" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6"/><text class="lbl" x="${(x*.55).toFixed(1)}" y="${(y*.55-7).toFixed(1)}" text-anchor="middle">${$('.sname',s).textContent}</text></g>`; });
+  html+='<circle r="4.5" cy="6" fill="#fff" stroke="#0E2216" stroke-width="1.5"/><circle class="wball" r="5" cx="0" cy="6" fill="#C8102E" stroke="#fff" stroke-width="1.5" opacity="0"/>';
+  svg.innerHTML=html;
+  const rays=$$('.ray',svg), ball=$('.wball',svg); let anim=0;
+  function play(i){ shots.forEach((s,j)=>s.classList.toggle('on',j===i)); rays.forEach((r,j)=>r.classList.toggle('on',j===i)); if(reduced) return;
+    cancelAnimationFrame(anim); const p=rays[i], L=p.getTotalLength(), t0=performance.now(); ball.setAttribute('opacity','1');
+    (function f(now){ const k=clamp((now-t0)/700,0,1), e=1-Math.pow(1-k,2), pt=p.getPointAtLength(L*e); ball.setAttribute('cx',pt.x.toFixed(1)); ball.setAttribute('cy',pt.y.toFixed(1)); if(k<1) anim=requestAnimationFrame(f); else setTimeout(()=>ball.setAttribute('opacity','0'),500); })(t0); }
+  function clear(){ shots.forEach(s=>s.classList.remove('on')); rays.forEach(r=>r.classList.remove('on')); }
+  shots.forEach((s,i)=>{ s.addEventListener('mouseenter',()=>play(i)); s.addEventListener('focus',()=>play(i)); s.addEventListener('click',()=>play(i)); s.addEventListener('mouseleave',clear); s.addEventListener('blur',clear); });
+});
+
+/* ---------- DRS project reviews ---------- */
+(()=>{
+  function trackSVG(seed){ const px=seed%2?136:162, py=58+seed*4, ix=(px+150)/2+(seed%2?3:-3), iy=34;
+    return `<polygon class="tpitch" points="112,118 188,118 162,12 138,12"/><polygon class="zone" points="142,118 158,118 153.5,12 146.5,12"/>
+      <line class="tline" x1="114" y1="106" x2="186" y2="106"/><line class="tline" x1="136" y1="20" x2="164" y2="20"/>
+      <line class="stump" x1="146.5" y1="4" x2="146.5" y2="17"/><line class="stump" x1="150" y1="4" x2="150" y2="17"/><line class="stump" x1="153.5" y1="4" x2="153.5" y2="17"/>
+      <path class="path" d="M ${seed%2?178:122} 116 L ${px} ${py} Q ${ix} ${iy+10} 150 11"/><circle class="mark" cx="${px}" cy="${py}" r="4"/><circle class="mark" cx="${ix}" cy="${iy}" r="4"/>
+      <g font-family="Barlow Condensed, sans-serif" font-weight="700" font-size="10" letter-spacing="1" fill="#fff"><text x="196" y="${py+3}">PITCHING · IN LINE</text><text x="196" y="${iy+3}">IMPACT · IN LINE</text><text x="196" y="14">WICKETS · HITTING</text></g>`; }
+  $$('.drs').forEach(card=>{
+    $('[data-track]',card).innerHTML=trackSVG(+card.dataset.seed);
+    const front=$('.drs-front',card), back=$('.drs-back',card);
+    $$('.drs-btn',card).forEach(b=>b.addEventListener('click',e=>{
+      const on=!card.classList.contains('flipped'); card.classList.toggle('flipped',on); front.setAttribute('aria-hidden',String(on)); back.setAttribute('aria-hidden',String(!on));
+      if(on){ const r=card.getBoundingClientRect(); setTimeout(()=>{ fx.burst(r.left+r.width/2,r.top+r.height*.3,14,{scale:.9}); },reduced?0:1500); toast('Third umpire: decision is SHIPPED ✓'); $('.drs-back .drs-btn',card).focus({preventScroll:true}); }
+      else $('.drs-front .drs-btn',card).focus({preventScroll:true});
+      e.stopPropagation(); }));
   });
-  canvas.addEventListener('mouseleave', () => { mouseX = -1000; mouseY = -1000; mouseActive = false; });
+})();
 
-  // Click-burst: send a ripple pulse + scatter nearby nodes outward
-  let bursts = [];
-  canvas.addEventListener('click', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const cx = e.clientX - rect.left;
-    const cy = e.clientY - rect.top;
-    bursts.push({ x: cx, y: cy, r: 0, alpha: 1 });
-    nodes.forEach(n => {
-      const dx = n.x - cx, dy = n.y - cy;
-      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-      if (dist < 260) {
-        const force = (1 - dist / 260) * 5;
-        n.vx += (dx / dist) * force;
-        n.vy += (dy / dist) * force;
-      }
-    });
-  });
-
-  let t = 0;
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    t += 0.016;
-
-    // update positions with mouse repulsion + drift back to base velocity
-    nodes.forEach(n => {
-      if (mouseActive) {
-        const dx = n.x - mouseX, dy = n.y - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-        if (dist < MOUSE_RADIUS) {
-          const force = (1 - dist / MOUSE_RADIUS) * 0.6;
-          n.vx += (dx / dist) * force;
-          n.vy += (dy / dist) * force;
-        }
-      }
-      // ease velocity back toward base drift (damping)
-      n.vx += (n.baseVx - n.vx) * 0.02;
-      n.vy += (n.baseVy - n.vy) * 0.02;
-      n.x += n.vx;
-      n.y += n.vy;
-      if (n.x < -20) n.x = w + 20;
-      if (n.x > w + 20) n.x = -20;
-      if (n.y < -20) n.y = h + 20;
-      if (n.y > h + 20) n.y = -20;
-    });
-
-    // draw connections (brighter base + glow near mouse)
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECT_DIST) {
-          const base = (1 - dist / CONNECT_DIST) * 0.42;
-          ctx.strokeStyle = `rgba(0,255,148,${base})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-      // mouse proximity connection (orange, anywhere on canvas)
-      if (mouseActive) {
-        const dxm = nodes[i].x - mouseX, dym = nodes[i].y - mouseY;
-        const distm = Math.sqrt(dxm * dxm + dym * dym);
-        if (distm < MOUSE_RADIUS) {
-          const opacity = (1 - distm / MOUSE_RADIUS) * 0.65;
-          ctx.strokeStyle = `rgba(255,107,53,${opacity})`;
-          ctx.lineWidth = 1.2;
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(mouseX, mouseY);
-          ctx.stroke();
-        }
-      }
-    }
-
-    // draw nodes with pulse (brighter)
-    nodes.forEach(n => {
-      const pulse = Math.sin(t * 1.5 + n.pulsePhase) * 0.35 + 0.75;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,255,148,${0.85 * pulse})`;
-      ctx.shadowColor = 'rgba(0,255,148,0.6)';
-      ctx.shadowBlur = 6;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
-
-    // draw click-burst ripples
-    bursts.forEach(b => {
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255,107,53,${b.alpha})`;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      b.r += 4.5;
-      b.alpha -= 0.018;
-    });
-    bursts = bursts.filter(b => b.alpha > 0);
-
-    // mouse glow halo
-    if (mouseActive) {
-      const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, MOUSE_RADIUS);
-      grad.addColorStop(0, 'rgba(0,255,148,0.05)');
-      grad.addColorStop(1, 'rgba(0,255,148,0)');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(mouseX, mouseY, MOUSE_RADIUS, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  draw();
-
-  // ===== Robot Readout — cycles through live metrics =====
-  const botStats = [
-    { num: '99.9%', desc: 'MindMesh uptime' },
-    { num: '10K+', desc: 'msgs/s Kafka throughput' },
-    { num: '70%', desc: 'throughput improvement' },
-    { num: '1M+', desc: 'users served' }
+/* ---------- squad: skill groups at fielding positions ---------- */
+(()=>{
+  const SQUAD=[
+    {pos:'Slip',tag:'LANG',x:238,y:298,k:'Languages',items:['Python','Go','Java','C++','JavaScript','TypeScript','SQL']},
+    {pos:'Point',tag:'API',x:322,y:238,k:'Backend & Frameworks',items:['Spring Boot','FastAPI','Flask','Node.js','Express.js','REST APIs','GraphQL','gRPC','Microservices']},
+    {pos:'Cover',tag:'DIST',x:304,y:156,k:'Distributed Systems',items:['Kafka','Redis','Event-Driven Architecture','Asynchronous Processing','Distributed Systems','Fault Tolerance','Load Balancing','MQTT']},
+    {pos:'Mid-off',tag:'AI',x:242,y:92,k:'AI & Search',items:['LangGraph','LangChain','MCP','RAG','FAISS','Neo4j','Vector Search','Hybrid Retrieval','Semantic Search','Information Retrieval','Prompt Engineering','LLM Evaluation']},
+    {pos:'Mid-on',tag:'OPS',x:158,y:92,k:'Cloud & DevOps',items:['AWS (EC2, S3, RDS, Lambda)','AWS IoT Greengrass','GCP (Vertex AI, Cloud Run)','Kubernetes','Docker','Jenkins','Git','GitHub Actions','CI/CD','Linux']},
+    {pos:'Mid-wicket',tag:'DB',x:92,y:166,k:'Data & Pipelines',items:['PostgreSQL','MySQL','MongoDB','Redis','Neo4j','Supabase','SQL','Data Pipelines','ETL','MES Integration']},
+    {pos:'Square leg',tag:'OBS',x:80,y:250,k:'Observability & Testing',items:['Root Cause Analysis','LangFuse','Structured Logging','Performance Profiling','Jest','React Testing Library']},
   ];
-  let botIdx = 0;
-  function cycleBotStat() {
-    const numEl = document.getElementById('botStatNum');
-    const descEl = document.getElementById('botStatDesc');
-    const bar = document.getElementById('botBar');
-    if (!numEl) return;
-    numEl.style.opacity = '0';
-    descEl.style.opacity = '0';
-    setTimeout(() => {
-      botIdx = (botIdx + 1) % botStats.length;
-      numEl.textContent = botStats[botIdx].num;
-      descEl.textContent = botStats[botIdx].desc;
-      numEl.style.opacity = '1';
-      descEl.style.opacity = '1';
-      bar.style.animation = 'none';
-      void bar.offsetWidth;
-      bar.style.animation = 'readoutProgress 3.5s linear infinite';
-    }, 300);
-  }
-  setInterval(cycleBotStat, 3500);
+  const svg=$('#fieldSvg'), groupsEl=$('#groups'), hint=$('#fmHint');
+  let html='<defs><clipPath id="fmClip"><ellipse cx="200" cy="220" rx="188" ry="208"/></clipPath></defs><ellipse class="fm-oval" cx="200" cy="220" rx="188" ry="208"/><g clip-path="url(#fmClip)">';
+  for(let i=0;i<10;i++) if(i%2) html+=`<rect class="fm-stripe" x="${i*40}" y="0" width="40" height="440"/>`;
+  html+='</g><ellipse class="fm-ring" cx="200" cy="220" rx="96" ry="112"/><rect class="fm-pitch" x="191" y="168" width="18" height="86" rx="2"/>';
+  html+='<path d="M196 252 v-8 M200 252 v-8 M204 252 v-8 M196 170 v8 M200 170 v8 M204 170 v8" stroke="#fff" stroke-width="2"/>';
+  html+='<g class="fixed-pl"><circle cx="200" cy="146" r="13"/><text x="200" y="150" text-anchor="middle" font-size="10">AKG</text><text class="pos" x="200" y="126" text-anchor="middle" style="fill:#fff">BOWLER</text></g>';
+  html+='<g class="fixed-pl"><circle cx="200" cy="244" r="9" style="fill:#fff;stroke:#0E2216"/><text x="200" y="230" text-anchor="middle" style="fill:#fff;font:700 9px Barlow Condensed,sans-serif;letter-spacing:1px">BATTER</text></g>';
+  html+='<g class="fixed-pl"><circle cx="200" cy="284" r="11" style="fill:#13315C"/><text x="200" y="306" text-anchor="middle" style="fill:#fff;font:700 9px Barlow Condensed,sans-serif;letter-spacing:1px">KEEPER</text></g>';
+  SQUAD.forEach((s,i)=>{ html+=`<g class="fielder" data-i="${i}" tabindex="0" role="button" aria-label="${s.pos}: ${s.k}"><circle cx="${s.x}" cy="${s.y}" r="17"/><text x="${s.x}" y="${s.y+3.5}">${s.tag}</text><text class="pos" x="${s.x}" y="${s.y+31}">${s.pos}</text></g>`; });
+  html+='<path class="throw" id="throwPath" d="" opacity="0"/><circle id="throwBall" r="5" fill="#C8102E" stroke="#fff" stroke-width="1.5" opacity="0"/>';
+  svg.innerHTML=html;
+  SQUAD.forEach((s,i)=>{ const g=document.createElement('article'); g.className='card group'; g.dataset.i=i;
+    g.innerHTML=`<h3>${s.k}<small>at ${s.pos.toLowerCase()}</small></h3><ul class="chips">${s.items.map(x=>`<li>${x}</li>`).join('')}</ul>`; groupsEl.append(g); });
+  const fielders=$$('.fielder',svg), groups=$$('.group',groupsEl), tp=$('#throwPath'), tb=$('#throwBall'); let anim=0;
+  function select(i,throwIt){ fielders.forEach((f,j)=>f.classList.toggle('on',j===i)); groups.forEach((g,j)=>g.classList.toggle('on',j===i)); hint.textContent=`${SQUAD[i].pos}: ${SQUAD[i].k}`;
+    if(!throwIt) return; const s=SQUAD[i], d=`M ${s.x} ${s.y} Q ${(s.x+200)/2} ${Math.min(s.y,284)-50} 200 284`; tp.setAttribute('d',d); tp.setAttribute('opacity','1');
+    if(innerWidth<=1000){ const g=groups[i], r=g.getBoundingClientRect(); if(r.top>innerHeight||r.bottom<0) g.scrollIntoView({behavior:reduced?'auto':'smooth',block:'nearest'}); }
+    if(reduced){ tb.setAttribute('opacity','0'); return; }
+    cancelAnimationFrame(anim); const L=tp.getTotalLength(), t0=performance.now(); tb.setAttribute('opacity','1');
+    (function f(now){ const k=clamp((now-t0)/550,0,1), pt=tp.getPointAtLength(L*k); tb.setAttribute('cx',pt.x); tb.setAttribute('cy',pt.y);
+      if(k<1) anim=requestAnimationFrame(f); else { const r=svg.getBoundingClientRect(); fx.burst(r.left+r.width*200/400,r.top+r.height*284/440,10,{scale:.7,lift:60}); setTimeout(()=>{ tb.setAttribute('opacity','0'); tp.setAttribute('opacity','0'); },400); } })(t0); }
+  fielders.forEach((f,i)=>{ f.addEventListener('click',()=>select(i,true)); f.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(i,true); } }); });
+  groups.forEach((g,i)=>{ g.addEventListener('mouseenter',()=>fielders.forEach((f,j)=>f.classList.toggle('on',j===i))); g.addEventListener('mouseleave',()=>fielders.forEach(f=>f.classList.toggle('on',f.dataset.i===String(groups.findIndex(x=>x.classList.contains('on')))))); });
+})();
 
-  // ===== Scroll Reveal =====
-  if ('IntersectionObserver' in window) {
-    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-    revealEls.forEach(el => el.classList.add('js-ready'));
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-    revealEls.forEach(el => revealObserver.observe(el));
-    setTimeout(() => {
-      document.querySelectorAll('.js-ready:not(.in-view)').forEach(el => el.classList.add('in-view'));
-    }, 4000);
+/* ---------- nets: face an over, unlock the coursework ---------- */
+(()=>{
+  const cv=$('#netsCanvas'), ctx=cv.getContext('2d'), stage=$('#netsStage'), call=$('#netsCall'), btn=$('#netsBtn'), help=$('#netsHelp');
+  const ballsEl=$$('#overBalls span'), courseEls=$$('#courses li'), totalEl=$('#netsTotal'), overEl=$('#netsOver');
+  let W=600,H=280,vis=false,last=performance.now(),state='idle',st=0,overN=1,ballN=0,overRuns=0,d=null,swingT=-1,sw=0,swOn=false,res=null,stumps=0,hitBall=null;
+  cv.tabIndex=0;
+  function size(){ const D=Math.min(2,devicePixelRatio||1); W=stage.clientWidth||600; H=Math.round(clamp(W*.46,230,330)); cv.width=Math.round(W*D); cv.height=Math.round(H*D); cv.style.height=H+'px'; ctx.setTransform(D,0,0,D,0,0); draw(); }
+  const G=()=>H*.8;
+  function newDelivery(){
+    if(ballN>=6){ ballN=0; overRuns=0; overN++; overEl.textContent='over '+overN; ballsEl.forEach(b=>{ b.textContent='·'; b.className=''; }); courseEls.forEach(li=>{ const r=$('.res',li); r.textContent='·'; r.className='res'; }); totalEl.textContent='0 RUNS'; }
+    const sf=rand(.85,1.15); d={sf,kmh:Math.round(146/sf),t1:.5*sf,t2:.3*sf,len:rand(.42,.56),onStumps:Math.random()<.55,bx:0,by:0};
+    state='runup'; st=0; swingT=-1; sw=0; swOn=false; res=null; stumps=0; hitBall=null; btn.textContent='Swing!'; help.textContent=`${d.kmh} km/h · swing when it reaches the bat`;
   }
+  function ballPos(tt){ const rx=W*.78, ry=H*.42, bxp=W*d.len, gy=G(), tx=W*.2, ty=H*.6;
+    if(tt<=d.t1){ const k=tt/d.t1; return [lerp(rx,bxp,k),lerp(ry,gy,k*k)]; }
+    const k=(tt-d.t1)/d.t2; return [lerp(bxp,tx,k),lerp(gy,ty,Math.sqrt(Math.max(0,k)))]; }
+  function swing(){ if(state==='idle'){ newDelivery(); return; } if(state==='done'){ newDelivery(); return; } if(state!=='ball'&&state!=='runup') return; if(swOn) return; swOn=true; swingT=state==='ball'?st:-1; }
+  function settle(runs,wicket,label,cls){
+    const i=ballN; ballN++; overRuns+=runs; const b=ballsEl[i], txt=wicket?'W':runs?String(runs):'·', klass=wicket?'out':runs>=6?'big':runs>=4?'hit':runs?'hit':'';
+    b.textContent=txt; b.className=klass; const li=courseEls[i], r=$('.res',li); r.textContent=txt; r.className='res '+klass; li.classList.remove('pop'); void li.offsetWidth; li.classList.add('pop');
+    totalEl.textContent=overRuns+' RUNS'; call.textContent=label; call.className='game-call'; void call.offsetWidth; call.classList.add('show');
+    innings.ball(runs,wicket); if(runs===6) stadium.roar(); if(wicket) stadium.wicket();
+    const cr=cv.getBoundingClientRect(); if(runs>=4) fx.burst(cr.left+W*.3,cr.top+H*.45,runs===6?30:16,{max:380});
+    state='result'; st=0;
+    help.textContent=ballN>=6?`Over complete: ${overRuns} runs. Press New over to go again.`:`${$('span',li).textContent}: ${label.toLowerCase()}`;
+    if(ballN>=6) toast(`Over complete: ${overRuns} runs! All six SJSU courses faced.`);
+  }
+  function update(dt){
+    st+=dt; if(swOn) sw=Math.min(1,sw+dt*5);
+    if(state==='runup'&&st>.7){ state='ball'; st=0; }
+    else if(state==='ball'){
+      const arr=d.t1+d.t2;
+      if(swingT>=0&&!res){ const err=swingT-arr, a=Math.abs(err);
+        if(a<.05) res={runs:6,label:'SIX!',vx:W*1.25,vy:-H*2.3};
+        else if(a<.095) res={runs:4,label:'FOUR!',vx:W*1.6,vy:-H*.25};
+        else if(a<.15) res={runs:err<0?2:1,label:err<0?'TWO RUNS':'EDGED · 1',vx:err<0?W*.6:-W*.5,vy:-H*.7};
+        else res={miss:true}; }
+      if(st>=arr){
+        if(res&&!res.miss){ const p=ballPos(arr); hitBall={x:p[0],y:p[1],vx:res.vx,vy:res.vy}; settle(res.runs,false,res.label); }
+        else if(st>=arr+.06){ if(d.onStumps){ stumps=.001; settle(0,true,'BOWLED!'); } else settle(0,false,res&&res.miss?'SWING AND A MISS':'BEATEN'); }
+      }
+    }
+    else if(state==='result'){ if(hitBall){ hitBall.vy+=H*2.2*dt; hitBall.x+=hitBall.vx*dt; hitBall.y+=hitBall.vy*dt; if(hitBall.y>G()){ hitBall.y=G(); hitBall.vy*=-.35; hitBall.vx*=.7; } }
+      if(stumps>0) stumps=Math.min(1,stumps+dt*2.5);
+      if(st>1.4){ state=ballN>=6?'done':'idle'; btn.textContent=ballN>=6?'New over':'Bowl it'; if(ballN<6) help.textContent=`Ball ${ballN+1} of 6 · click the nets or press Space`; } }
+  }
+  function figure(x,gy,s,col,swingK,isBat){
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.strokeStyle='#F4F1EA'; ctx.lineWidth=s*.13; ctx.beginPath(); ctx.moveTo(x,gy-s*.75); ctx.lineTo(x-s*.12,gy); ctx.moveTo(x,gy-s*.75); ctx.lineTo(x+s*.14,gy); ctx.stroke();
+    ctx.fillStyle=col; ctx.beginPath(); ctx.roundRect?ctx.roundRect(x-s*.17,gy-s*1.32,s*.34,s*.62,s*.1):ctx.rect(x-s*.17,gy-s*1.32,s*.34,s*.62); ctx.fill();
+    ctx.fillStyle=isBat?'#13315C':'#F4F1EA'; ctx.beginPath(); ctx.arc(x,gy-s*1.5,s*.17,0,TAU); ctx.fill();
+    if(isBat){ ctx.strokeStyle='#C9CED6'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(x+s*.06,gy-s*1.56); ctx.lineTo(x+s*.06,gy-s*1.42); ctx.moveTo(x+s*.11,gy-s*1.56); ctx.lineTo(x+s*.11,gy-s*1.42); ctx.stroke();
+      const hx=x+s*.12, hy=gy-s*1.05, ang=lerp(-2.2,1.1,swingK); ctx.save(); ctx.translate(hx,hy); ctx.rotate(ang);
+      ctx.fillStyle='#2B2B2B'; ctx.fillRect(-s*.03,-s*.02,s*.06,s*.28); ctx.fillStyle='#F2D59B'; ctx.strokeStyle='#C9A35F'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.rect(-s*.07,s*.24,s*.14,s*.6); ctx.fill(); ctx.stroke(); ctx.restore(); }
+  }
+  function draw(){
+    const gy=G(), night=tok.night; ctx.clearRect(0,0,W,H);
+    let g=ctx.createLinearGradient(0,0,0,gy); g.addColorStop(0,night?'#0B1A2C':'#DCEFFA'); g.addColorStop(1,night?'#16324A':'#BFE3C2'); ctx.fillStyle=g; ctx.fillRect(0,0,W,gy);
+    ctx.strokeStyle=night?'rgba(255,255,255,.08)':'rgba(14,34,22,.10)'; ctx.lineWidth=1; for(let x=-H;x<W;x+=16){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x+gy,gy); ctx.moveTo(x+gy,0); ctx.lineTo(x,gy); ctx.stroke(); }
+    ctx.fillStyle=tok['grass-1']; ctx.fillRect(0,gy,W,H-gy); ctx.fillStyle=tok.pitch; ctx.fillRect(W*.06,gy,W*.82,H*.05);
+    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fillRect(W*.2,gy,2,H*.05); ctx.fillRect(W*.8,gy,2,H*.05);
+    const sx=W*.1, sh=H*.2;
+    [-6,0,6].forEach((o,j)=>{ ctx.save(); ctx.translate(sx+o,gy); if(stumps>0) ctx.rotate((j-1)*stumps*.7-stumps*.4); ctx.fillStyle='#F7F1E1'; ctx.fillRect(-1.6,-sh,3.2,sh); ctx.restore(); });
+    if(stumps>0){ ctx.fillStyle='#F7F1E1'; ctx.fillRect(sx-14-stumps*30,gy-sh-6-stumps*40,10,3); ctx.fillRect(sx+6+stumps*34,gy-sh-4-stumps*30,10,3); } else { ctx.fillStyle='#F7F1E1'; ctx.fillRect(sx-7,gy-sh-3,14,3); }
+    const bs=H*.38; figure(W*.17,gy,bs,tok.accent,sw,true);
+    let bx=W*.9; if(state==='runup') bx=lerp(W*.98,W*.82,clamp(st/.7,0,1)); else if(state!=='idle'&&state!=='done') bx=W*.8;
+    figure(bx,gy,bs*.95,'#13315C',0,false);
+    ctx.strokeStyle='#F4F1EA'; ctx.lineWidth=bs*.09; ctx.lineCap='round'; const arm=state==='runup'?lerp(-1.5,2.6,clamp((st-.3)/.4,0,1)):2.6;
+    ctx.beginPath(); ctx.moveTo(bx,gy-bs*1.2); ctx.lineTo(bx+Math.sin(arm)*bs*.55,gy-bs*1.2-Math.cos(arm)*bs*.55); ctx.stroke();
+    let ball=null; if(state==='ball'&&d){ ball=ballPos(Math.min(st,d.t1+d.t2+.2)); if(st>d.t1+d.t2){ const k=(st-d.t1-d.t2)*W*1.4; ball=[ball[0]-k*.6,ball[1]]; } }
+    else if(state==='result'&&hitBall) ball=[hitBall.x,hitBall.y];
+    if(ball){ ctx.fillStyle='rgba(0,0,0,.2)'; ctx.beginPath(); ctx.ellipse(ball[0],gy+2,6,2,0,0,TAU); ctx.fill(); ctx.fillStyle=tok.ballc; ctx.beginPath(); ctx.arc(ball[0],ball[1],Math.max(4,H*.02),0,TAU); ctx.fill(); ctx.strokeStyle=tok.seam; ctx.lineWidth=1.2; ctx.stroke(); }
+    ctx.fillStyle=night?'rgba(92,255,138,.18)':'rgba(31,122,52,.14)'; ctx.fillRect(W*.17,H*.5,W*.07,gy-H*.5);
+    ctx.font=`700 ${Math.round(clamp(W*.022,10,13))}px "Barlow Condensed", sans-serif`; ctx.fillStyle=night?'#BFE9CF':'#1F7A34'; ctx.textAlign='center'; ctx.fillText('HITTING ZONE',W*.205,H*.47);
+  }
+  function loop(now){ const dt=Math.min(.05,(now-last)/1000); last=now; if(vis&&!document.hidden){ if(state!=='idle'&&state!=='done') update(dt); draw(); } requestAnimationFrame(loop); }
+  btn.addEventListener('click',e=>{ e.stopPropagation(); swing(); });
+  cv.addEventListener('click',e=>{ e.stopPropagation(); swing(); });
+  cv.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); swing(); } });
+  document.addEventListener('keydown',e=>{ if(e.code!=='Space'||!vis) return; const t=e.target; if(t&&t.closest&&t.closest('a,button,input,textarea,select,[contenteditable],[role="button"],#netsCanvas')) return; e.preventDefault(); swing(); });
+  new IntersectionObserver(([e])=>{ vis=e.isIntersecting; },{threshold:.35}).observe(stage);
+  size(); addEventListener('resize',debounce(size,150)); themeSubs.push(draw); requestAnimationFrame(loop);
+})();
 
-  // ===== Contact Form (demo) =====
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.submit-btn');
-    const original = btn.textContent;
-    btn.textContent = 'Ping sent ✓';
-    btn.style.background = '#00FF94';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-      e.target.reset();
-    }, 2200);
-    return false;
-  }
+
+/* ---------- nav, progress ---------- */
+(()=>{
+  const nav=$('#nav'), menu=$('#menuBtn'), links=$('#navLinks'), bar=$('#progress');
+  const close=()=>{ links.classList.remove('open'); menu.setAttribute('aria-expanded','false'); };
+  menu.addEventListener('click',e=>{ e.stopPropagation(); const o=links.classList.toggle('open'); menu.setAttribute('aria-expanded',String(o)); });
+  links.addEventListener('click',e=>{ if(e.target.closest('a')) close(); });
+  document.addEventListener('click',e=>{ if(links.classList.contains('open')&&!nav.contains(e.target)) close(); });
+  const map=new Map($$('a',links).map(a=>[a.getAttribute('href').slice(1),a]));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; map.forEach(a=>a.removeAttribute('aria-current')); const a=map.get(e.target.id); if(a) a.setAttribute('aria-current','true'); }),{rootMargin:'-45% 0px -50% 0px'});
+  map.forEach((a,id)=>{ const s=document.getElementById(id); if(s) io.observe(s); });
+  document.addEventListener('click',e=>{ const a=e.target.closest('a[href^="#"]'); if(!a) return; const id=a.getAttribute('href').slice(1), tgt=id?document.getElementById(id):null; if(!tgt) return;
+    e.preventDefault(); tgt.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'}); try{ history.replaceState(null,'','#'+id); }catch(err){} });
+  let tick=false; const upd=()=>{ tick=false; const max=Math.max(1,root.scrollHeight-innerHeight); bar.style.transform=`scaleX(${clamp(scrollY/max,0,1).toFixed(4)})`; };
+  addEventListener('scroll',()=>{ if(!tick){ tick=true; requestAnimationFrame(upd); } },{passive:true}); upd();
+})();
+
+/* ---------- click the ground to bowl a ball ---------- */
+document.addEventListener('click',e=>{
+  if(e.defaultPrevented) return;
+  if(e.target.closest('a,button,input,label,select,textarea,canvas,dialog,.card,.nav,.ticket,.sec-head,.hero-main,.pcard,.ticker,.foot p')) return;
+  if(getSelection&&getSelection().toString()) return;
+  const r=Math.random(); let runs=0,w=false,txt='DOT BALL',cls='',kind='dot';
+  if(r<.05){ w=true; txt='HOWZAT!'; cls='out'; }
+  else if(r<.17){ runs=6; txt='SIX!'; cls='six'; kind='six'; }
+  else if(r<.33){ runs=4; txt='FOUR!'; cls='four'; kind='four'; }
+  else if(r<.37){ runs=3; txt='3 RUNS'; kind='run'; }
+  else if(r<.5){ runs=2; txt='2 RUNS'; kind='run'; }
+  else if(r<.75){ runs=1; txt='SINGLE'; kind='run'; }
+  innings.ball(runs,w); callout(e.clientX,e.clientY,txt,cls);
+  if(w){ stadium.wicket(); fx.burst(e.clientX,e.clientY,12,{color:'#F7F1E1',scale:.9}); }
+  else { stadium.hit(kind,e.clientX); if(runs===6){ stadium.roar(); fx.burst(e.clientX,e.clientY,26,{max:420}); } else if(runs===4) fx.burst(e.clientX,e.clientY,12,{scale:.8}); }
+});
+
+/* ---------- type "howzat" ---------- */
+(()=>{ let buf=''; document.addEventListener('keydown',e=>{ const t=e.target; if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return; if(!e.key||e.key.length!==1) return;
+  buf=(buf+e.key.toLowerCase()).slice(-6); if(buf==='howzat'){ buf=''; howzat(); stadium.wicket(); stadium.roar(); setTimeout(()=>toast('Umpire says NOT OUT. Ajay bats on!'),1300); } }); })();
+
+/* ---------- contact ticket: copy email, barcode ---------- */
+(()=>{
+  const bc=$('#barcode'); let seed=7; const rnd=()=>{ seed=(seed*9301+49297)%233280; return seed/233280; };
+  for(let i=0;i<34;i++){ const b=document.createElement('i'); b.style.width=(1+Math.floor(rnd()*3))+'px'; bc.append(b); }
+  $$('[data-copy]').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation(); const r=b.getBoundingClientRect();
+    const ok=()=>{ toast('Email copied. Howzat for a first step?'); fx.burst(r.left+r.width/2,r.top,18,{scale:.9}); };
+    const fallback=()=>{ const el=$('#email'); try{ const rg=document.createRange(); rg.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(rg); }catch(err){} toast(`Selected: ${EMAIL}. Press Ctrl+C or ⌘C to copy.`); };
+    try{ if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(EMAIL).then(ok,fallback); else fallback(); }catch(err){ fallback(); }
+  }));
+})();
+
+/* ---------- match summary dialog ---------- */
+(()=>{
+  const dlg=$('#tldr');
+  $('#tldrBtn').addEventListener('click',e=>{ e.stopPropagation(); if(typeof dlg.showModal==='function') dlg.showModal(); else dlg.setAttribute('open',''); });
+  $('#tldrClose').addEventListener('click',()=>dlg.close?dlg.close():dlg.removeAttribute('open'));
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+})();
+
+})();
 </script>
-
 </body>
 </html>
